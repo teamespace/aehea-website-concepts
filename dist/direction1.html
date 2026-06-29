@@ -238,6 +238,46 @@
       background-color: var(--color-accent-dark);
     }
 
+    /* Magnetic button interaction (inspired by kaiko.ai) */
+    .btn-magnetic {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+      will-change: transform;
+    }
+
+    .btn-magnetic::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: -1;
+      opacity: 0.12;
+    }
+
+    .btn-magnetic:hover::before {
+      transform: scaleX(1);
+    }
+
+    .btn--primary.btn-magnetic::before {
+      background: #FFFFFF;
+      opacity: 0.18;
+    }
+
+    .nav__cta.btn-magnetic::before {
+      background: var(--color-accent);
+      opacity: 1;
+    }
+
+    .nav__cta.btn-magnetic:hover {
+      background-color: transparent;
+      color: #FFFFFF;
+      border-color: var(--color-accent);
+    }
+
     .hero__link {
       font-family: var(--font-body);
       font-size: 14px;
@@ -800,7 +840,7 @@
         <a href="#faq" class="nav__link">FAQ</a>
         <a href="#cta" class="nav__link">Contact</a>
       </div>
-      <a href="#cta" class="nav__cta">Register your interest</a>
+      <a href="#cta" class="nav__cta btn-magnetic">Register your interest</a>
       <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span>
         <span></span>
@@ -818,7 +858,7 @@
 Save lives.</h1>
         <p class="hero__sub">Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety.</p>
         <div class="hero__cta-row">
-          <a href="#cta" class="btn btn--primary">Apply Now</a>
+          <a href="#cta" class="btn btn--primary btn-magnetic">Apply Now</a>
           <a href="#about" class="hero__link">Learn more →</a>
         </div>
       </div>
@@ -1092,6 +1132,20 @@ Save lives.</h1>
           alert('Please enter a valid email address.');
           input.focus();
         }
+      });
+
+      // Magnetic button effect (inspired by kaiko.ai)
+      document.querySelectorAll('.btn-magnetic').forEach(function (btn) {
+        btn.addEventListener('mousemove', function (e) {
+          var rect = btn.getBoundingClientRect();
+          var x = e.clientX - rect.left - rect.width / 2;
+          var y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = 'translate(' + (x * 0.2) + 'px, ' + (y * 0.2) + 'px) scale(1.03)';
+        });
+
+        btn.addEventListener('mouseleave', function () {
+          btn.style.transform = '';
+        });
       });
 
       // Smooth scroll for anchor links (polyfill-free, modern browsers handle CSS scroll-behavior)

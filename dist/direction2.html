@@ -217,6 +217,46 @@
       font-size: 13px;
     }
 
+    /* Magnetic button interaction (inspired by kaiko.ai) */
+    .btn-magnetic {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+      will-change: transform;
+    }
+
+    .btn-magnetic::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: -1;
+      opacity: 0.12;
+    }
+
+    .btn-magnetic:hover::before {
+      transform: scaleX(1);
+    }
+
+    .btn--primary.btn-magnetic::before {
+      background: #FFFFFF;
+      opacity: 0.18;
+    }
+
+    .btn--ghost.btn-magnetic::before {
+      background: #FFFFFF;
+      opacity: 1;
+    }
+
+    .btn--ghost.btn-magnetic:hover {
+      background-color: transparent;
+      color: var(--color-dark-navy);
+      border-color: #FFFFFF;
+    }
+
     /* Hero */
     .hero {
       background-color: var(--color-dark-navy);
@@ -933,7 +973,7 @@
           <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
         </div>
-        <a href="#cta" class="btn btn--primary site-nav__cta">Register your interest</a>
+        <a href="#cta" class="btn btn--primary site-nav__cta btn-magnetic">Register your interest</a>
       </div>
     </nav>
   </header>
@@ -953,8 +993,8 @@
 Save lives.</h1>
           <p class="hero__sub">The AEHEA celebrates healthcare institutions across Asia Pacific that demonstrate outstanding commitment to environmental hygiene, infection prevention and quality patient care.</p>
           <div class="hero__ctas">
-            <a href="#cta" class="btn btn--primary">Apply Now</a>
-            <a href="#about" class="btn btn--ghost">Learn more</a>
+            <a href="#cta" class="btn btn--primary btn-magnetic">Apply Now</a>
+            <a href="#about" class="btn btn--ghost btn-magnetic">Learn more</a>
           </div>
         </div>
         <div class="hero__image-wrap">
@@ -1241,6 +1281,20 @@ Save lives.</h1>
           alert('Please enter a valid email address.');
           input.focus();
         }
+      });
+
+      // Magnetic button effect (inspired by kaiko.ai)
+      document.querySelectorAll('.btn-magnetic').forEach(function (btn) {
+        btn.addEventListener('mousemove', function (e) {
+          var rect = btn.getBoundingClientRect();
+          var x = e.clientX - rect.left - rect.width / 2;
+          var y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = 'translate(' + (x * 0.2) + 'px, ' + (y * 0.2) + 'px) scale(1.03)';
+        });
+
+        btn.addEventListener('mouseleave', function () {
+          btn.style.transform = '';
+        });
       });
 
       // Smooth scroll for anchor links (CSS scroll-behavior handles most browsers)
