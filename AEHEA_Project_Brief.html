@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEHEA Website — Project Brief</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --schülke: #007CC2;
+    --purple: #6B4FBB;
+    --dark: #0f0f0f;
+    --mid: #1a1a1a;
+    --surface: #222;
+    --border: #333;
+    --text: #f0f0f0;
+    --muted: #888;
+    --green: #4ade80;
+    --red: #f87171;
+    --yellow: #facc15;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* SLIDES */
+  .slides { width: 100%; height: 100vh; position: relative; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity .35s ease, transform .35s ease;
+    pointer-events: none;
+  }
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+  .slide.exit {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  /* LAYOUT HELPERS */
+  .slide-inner { width: 100%; max-width: 900px; }
+  .label {
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 700; line-height: 1.05; }
+  h2 { font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; line-height: 1.1; }
+  h3 { font-size: 18px; font-weight: 600; }
+  p  { font-size: 16px; line-height: 1.6; color: #ccc; }
+
+  .accent { color: var(--schülke); }
+  .accent-purple { color: #a78bfa; }
+  .sub { font-size: 20px; color: var(--muted); margin-top: 16px; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 32px; }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .card h3 { margin-bottom: 8px; }
+  .card p  { font-size: 14px; }
+
+  /* DIRECTION CARDS */
+  .dir-card { border-radius: 12px; padding: 24px; border: 1px solid transparent; }
+  .dir-1 { background: #0f1a22; border-color: #007CC230; }
+  .dir-2 { background: #001e36; border-color: var(--schülke); }
+  .dir-3 { background: #160f2a; border-color: #7c3aed50; }
+
+  .swatch {
+    display: flex;
+    gap: 6px;
+    margin: 12px 0 16px;
+  }
+  .dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid #ffffff20;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: .05em;
+  }
+  .tag-low  { background: #1e3a2a; color: #4ade80; }
+  .tag-high { background: #1a3050; color: #60a5fa; }
+  .tag-none { background: #2a1a40; color: #a78bfa; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: #ccc;
+  }
+  .checklist .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
+  .step {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-day { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding-top: 3px; }
+  .today    { color: var(--yellow); }
+  .tomorrow { color: var(--schülke); }
+  .deadline { color: var(--red); }
+  .step-content h3 { font-size: 15px; margin-bottom: 4px; }
+  .step-content p  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .step-tasks { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+  .step-task {
+    font-size: 13px;
+    color: #bbb;
+    padding: 4px 10px;
+    background: var(--surface);
+    border-radius: 6px;
+    border-left: 3px solid var(--border);
+  }
+  .step-task.urgent { border-left-color: var(--yellow); }
+  .step-task.blue   { border-left-color: var(--schülke); }
+  .step-task.red    { border-left-color: var(--red); }
+
+  /* ASSETS TABLE */
+  .assets { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+  .asset-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: var(--surface);
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .asset-row .status { font-size: 18px; flex-shrink: 0; }
+  .asset-row .name   { flex: 1; }
+  .asset-row .note   { font-size: 12px; color: var(--muted); }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--mid);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 10px 20px;
+    z-index: 100;
+  }
+  .nav button {
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 8px;
+    opacity: .6;
+    transition: opacity .2s;
+  }
+  .nav button:hover { opacity: 1; }
+  .nav button:disabled { opacity: .2; cursor: default; }
+  .nav .counter {
+    font-size: 13px;
+    color: var(--muted);
+    min-width: 50px;
+    text-align: center;
+  }
+  .dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .dot-nav {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+  }
+  .dot-nav.active { background: var(--text); transform: scale(1.3); }
+
+  /* TITLE SLIDE special */
+  .slide-title { background: var(--dark); text-align: left; align-items: flex-start; }
+  .slide-title .slide-inner { max-width: 800px; }
+  .meta-row {
+    display: flex;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .meta { }
+  .meta .key { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .meta .val { font-size: 14px; color: var(--text); }
+
+  .divider {
+    width: 48px;
+    height: 3px;
+    background: var(--schülke);
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  /* PHASE BAR */
+  .phases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 28px; }
+  .phase {
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .phase.active-phase { border-color: var(--yellow); background: #1a1500; }
+  .phase-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .phase.active-phase .phase-label { color: var(--yellow); }
+  .phase h3 { font-size: 15px; margin-bottom: 6px; }
+  .phase p  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* WIREFRAME NOTE */
+  .wf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .wf-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .wf-card h3 { font-size: 14px; color: var(--schülke); margin-bottom: 8px; }
+  .wf-card ul { padding-left: 16px; }
+  .wf-card li { font-size: 13px; color: #bbb; line-height: 1.7; }
+
+</style>
+</head>
+<body>
+
+<div class="slides" id="slides">
+
+  <!-- SLIDE 1: TITLE -->
+  <div class="slide slide-title active" data-index="0">
+    <div class="slide-inner">
+      <div class="label">Project Overview · June 2026</div>
+      <h1>AEHEA Website<br><span class="accent">Design & Build</span></h1>
+      <p class="sub">What this project is, what you need to do, and when.</p>
+      <div class="meta-row">
+        <div class="meta">
+          <div class="key">Client</div>
+          <div class="val">APSIC + Schülke</div>
+        </div>
+        <div class="meta">
+          <div class="key">Agency</div>
+          <div class="val">Elux</div>
+        </div>
+        <div class="meta">
+          <div class="key">Prepared by</div>
+          <div class="val">Unsensible</div>
+        </div>
+        <div class="meta">
+          <div class="key">Phase 1 Deadline</div>
+          <div class="val" style="color: var(--red); font-weight: 700;">Thursday, 2 July 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: WHAT IS THIS -->
+  <div class="slide" data-index="1">
+    <div class="slide-inner">
+      <div class="label">The Project</div>
+      <h2>A prestige award website<br>for hospitals across <span class="accent">Asia Pacific</span></h2>
+      <div class="grid-2" style="margin-top:36px;">
+        <div class="card">
+          <h3>🏥 What is AEHEA?</h3>
+          <p style="margin-top:8px;">The APSIC Environmental Hygiene Excellence Award — recognises hospitals that demonstrate excellence in environmental hygiene and patient safety. Scientifically led by APSIC, delivered in cooperation with Schülke.</p>
+        </div>
+        <div class="card">
+          <h3>🎯 Primary Objective</h3>
+          <p style="margin-top:8px;"><strong style="color:#fff;">Signal prestige and credibility.</strong> The site must convey scientific authority and a premium, trustworthy presence so the award is taken seriously across Asia Pacific. Driving hospital applications is the secondary goal.</p>
+        </div>
+        <div class="card">
+          <h3>👤 Audience</h3>
+          <p style="margin-top:8px;">Hospitals, IPC (Infection Prevention & Control) specialists, and quality leads across Asia Pacific. English-speaking professional audience. Tone: scientific authority meets premium, clean, clinical design.</p>
+        </div>
+        <div class="card">
+          <h3>⚠️ Non-Negotiable Rule</h3>
+          <p style="margin-top:8px;"><strong style="color:#f87171;">APSIC leads. Always.</strong> Schülke is a cooperation partner — never the owner or judge. Nothing in design or copy may imply Schülke influences judging. Scientific independence must be preserved at all times.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: PHASES -->
+  <div class="slide" data-index="2">
+    <div class="slide-inner">
+      <div class="label">Engagement Scope</div>
+      <h2>Three phases.<br>You're at the <span style="color:var(--yellow)">start of Phase 1</span>.</h2>
+      <div class="phases">
+        <div class="phase active-phase">
+          <div class="phase-label">Phase 1 · NOW</div>
+          <h3>3 Homepage Concepts</h3>
+          <p>Elux presents three visual directions. Each direction is a distinct homepage concept in Figma — one per visual style.</p>
+          <p style="margin-top:8px; color:var(--yellow); font-size:13px; font-weight:700;">Due: Thursday 2 July 2026</p>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Phase 2 · After selection</div>
+          <h3>Full Design</h3>
+          <p>One direction is selected. Elux designs all remaining pages (6 pages + legal) in that direction — in Figma.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Phase 3 · Final</div>
+          <h3>Webflow Build</h3>
+          <p>Full responsive site on Webflow. Desktop, tablet, mobile. CMS-ready so winners can be announced at APSIC 2028.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: 3 DIRECTIONS -->
+  <div class="slide" data-index="3">
+    <div class="slide-inner">
+      <div class="label">The Creative Brief</div>
+      <h2>Three visual directions<br>for Elux to design</h2>
+      <div class="grid-3">
+        <div class="dir-card dir-1">
+          <span class="tag tag-low">Low Schülke association</span>
+          <h3 style="margin-bottom:6px;">Direction 1</h3>
+          <p style="font-size:13px; color:var(--schülke); font-weight:600; margin-bottom:8px;">Grey / White + Blue</p>
+          <div class="swatch">
+            <div class="dot" style="background:#f5f5f5;"></div>
+            <div class="dot" style="background:#AFAFAF;"></div>
+            <div class="dot" style="background:#636362;"></div>
+            <div class="dot" style="background:#007CC2;"></div>
+          </div>
+          <p style="font-size:13px; line-height:1.6;">Clean, clinical, scientific-minimal. Light grey & white with Schülke blue as a restrained accent only. No arrow device or halftone. Subtle rounded corners.</p>
+          <p style="font-size:12px; margin-top:10px; color:var(--muted);">Vibe: light biotech / lab studio aesthetic</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Header: clean grotesque sans (Google)</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Ref: image 3 (biotech minimal)</p>
+        </div>
+        <div class="dir-card dir-2">
+          <span class="tag tag-high">Strongest Schülke tie</span>
+          <h3 style="margin-bottom:6px;">Direction 2</h3>
+          <p style="font-size:13px; color:#60a5fa; font-weight:600; margin-bottom:8px;">Schülke Blue</p>
+          <div class="swatch">
+            <div class="dot" style="background:#007CC2;"></div>
+            <div class="dot" style="background:#007CC265;"></div>
+            <div class="dot" style="background:#007CC230;"></div>
+            <div class="dot" style="background:#f0f0f0;"></div>
+          </div>
+          <p style="font-size:13px; line-height:1.6;">Schülke blue (#007CC2) leads. Supported by halftone gradations at 40/20/10%. Uses Schülke's 'plus' arrow device. Confident, editorial, institutional.</p>
+          <p style="font-size:12px; margin-top:10px; color:var(--muted);">Vibe: authoritative medical-institution feel</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Header: strong institutional sans (Google)</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Ref: image 1 (Johns Hopkins) + image 6 (palette)</p>
+        </div>
+        <div class="dir-card dir-3">
+          <span class="tag tag-none">No Schülke association</span>
+          <h3 style="margin-bottom:6px;">Direction 3</h3>
+          <p style="font-size:13px; color:#a78bfa; font-weight:600; margin-bottom:8px;">New Blue–Purple</p>
+          <div class="swatch">
+            <div class="dot" style="background:#6B4FBB;"></div>
+            <div class="dot" style="background:#8B5CF6;"></div>
+            <div class="dot" style="background:#c4b5fd;"></div>
+            <div class="dot" style="background:#f5f0ff;"></div>
+          </div>
+          <p style="font-size:13px; line-height:1.6;">Completely fresh AEHEA-owned identity. Free to move away from Schülke blue entirely. Premium, modern, slightly futuristic. Subtle rounded corners only.</p>
+          <p style="font-size:12px; margin-top:10px; color:var(--muted);">Vibe: refined AI / genomics aesthetic</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Header: serif or distinctive display face (Google)</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Ref: image 5 (MYDNA genetics)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: WIREFRAME OVERVIEW -->
+  <div class="slide" data-index="4">
+    <div class="slide-inner">
+      <div class="label">Site Structure</div>
+      <h2>6 pages. Structure is<br><span class="accent">locked</span> — directions change only look & feel.</h2>
+      <div class="wf-grid">
+        <div class="wf-card">
+          <h3>1. Home / Landing</h3>
+          <ul>
+            <li>Hero: "Be Recognised. Save Lives." + Apply Now CTA</li>
+            <li>About AEHEA + 3 contribution pillars</li>
+            <li>Joint message from Award Chair & APSIC President</li>
+            <li>Why Join benefits + quick links + footer</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>2. Leadership & Process</h3>
+          <ul>
+            <li>Programme leadership (Prof. Moi Lin) & Expert Panel</li>
+            <li>3-stage evaluation process + assessment criteria</li>
+            <li>"Partners in safer care, led by APSIC" co-branding section</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>3. Winners & Partners</h3>
+          <ul>
+            <li>Winners placeholder → CMS-managed (announce at APSIC 2028)</li>
+            <li>Expert Panel profile grid</li>
+            <li>Schülke cooperation partner feature</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>4. How to Participate</h3>
+          <ul>
+            <li><strong style="color:#fff;">8-step interactive timeline UI</strong> — must work on mobile</li>
+            <li>Free of charge, scientifically independent, confidential</li>
+            <li>Apply Now CTA</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>5. Apply Now</h3>
+          <ul>
+            <li>Expression of Interest form</li>
+            <li>Hospital details, IPC/Quality Lead contact</li>
+            <li>Validation + doc upload + data confidentiality note</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>6. FAQ & Contact</h3>
+          <ul>
+            <li>Accordion FAQ (9 core questions)</li>
+            <li>Contact form + email, phone, office, map</li>
+            <li>+ Legal pages (Privacy, Terms, Conditions)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: ASSETS STATUS -->
+  <div class="slide" data-index="5">
+    <div class="slide-inner">
+      <div class="label">Asset Status</div>
+      <h2>What you have.<br>What's <span style="color:var(--red)">still missing</span>.</h2>
+      <div class="assets" style="margin-top:28px;">
+        <div class="asset-row">
+          <span class="status">✅</span>
+          <span class="name">Design Brief (PDF)</span>
+          <span class="note">Full — approved structure, tone, brand rules</span>
+        </div>
+        <div class="asset-row">
+          <span class="status">✅</span>
+          <span class="name">Wireframes</span>
+          <span class="note">Home, Leadership & Process, Apply Now · desktop</span>
+        </div>
+        <div class="asset-row">
+          <span class="status">✅</span>
+          <span class="name">Visual References (5 images)</span>
+          <span class="note">Mapped to each direction — Johns Hopkins, biotech lab, MYDNA, palette</span>
+        </div>
+        <div class="asset-row" style="border: 1px solid #f8717140; background:#1a0a0a;">
+          <span class="status">❌</span>
+          <span class="name" style="color:#f87171;">APSIC / AEHEA Logo</span>
+          <span class="note" style="color:#f87171;">Needed before Elux can start designing</span>
+        </div>
+        <div class="asset-row" style="border: 1px solid #f8717140; background:#1a0a0a;">
+          <span class="status">❌</span>
+          <span class="name" style="color:#f87171;">Schülke Logo + Brand Guidelines</span>
+          <span class="note" style="color:#f87171;">Arrow device + halftone = required for Direction 2</span>
+        </div>
+        <div class="asset-row" style="border: 1px solid #f8717140; background:#1a0a0a;">
+          <span class="status">❌</span>
+          <span class="name" style="color:#f87171;">Approved Website Copy</span>
+          <span class="note" style="color:#f87171;">All page copy — locked per brief, must follow exactly</span>
+        </div>
+        <div class="asset-row" style="border: 1px solid #facc1540; background:#141000;">
+          <span class="status">⚠️</span>
+          <span class="name" style="color:#facc15;">Wireframes (remaining pages)</span>
+          <span class="note" style="color:#888;">Winners & Partners, How to Participate, FAQ — not yet exported</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: NEXT STEPS -->
+  <div class="slide" data-index="6">
+    <div class="slide-inner">
+      <div class="label">What You Need To Do</div>
+      <h2>Step-by-step.<br><span style="color:var(--red)">2 days</span> to Phase 1 deadline.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-day today">Today<br>Tue 30 Jun</div>
+          <div class="step-content">
+            <h3>Chase missing assets from client</h3>
+            <div class="step-tasks">
+              <div class="step-task urgent">📦 Request APSIC / AEHEA logo files (SVG or AI)</div>
+              <div class="step-task urgent">📦 Request Schülke logo + full brand guidelines PDF</div>
+              <div class="step-task urgent">📄 Request approved website copy (all pages)</div>
+              <div class="step-task urgent">🖼️ Export remaining wireframe pages from Figma (Winners, How to Participate, FAQ)</div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-day today">Today<br>Tue 30 Jun</div>
+          <div class="step-content">
+            <h3>Brief Elux — align on the 3 directions</h3>
+            <div class="step-tasks">
+              <div class="step-task blue">Share: Design Brief PDF + wireframes + visual references</div>
+              <div class="step-task blue">Walk through each direction: palette, vibe, brand rules per direction</div>
+              <div class="step-task blue">Remind Elux: structure is locked — directions change look only, not content</div>
+              <div class="step-task blue">Confirm: "Apply Now" must appear in nav and as CTA throughout</div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-day tomorrow">Tomorrow<br>Wed 1 Jul</div>
+          <div class="step-content">
+            <h3>Elux designs — you stay available for questions</h3>
+            <div class="step-tasks">
+              <div class="step-task blue">Elux works on 3 homepage concepts in Figma</div>
+              <div class="step-task blue">Be on standby to clarify direction rules or brand questions</div>
+              <div class="step-task blue">Mid-day check-in with Elux to catch issues early</div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-day deadline">Thursday<br>2 Jul · DEADLINE</div>
+          <div class="step-content">
+            <h3>Review 3 concepts → send to client</h3>
+            <div class="step-tasks">
+              <div class="step-task red">Internal review: check brand rules, APSIC hierarchy, direction clarity</div>
+              <div class="step-task red">Present 3 homepage concepts to APSIC + Schülke for selection</div>
+              <div class="step-task red">Brief client: they must select ONE direction to proceed to Phase 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: KEY RULES TO BRIEF ELUX -->
+  <div class="slide" data-index="7">
+    <div class="slide-inner">
+      <div class="label">For Your Elux Brief</div>
+      <h2>Key rules Elux<br><span class="accent">must not miss</span></h2>
+      <div class="grid-2" style="margin-top:32px;">
+        <div class="card">
+          <h3>🏛️ APSIC leads at all times</h3>
+          <p style="margin-top:8px;">APSIC / AEHEA brand every page. Logos appear together only in the "Partners in safer care" section. Schülke's home is the Cooperation Partner feature on Winners & Partners page.</p>
+        </div>
+        <div class="card">
+          <h3>🎨 Direction 2 gets Schülke assets</h3>
+          <p style="margin-top:8px;">The Schülke 'plus' arrow device and halftone blue gradations (40/20/10%) are <strong style="color:#fff;">Direction 2 only</strong>. Directions 1 and 3 use only subtle cues — rounded corners. No arrow, no halftone.</p>
+        </div>
+        <div class="card">
+          <h3>📱 8-step flow = mobile-first</h3>
+          <p style="margin-top:8px;">The interactive application timeline on "How to Participate" must work cleanly on mobile. This is called out specifically in the brief — it's a design challenge Elux must solve, not an afterthought.</p>
+        </div>
+        <div class="card">
+          <h3>📐 Structure is sacred</h3>
+          <p style="margin-top:8px;">Directions change look & feel only — not the sitemap, not the wireframe layout, not the copy. Elux follows the approved wireframe structure exactly. No reordering, no adding sections.</p>
+        </div>
+        <div class="card">
+          <h3>🔤 Typography rules</h3>
+          <p style="margin-top:8px;">Body copy: <strong style="color:#fff;">Open Sans</strong> across all three directions. Headers: Google fonts — propose specific faces per direction. Direction 3 should use a serif or distinctive display face to differentiate.</p>
+        </div>
+        <div class="card">
+          <h3>🖼️ Imagery: Elux to source</h3>
+          <p style="margin-top:8px;">Clean, minimalist, studio-quality medical/clinical environments. Advanced environmental hygiene — calm, premium, no visual clutter. Tailored per direction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: TL;DR -->
+  <div class="slide" data-index="8">
+    <div class="slide-inner" style="max-width:700px;">
+      <div class="label">Summary</div>
+      <h2>Your next<br><span class="accent">3 actions</span></h2>
+      <div style="margin-top:36px; display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--yellow); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:20px; color:#000; flex-shrink:0;">1</div>
+          <div>
+            <h3 style="margin-bottom:6px;">Chase missing assets — TODAY</h3>
+            <p>Email / message client for APSIC/AEHEA logo, Schülke brand guidelines, and approved copy. Without these, Elux can't finish the Schülke-branded direction or use correct logos.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--schülke); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:20px; color:#fff; flex-shrink:0;">2</div>
+          <div>
+            <h3 style="margin-bottom:6px;">Brief Elux — TODAY</h3>
+            <p>Share the brief PDF, wireframes, and references. Walk through the 3 directions and key rules. Don't let Elux guess — a wrong interpretation on Day 1 costs you the deadline.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:20px; color:#fff; flex-shrink:0;">3</div>
+          <div>
+            <h3 style="margin-bottom:6px;">Review + deliver by Thursday</h3>
+            <p>Before sending to client, check: APSIC leads in hierarchy, Schülke assets only in Direction 2, "Apply Now" in nav, structure follows wireframe. Then present all 3 for client selection.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button id="prev" onclick="go(-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <div class="counter" id="counter">1 / 9</div>
+  <button id="next" onclick="go(1)">→</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('dots');
+  let current = 0;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot-nav' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit');
+    setTimeout(() => slides[current - (n > current ? -1 : 0)].classList.remove('exit'), 400);
+    current = n;
+    slides[current].classList.add('active');
+    document.querySelectorAll('.dot-nav').forEach((d, i) => d.classList.toggle('active', i === current));
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('prev').disabled = current === 0;
+    document.getElementById('next').disabled = current === slides.length - 1;
+  }
+
+  function go(dir) {
+    const next = current + dir;
+    if (next < 0 || next >= slides.length) return;
+    // exit animation
+    const exitSlide = slides[current];
+    exitSlide.classList.remove('active');
+    exitSlide.style.transform = dir > 0 ? 'translateX(-40px)' : 'translateX(40px)';
+    exitSlide.style.opacity = '0';
+    exitSlide.style.pointerEvents = 'none';
+    setTimeout(() => {
+      exitSlide.style.transform = '';
+      exitSlide.style.opacity = '';
+    }, 400);
+
+    current = next;
+    const enterSlide = slides[current];
+    enterSlide.style.transform = dir > 0 ? 'translateX(40px)' : 'translateX(-40px)';
+    enterSlide.style.opacity = '0';
+    enterSlide.style.pointerEvents = 'all';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        enterSlide.classList.add('active');
+        enterSlide.style.transform = '';
+        enterSlide.style.opacity = '';
+      });
+    });
+
+    document.querySelectorAll('.dot-nav').forEach((d, i) => d.classList.toggle('active', i === current));
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('prev').disabled = current === 0;
+    document.getElementById('next').disabled = current === slides.length - 1;
+  }
+
+  document.getElementById('prev').disabled = true;
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEHEA Website — Project Brief (ID)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --schülke: #007CC2;
+    --purple: #6B4FBB;
+    --dark: #0f0f0f;
+    --mid: #1a1a1a;
+    --surface: #222;
+    --border: #333;
+    --text: #f0f0f0;
+    --muted: #888;
+    --green: #4ade80;
+    --red: #f87171;
+    --yellow: #facc15;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slides { width: 100%; height: 100vh; position: relative; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity .35s ease, transform .35s ease;
+    pointer-events: none;
+  }
+  .slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+  }
+
+  .slide-inner { width: 100%; max-width: 900px; }
+  .label {
+    font-size: 11px;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 700; line-height: 1.05; }
+  h2 { font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; line-height: 1.1; }
+  h3 { font-size: 18px; font-weight: 600; }
+  p  { font-size: 16px; line-height: 1.6; color: #ccc; }
+
+  .accent { color: var(--schülke); }
+  .sub { font-size: 20px; color: var(--muted); margin-top: 16px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 32px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .card h3 { margin-bottom: 8px; }
+  .card p  { font-size: 14px; }
+
+  .dir-card { border-radius: 12px; padding: 24px; border: 1px solid transparent; }
+  .dir-1 { background: #0f1a22; border-color: #007CC230; }
+  .dir-2 { background: #001e36; border-color: var(--schülke); }
+  .dir-3 { background: #160f2a; border-color: #7c3aed50; }
+
+  .swatch { display: flex; gap: 6px; margin: 12px 0 16px; }
+  .dot { width: 22px; height: 22px; border-radius: 50%; border: 1px solid #ffffff20; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: .05em;
+  }
+  .tag-low  { background: #1e3a2a; color: #4ade80; }
+  .tag-high { background: #1a3050; color: #60a5fa; }
+  .tag-none { background: #2a1a40; color: #a78bfa; }
+
+  .checklist { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .checklist li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #ccc; }
+  .checklist .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
+  .step {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-day { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding-top: 3px; }
+  .today    { color: var(--yellow); }
+  .tomorrow { color: var(--schülke); }
+  .deadline { color: var(--red); }
+  .step-content h3 { font-size: 15px; margin-bottom: 4px; }
+  .step-content p  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .step-tasks { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+  .step-task {
+    font-size: 13px;
+    color: #bbb;
+    padding: 4px 10px;
+    background: var(--surface);
+    border-radius: 6px;
+    border-left: 3px solid var(--border);
+  }
+  .step-task.urgent { border-left-color: var(--yellow); }
+  .step-task.blue   { border-left-color: var(--schülke); }
+  .step-task.red    { border-left-color: var(--red); }
+
+  .assets { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+  .asset-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: var(--surface);
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .asset-row .status { font-size: 18px; flex-shrink: 0; }
+  .asset-row .name   { flex: 1; }
+  .asset-row .note   { font-size: 12px; color: var(--muted); }
+
+  .nav {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--mid);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 10px 20px;
+    z-index: 100;
+  }
+  .nav button {
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 8px;
+    opacity: .6;
+    transition: opacity .2s;
+  }
+  .nav button:hover { opacity: 1; }
+  .nav button:disabled { opacity: .2; cursor: default; }
+  .nav .counter { font-size: 13px; color: var(--muted); min-width: 50px; text-align: center; }
+  .dots { display: flex; gap: 6px; align-items: center; }
+  .dot-nav {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+  }
+  .dot-nav.active { background: var(--text); transform: scale(1.3); }
+
+  .slide-title { text-align: left; align-items: flex-start; }
+  .slide-title .slide-inner { max-width: 800px; }
+  .meta-row { display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap; }
+  .meta .key { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .meta .val { font-size: 14px; color: var(--text); }
+
+  .phases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 28px; }
+  .phase { padding: 20px; border-radius: 10px; border: 1px solid var(--border); }
+  .phase.active-phase { border-color: var(--yellow); background: #1a1500; }
+  .phase-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .phase.active-phase .phase-label { color: var(--yellow); }
+  .phase h3 { font-size: 15px; margin-bottom: 6px; }
+  .phase p  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  .wf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .wf-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .wf-card h3 { font-size: 14px; color: var(--schülke); margin-bottom: 8px; }
+  .wf-card ul { padding-left: 16px; }
+  .wf-card li { font-size: 13px; color: #bbb; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<div class="slides" id="slides">
+
+  <!-- SLIDE 1: JUDUL -->
+  <div class="slide slide-title active" data-index="0">
+    <div class="slide-inner">
+      <div class="label">Ringkasan Proyek · Juni 2026</div>
+      <h1>Website AEHEA<br><span class="accent">Design & Build</span></h1>
+      <p class="sub">Apa projectnya, apa yang harus dilakukan, dan kapan.</p>
+      <div class="meta-row">
+        <div class="meta">
+          <div class="key">Klien</div>
+          <div class="val">APSIC + Schülke</div>
+        </div>
+        <div class="meta">
+          <div class="key">Agensi</div>
+          <div class="val">Elux</div>
+        </div>
+        <div class="meta">
+          <div class="key">Disiapkan oleh</div>
+          <div class="val">Unsensible</div>
+        </div>
+        <div class="meta">
+          <div class="key">Deadline Fase 1</div>
+          <div class="val" style="color: var(--red); font-weight: 700;">Kamis, 2 Juli 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: APA INI -->
+  <div class="slide" data-index="1">
+    <div class="slide-inner">
+      <div class="label">Tentang Proyek</div>
+      <h2>Website penghargaan bergengsi<br>untuk rumah sakit di <span class="accent">Asia Pasifik</span></h2>
+      <div class="grid-2" style="margin-top:36px;">
+        <div class="card">
+          <h3>🏥 Apa itu AEHEA?</h3>
+          <p style="margin-top:8px;">APSIC Environmental Hygiene Excellence Award — menghargai rumah sakit yang unggul dalam kebersihan lingkungan dan keselamatan pasien. Dipimpin secara ilmiah oleh APSIC, dilaksanakan bekerja sama dengan Schülke.</p>
+        </div>
+        <div class="card">
+          <h3>🎯 Tujuan Utama</h3>
+          <p style="margin-top:8px;"><strong style="color:#fff;">Menunjukkan prestise dan kredibilitas.</strong> Website harus memancarkan otoritas ilmiah dan kehadiran yang premium agar penghargaan ini dianggap serius di seluruh Asia Pasifik. Mendorong pendaftaran rumah sakit adalah tujuan kedua.</p>
+        </div>
+        <div class="card">
+          <h3>👤 Target Audiens</h3>
+          <p style="margin-top:8px;">Rumah sakit, spesialis IPC (Pencegahan & Pengendalian Infeksi), dan quality lead di Asia Pasifik. Audiens profesional berbahasa Inggris. Tone: otoritas ilmiah bertemu desain premium, bersih, klinis.</p>
+        </div>
+        <div class="card">
+          <h3>⚠️ Aturan Tidak Bisa Diganggu Gugat</h3>
+          <p style="margin-top:8px;"><strong style="color:#f87171;">APSIC selalu memimpin.</strong> Schülke adalah mitra kerjasama — bukan pemilik atau juri. Tidak ada satupun desain atau teks yang boleh mengisyaratkan Schülke mempengaruhi penilaian. Independensi ilmiah harus dijaga setiap saat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: FASE -->
+  <div class="slide" data-index="2">
+    <div class="slide-inner">
+      <div class="label">Lingkup Pekerjaan</div>
+      <h2>Tiga fase.<br>Sekarang kamu di <span style="color:var(--yellow)">awal Fase 1</span>.</h2>
+      <div class="phases">
+        <div class="phase active-phase">
+          <div class="phase-label">Fase 1 · SEKARANG</div>
+          <h3>3 Konsep Homepage</h3>
+          <p>Elux mempresentasikan tiga arah visual. Masing-masing berupa konsep homepage tersendiri di Figma — satu per gaya visual.</p>
+          <p style="margin-top:8px; color:var(--yellow); font-size:13px; font-weight:700;">Deadline: Kamis 2 Juli 2026</p>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Fase 2 · Setelah pilihan</div>
+          <h3>Desain Penuh</h3>
+          <p>Satu arah dipilih. Elux mendesain semua halaman yang tersisa (6 halaman + legal) dalam arah tersebut — di Figma.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-label">Fase 3 · Final</div>
+          <h3>Build di Webflow</h3>
+          <p>Site responsif penuh di Webflow. Desktop, tablet, mobile. Siap CMS agar pemenang bisa diumumkan di APSIC 2028.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: 3 ARAH VISUAL -->
+  <div class="slide" data-index="3">
+    <div class="slide-inner">
+      <div class="label">Brief Kreatif</div>
+      <h2>Tiga arah visual<br>yang harus didesain Elux</h2>
+      <div class="grid-3">
+        <div class="dir-card dir-1">
+          <span class="tag tag-low">Asosiasi Schülke rendah</span>
+          <h3 style="margin-bottom:6px;">Arah 1</h3>
+          <p style="font-size:13px; color:var(--schülke); font-weight:600; margin-bottom:8px;">Abu-abu / Putih + Biru</p>
+          <div class="swatch">
+            <div class="dot" style="background:#f5f5f5;"></div>
+            <div class="dot" style="background:#AFAFAF;"></div>
+            <div class="dot" style="background:#636362;"></div>
+            <div class="dot" style="background:#007CC2;"></div>
+          </div>
+          <p style="font-size:13px; line-height:1.6;">Bersih, klinis, minimal-ilmiah. Abu-abu terang & putih dengan biru Schülke sebagai aksen terbatas. Tidak ada arrow device atau halftone. Sudut membulat halus.</p>
+          <p style="font-size:12px; margin-top:10px; color:var(--muted);">Vibe: estetika lab biotek / studio ringan</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Header: grotesque sans bersih (Google)</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Ref: image 3 (biotek minimal)</p>
+        </div>
+        <div class="dir-card dir-2">
+          <span class="tag tag-high">Paling kuat ke Schülke</span>
+          <h3 style="margin-bottom:6px;">Arah 2</h3>
+          <p style="font-size:13px; color:#60a5fa; font-weight:600; margin-bottom:8px;">Biru Schülke</p>
+          <div class="swatch">
+            <div class="dot" style="background:#007CC2;"></div>
+            <div class="dot" style="background:#007CC265;"></div>
+            <div class="dot" style="background:#007CC230;"></div>
+            <div class="dot" style="background:#f0f0f0;"></div>
+          </div>
+          <p style="font-size:13px; line-height:1.6;">Biru Schülke (#007CC2) mendominasi. Didukung gradasi halftone 40/20/10%. Menggunakan arrow device 'plus' Schülke. Percaya diri, editorial, institusional.</p>
+          <p style="font-size:12px; margin-top:10px; color:var(--muted);">Vibe: institusi medis yang berwibawa</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Header: institutional sans yang kuat (Google)</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Ref: image 1 (Johns Hopkins) + image 6 (palet)</p>
+        </div>
+        <div class="dir-card dir-3">
+          <span class="tag tag-none">Identitas AEHEA sendiri</span>
+          <h3 style="margin-bottom:6px;">Arah 3</h3>
+          <p style="font-size:13px; color:#a78bfa; font-weight:600; margin-bottom:8px;">Biru–Ungu Baru</p>
+          <div class="swatch">
+            <div class="dot" style="background:#6B4FBB;"></div>
+            <div class="dot" style="background:#8B5CF6;"></div>
+            <div class="dot" style="background:#c4b5fd;"></div>
+            <div class="dot" style="background:#f5f0ff;"></div>
+          </div>
+          <p style="font-size:13px; line-height:1.6;">Identitas AEHEA yang sepenuhnya baru. Bebas meninggalkan biru Schülke sepenuhnya. Premium, modern, sedikit futuristik. Hanya sudut membulat halus.</p>
+          <p style="font-size:12px; margin-top:10px; color:var(--muted);">Vibe: estetika AI / genomik yang refined</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Header: serif atau display face (Google)</p>
+          <p style="font-size:12px; margin-top:4px; color:var(--muted);">Ref: image 5 (MYDNA genetics)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: STRUKTUR HALAMAN -->
+  <div class="slide" data-index="4">
+    <div class="slide-inner">
+      <div class="label">Struktur Website</div>
+      <h2>6 halaman. Struktur sudah<br><span class="accent">terkunci</span> — arah hanya mengubah tampilan.</h2>
+      <div class="wf-grid">
+        <div class="wf-card">
+          <h3>1. Home / Landing</h3>
+          <ul>
+            <li>Hero: "Be Recognised. Save Lives." + CTA Apply Now</li>
+            <li>Tentang AEHEA + 3 pilar kontribusi</li>
+            <li>Pesan bersama dari Ketua Program & Presiden APSIC</li>
+            <li>Manfaat Why Join + tautan cepat + footer</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>2. Leadership & Process</h3>
+          <ul>
+            <li>Kepemimpinan program (Prof. Moi Lin) & Expert Panel</li>
+            <li>Proses evaluasi 3 tahap + kriteria penilaian</li>
+            <li>Seksi co-branding "Partners in safer care, led by APSIC"</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>3. Winners & Partners</h3>
+          <ul>
+            <li>Placeholder pemenang → dikelola CMS (umumkan di APSIC 2028)</li>
+            <li>Grid profil Expert Panel</li>
+            <li>Fitur mitra kerjasama Schülke</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>4. How to Participate</h3>
+          <ul>
+            <li><strong style="color:#fff;">Timeline interaktif 8 langkah</strong> — harus berfungsi di mobile</li>
+            <li>Gratis, independen secara ilmiah, rahasia</li>
+            <li>CTA Apply Now</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>5. Apply Now</h3>
+          <ul>
+            <li>Formulir Expression of Interest</li>
+            <li>Detail rumah sakit, kontak IPC/Quality Lead</li>
+            <li>Validasi + upload dokumen + jaminan kerahasiaan data</li>
+          </ul>
+        </div>
+        <div class="wf-card">
+          <h3>6. FAQ & Contact</h3>
+          <ul>
+            <li>FAQ accordion (9 pertanyaan utama)</li>
+            <li>Formulir kontak + email, telepon, kantor, peta</li>
+            <li>+ Halaman legal (Privacy, Terms, Conditions)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: STATUS ASET -->
+  <div class="slide" data-index="5">
+    <div class="slide-inner">
+      <div class="label">Status Aset</div>
+      <h2>Yang sudah ada.<br>Yang <span style="color:var(--red)">masih kurang</span>.</h2>
+      <div class="assets" style="margin-top:28px;">
+        <div class="asset-row">
+          <span class="status">✅</span>
+          <span class="name">Design Brief (PDF)</span>
+          <span class="note">Lengkap — struktur, tone, dan aturan brand sudah disetujui</span>
+        </div>
+        <div class="asset-row">
+          <span class="status">✅</span>
+          <span class="name">Wireframe</span>
+          <span class="note">Home, Leadership & Process, Apply Now · versi desktop</span>
+        </div>
+        <div class="asset-row">
+          <span class="status">✅</span>
+          <span class="name">Referensi Visual (5 gambar)</span>
+          <span class="note">Sudah dipetakan ke tiap arah — Johns Hopkins, biotek lab, MYDNA, palet</span>
+        </div>
+        <div class="asset-row" style="border: 1px solid #f8717140; background:#1a0a0a;">
+          <span class="status">❌</span>
+          <span class="name" style="color:#f87171;">Logo APSIC / AEHEA</span>
+          <span class="note" style="color:#f87171;">Wajib ada sebelum Elux mulai mendesain</span>
+        </div>
+        <div class="asset-row" style="border: 1px solid #f8717140; background:#1a0a0a;">
+          <span class="status">❌</span>
+          <span class="name" style="color:#f87171;">Logo Schülke + Brand Guidelines</span>
+          <span class="note" style="color:#f87171;">Arrow device + halftone = wajib untuk Arah 2</span>
+        </div>
+        <div class="asset-row" style="border: 1px solid #f8717140; background:#1a0a0a;">
+          <span class="status">❌</span>
+          <span class="name" style="color:#f87171;">Copy Website yang Disetujui</span>
+          <span class="note" style="color:#f87171;">Semua copy halaman — sudah terkunci, harus diikuti persis</span>
+        </div>
+        <div class="asset-row" style="border: 1px solid #facc1540; background:#141000;">
+          <span class="status">⚠️</span>
+          <span class="name" style="color:#facc15;">Wireframe (halaman tersisa)</span>
+          <span class="note" style="color:#888;">Winners & Partners, How to Participate, FAQ — belum diekspor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: LANGKAH SELANJUTNYA -->
+  <div class="slide" data-index="6">
+    <div class="slide-inner">
+      <div class="label">Yang Harus Kamu Lakukan</div>
+      <h2>Step by step.<br><span style="color:var(--red)">2 hari</span> menuju deadline Fase 1.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-day today">Hari ini<br>Sel 30 Jun</div>
+          <div class="step-content">
+            <h3>Minta aset yang kurang dari klien</h3>
+            <div class="step-tasks">
+              <div class="step-task urgent">📦 Minta file logo APSIC / AEHEA (SVG atau AI)</div>
+              <div class="step-task urgent">📦 Minta logo Schülke + PDF brand guidelines lengkap</div>
+              <div class="step-task urgent">📄 Minta copy website yang sudah disetujui (semua halaman)</div>
+              <div class="step-task urgent">🖼️ Ekspor sisa wireframe dari Figma (Winners, How to Participate, FAQ)</div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-day today">Hari ini<br>Sel 30 Jun</div>
+          <div class="step-content">
+            <h3>Brief Elux — selaraskan 3 arah visual</h3>
+            <div class="step-tasks">
+              <div class="step-task blue">Bagikan: Design Brief PDF + wireframe + referensi visual</div>
+              <div class="step-task blue">Jelaskan tiap arah: palet, vibe, aturan brand per arah</div>
+              <div class="step-task blue">Tegaskan: struktur terkunci — arah hanya mengubah tampilan, bukan konten</div>
+              <div class="step-task blue">Konfirmasi: "Apply Now" harus ada di nav dan sebagai CTA di seluruh halaman</div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-day tomorrow">Besok<br>Rab 1 Jul</div>
+          <div class="step-content">
+            <h3>Elux mendesain — kamu standby untuk pertanyaan</h3>
+            <div class="step-tasks">
+              <div class="step-task blue">Elux mengerjakan 3 konsep homepage di Figma</div>
+              <div class="step-task blue">Sedia untuk klarifikasi aturan arah atau pertanyaan brand</div>
+              <div class="step-task blue">Check-in dengan Elux di tengah hari untuk antisipasi masalah lebih awal</div>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-day deadline">Kamis<br>2 Jul · DEADLINE</div>
+          <div class="step-content">
+            <h3>Review 3 konsep → kirim ke klien</h3>
+            <div class="step-tasks">
+              <div class="step-task red">Review internal: cek aturan brand, hierarki APSIC, kejelasan tiap arah</div>
+              <div class="step-task red">Presentasikan 3 konsep homepage ke APSIC + Schülke untuk dipilih</div>
+              <div class="step-task red">Brief klien: mereka harus pilih SATU arah untuk lanjut ke Fase 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: ATURAN PENTING UNTUK ELUX -->
+  <div class="slide" data-index="7">
+    <div class="slide-inner">
+      <div class="label">Untuk Brief ke Elux</div>
+      <h2>Aturan penting yang<br><span class="accent">tidak boleh terlewat</span></h2>
+      <div class="grid-2" style="margin-top:32px;">
+        <div class="card">
+          <h3>🏛️ APSIC selalu memimpin</h3>
+          <p style="margin-top:8px;">Brand APSIC / AEHEA ada di setiap halaman. Logo hanya muncul bersama di seksi "Partners in safer care". Rumah Schülke adalah fitur Cooperation Partner di halaman Winners & Partners.</p>
+        </div>
+        <div class="card">
+          <h3>🎨 Aset Schülke khusus Arah 2</h3>
+          <p style="margin-top:8px;">Arrow device 'plus' Schülke dan gradasi halftone biru (40/20/10%) <strong style="color:#fff;">hanya untuk Arah 2</strong>. Arah 1 dan 3 hanya pakai cues halus — sudut membulat. Tidak ada arrow, tidak ada halftone.</p>
+        </div>
+        <div class="card">
+          <h3>📱 Flow 8 langkah = mobile-first</h3>
+          <p style="margin-top:8px;">Timeline aplikasi interaktif di "How to Participate" harus berfungsi bersih di mobile. Ini disebut khusus dalam brief — tantangan desain yang harus dipecahkan Elux, bukan afterthought.</p>
+        </div>
+        <div class="card">
+          <h3>📐 Struktur tidak bisa diubah</h3>
+          <p style="margin-top:8px;">Arah hanya mengubah tampilan — bukan sitemap, bukan susunan wireframe, bukan copy. Elux mengikuti struktur wireframe yang disetujui persis. Tidak ada perubahan urutan atau penambahan seksi.</p>
+        </div>
+        <div class="card">
+          <h3>🔤 Aturan Tipografi</h3>
+          <p style="margin-top:8px;">Body copy: <strong style="color:#fff;">Open Sans</strong> untuk semua arah. Header: Google font — usulkan face spesifik per arah. Arah 3 harus pakai serif atau display face yang berbeda agar set punya jangkauan tampilan.</p>
+        </div>
+        <div class="card">
+          <h3>🖼️ Imagery: Elux yang cari</h3>
+          <p style="margin-top:8px;">Bersih, minimalis, kualitas studio untuk lingkungan medis/klinis modern. Kebersihan lingkungan canggih — tenang, premium, tidak berantakan. Disesuaikan per arah.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: RINGKASAN -->
+  <div class="slide" data-index="8">
+    <div class="slide-inner" style="max-width:700px;">
+      <div class="label">Ringkasan</div>
+      <h2><span class="accent">3 langkah</span><br>yang harus kamu lakukan sekarang</h2>
+      <div style="margin-top:36px; display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--yellow); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:20px; color:#000; flex-shrink:0;">1</div>
+          <div>
+            <h3 style="margin-bottom:6px;">Minta aset yang kurang — HARI INI</h3>
+            <p>Email / hubungi klien untuk logo APSIC/AEHEA, brand guidelines Schülke, dan copy yang disetujui. Tanpa ini, Elux tidak bisa menyelesaikan arah bermerek Schülke atau pakai logo yang benar.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--schülke); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:20px; color:#fff; flex-shrink:0;">2</div>
+          <div>
+            <h3 style="margin-bottom:6px;">Brief Elux — HARI INI</h3>
+            <p>Bagikan brief PDF, wireframe, dan referensi. Jelaskan 3 arah dan aturan pentingnya. Jangan biarkan Elux menebak-nebak — interpretasi yang salah di Hari 1 bisa bikin deadline lewat.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:20px; align-items:flex-start;">
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--red); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:20px; color:#fff; flex-shrink:0;">3</div>
+          <div>
+            <h3 style="margin-bottom:6px;">Review + kirim paling lambat Kamis</h3>
+            <p>Sebelum kirim ke klien, cek: APSIC memimpin dalam hierarki, aset Schülke hanya di Arah 2, "Apply Now" ada di nav, struktur mengikuti wireframe. Lalu presentasikan 3 konsep untuk dipilih klien.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button id="prev" onclick="go(-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <div class="counter" id="counter">1 / 9</div>
+  <button id="next" onclick="go(1)">→</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('dots');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot-nav' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    const prev = current;
+    current = n;
+    slides[prev].style.cssText = 'opacity:0;transform:translateX(-40px);pointer-events:none;transition:opacity .35s,transform .35s;';
+    setTimeout(() => { slides[prev].style.cssText = ''; }, 400);
+    slides[current].style.cssText = '';
+    slides[current].classList.add('active');
+    document.querySelectorAll('.dot-nav').forEach((d, i) => d.classList.toggle('active', i === current));
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('prev').disabled = current === 0;
+    document.getElementById('next').disabled = current === slides.length - 1;
+  }
+
+  function go(dir) {
+    const next = current + dir;
+    if (next < 0 || next >= slides.length) return;
+
+    const exitSlide = slides[current];
+    exitSlide.classList.remove('active');
+    exitSlide.style.transform = dir > 0 ? 'translateX(-40px)' : 'translateX(40px)';
+    exitSlide.style.opacity = '0';
+    exitSlide.style.pointerEvents = 'none';
+    setTimeout(() => { exitSlide.style.transform = ''; exitSlide.style.opacity = ''; }, 400);
+
+    current = next;
+    const enterSlide = slides[current];
+    enterSlide.style.transform = dir > 0 ? 'translateX(40px)' : 'translateX(-40px)';
+    enterSlide.style.opacity = '0';
+    enterSlide.style.pointerEvents = 'all';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      enterSlide.classList.add('active');
+      enterSlide.style.transform = '';
+      enterSlide.style.opacity = '';
+    }));
+
+    document.querySelectorAll('.dot-nav').forEach((d, i) => d.classList.toggle('active', i === current));
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('prev').disabled = current === 0;
+    document.getElementById('next').disabled = current === slides.length - 1;
+  }
+
+  document.getElementById('prev').disabled = true;
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+  });
+</script>
+</body>
+</html>

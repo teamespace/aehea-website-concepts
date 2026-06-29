@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEHEA — Design PRD · 3 Directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #0d0d0d;
+  --surface: #181818;
+  --card: #1f1f1f;
+  --border: #2e2e2e;
+  --text: #f0f0f0;
+  --muted: #777;
+  --d1: #007CC2;
+  --d2: #007CC2;
+  --d3: #6B4FBB;
+}
+body { background:var(--bg); color:var(--text); font-family:'Open Sans',sans-serif; font-size:14px; line-height:1.6; }
+
+/* ── TABS ── */
+.tabs-bar {
+  position: sticky; top:0; z-index:100;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  display:flex; gap:0; padding:0 40px;
+}
+.tab-btn {
+  padding:16px 28px; font-size:13px; font-weight:600;
+  letter-spacing:.05em; text-transform:uppercase;
+  background:none; border:none; color:var(--muted);
+  cursor:pointer; border-bottom:2px solid transparent;
+  transition:color .2s, border-color .2s;
+}
+.tab-btn.d1.active { color:#007CC2; border-color:#007CC2; }
+.tab-btn.d2.active { color:#007CC2; border-color:#007CC2; }
+.tab-btn.d3.active { color:#a78bfa; border-color:#a78bfa; }
+.tab-btn:hover { color:var(--text); }
+
+/* ── PANELS ── */
+.panel { display:none; padding:40px; max-width:1100px; margin:0 auto; }
+.panel.active { display:block; }
+
+/* ── SECTION HEADERS ── */
+.sec-label {
+  font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:12px; margin-top:48px;
+}
+.sec-label:first-child { margin-top:0; }
+h2 { font-size:22px; font-weight:700; margin-bottom:20px; }
+h3 { font-size:15px; font-weight:600; margin-bottom:8px; }
+
+/* ── PALETTE ── */
+.palette { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+.swatch {
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  font-size:11px; color:var(--muted);
+}
+.swatch-box {
+  width:56px; height:56px; border-radius:10px;
+  border:1px solid #ffffff15;
+}
+.swatch span { font-family:monospace; font-size:10px; }
+
+/* ── FONT PREVIEW ── */
+.font-preview {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:28px 32px; margin-bottom:8px;
+}
+.fp-label { font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+.fp-heading { line-height:1.1; margin-bottom:8px; }
+.fp-body { font-family:'Open Sans',sans-serif; font-size:15px; color:#aaa; }
+.fp-meta { font-size:11px; color:var(--muted); margin-top:12px; }
+
+/* ── TOKENS ── */
+.tokens-block {
+  background:#111; border:1px solid var(--border); border-radius:10px;
+  padding:20px 24px; font-family:monospace; font-size:12px;
+  line-height:2; color:#ccc; position:relative; overflow:auto;
+}
+.tokens-block .comment { color:#555; }
+.tokens-block .key { color:#9ddcff; }
+.tokens-block .val { color:#b5e8a8; }
+
+/* ── SECTIONS SPEC ── */
+.sections { display:flex; flex-direction:column; gap:12px; }
+.section-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:10px; padding:20px 24px;
+  display:grid; grid-template-columns:220px 1fr; gap:24px;
+}
+.section-meta .s-num { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+.section-meta .s-name { font-size:15px; font-weight:700; margin-bottom:6px; }
+.section-meta .s-tag {
+  display:inline-block; font-size:10px; padding:2px 8px;
+  border-radius:20px; background:#ffffff10; color:var(--muted);
+}
+.section-spec { font-size:13px; color:#bbb; line-height:1.7; }
+.section-spec strong { color:var(--text); }
+.section-spec ul { padding-left:16px; margin-top:4px; }
+.section-spec li { margin-bottom:2px; }
+.section-spec .s-img {
+  margin-top:10px; font-size:11px; color:#5b9bd5;
+  font-family:monospace; word-break:break-all;
+}
+
+/* ── IMAGES ── */
+.img-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:4px; }
+.img-item {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:8px; padding:12px; font-size:11px;
+}
+.img-item .img-role { color:var(--muted); margin-bottom:4px; font-size:10px; text-transform:uppercase; letter-spacing:.1em; }
+.img-item .img-url { font-family:monospace; color:#5b9bd5; word-break:break-all; font-size:10px; }
+
+/* ── PROMPT ── */
+.prompt-wrap { position:relative; }
+.prompt-box {
+  width:100%; min-height:260px; background:#0a0a0a; border:1px solid var(--border);
+  border-radius:10px; padding:20px; font-family:monospace; font-size:12px;
+  color:#c8e6c9; line-height:1.7; resize:vertical;
+}
+.copy-btn {
+  position:absolute; top:12px; right:12px;
+  background:var(--surface); border:1px solid var(--border);
+  color:var(--text); font-size:11px; padding:6px 14px;
+  border-radius:6px; cursor:pointer; transition:background .2s;
+}
+.copy-btn:hover { background:var(--border); }
+
+/* ── DIVIDER ── */
+.divider { border:none; border-top:1px solid var(--border); margin:40px 0; }
+
+/* ── ACCENT OVERRIDES ── */
+.d1-accent { color:#007CC2; }
+.d2-accent { color:#007CC2; }
+.d3-accent { color:#a78bfa; }
+
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+</style>
+</head>
+<body>
+
+<div class="tabs-bar">
+  <button class="tab-btn d1 active" onclick="switchTab('d1')">Direction 1 — Grey / White + Blue</button>
+  <button class="tab-btn d2" onclick="switchTab('d2')">Direction 2 — Schülke Blue</button>
+  <button class="tab-btn d3" onclick="switchTab('d3')">Direction 3 — Blue–Purple</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     DIRECTION 1 — GREY / WHITE + BLUE
+════════════════════════════════════════════ -->
+<div class="panel active" id="panel-d1">
+
+  <div class="sec-label">Direction 1 · Overview</div>
+  <h2 class="d1-accent">Grey / White + Blue — Clinical Minimal</h2>
+  <p style="color:#aaa; max-width:700px;">Clean, clinical, scientific-minimal. Schülke blue (#007CC2) used sparingly as accent only. Light grey & white base. No Schülke arrow device or halftone. Subtle rounded corners. Referensi: biotech lab minimal + Johns Hopkins.</p>
+
+  <!-- PALETTE -->
+  <div class="sec-label" style="margin-top:36px;">Color Palette</div>
+  <div class="palette">
+    <div class="swatch"><div class="swatch-box" style="background:#FFFFFF; border:1px solid #ddd;"></div><span>#FFFFFF</span><span style="font-size:9px;color:#555;">Background</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#F7F7F7;"></div><span>#F7F7F7</span><span style="font-size:9px;color:#555;">Surface</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#EFEFEF;"></div><span>#EFEFEF</span><span style="font-size:9px;color:#555;">Subtle bg</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#E0E0E0;"></div><span>#E0E0E0</span><span style="font-size:9px;color:#555;">Border</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#AFAFAF;"></div><span>#AFAFAF</span><span style="font-size:9px;color:#555;">Muted text</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#636362;"></div><span>#636362</span><span style="font-size:9px;color:#555;">Body text</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#1A1A1A;"></div><span>#1A1A1A</span><span style="font-size:9px;color:#555;">Headline</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#007CC2;"></div><span>#007CC2</span><span style="font-size:9px;color:#555;">Accent only</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#E8F4FB;"></div><span>#E8F4FB</span><span style="font-size:9px;color:#555;">Blue tint bg</span></div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="sec-label">Typography</div>
+  <div class="grid-2">
+    <div class="font-preview">
+      <div class="fp-label">Header Font — Manrope</div>
+      <div class="fp-heading" style="font-family:'Manrope',sans-serif; font-size:38px; font-weight:800; color:#1a1a1a; background:#f7f7f7; padding:16px 0 4px;">Be Recognised.<br>Save Lives.</div>
+      <div class="fp-body" style="background:#f7f7f7; color:#636362; padding:8px 0 16px;">APSIC Environmental Hygiene Excellence Award</div>
+      <div class="fp-meta">Google Font: <strong>Manrope</strong> · weights 400/600/700/800<br>import: <code style="font-size:10px;">family=Manrope:wght@400;600;700;800</code></div>
+    </div>
+    <div class="font-preview">
+      <div class="fp-label">Body Font — Open Sans (all directions)</div>
+      <div class="fp-body" style="background:#f7f7f7; padding:16px; color:#636362; font-size:15px; border-radius:6px;">The award is scientifically led and independently governed by APSIC, and delivered in cooperation with Schülke, the exclusive partner for holistic Infection Prevention and Control solutions.</div>
+      <div class="fp-meta">Google Font: <strong>Open Sans</strong> · weights 400/500/600<br>Wajib per brief — digunakan di ketiga direction</div>
+    </div>
+  </div>
+
+  <!-- TOKENS -->
+  <div class="sec-label">Design Tokens — CSS Variables (copy-paste)</div>
+  <div class="tokens-block">
+<span class="comment">/* Direction 1 — Clinical Minimal */</span>
+<span class="key">--color-bg</span>:         <span class="val">#FFFFFF</span>;
+<span class="key">--color-surface</span>:     <span class="val">#F7F7F7</span>;
+<span class="key">--color-surface-2</span>:   <span class="val">#EFEFEF</span>;
+<span class="key">--color-border</span>:      <span class="val">#E0E0E0</span>;
+<span class="key">--color-text</span>:        <span class="val">#1A1A1A</span>;
+<span class="key">--color-text-body</span>:   <span class="val">#636362</span>;
+<span class="key">--color-text-muted</span>:  <span class="val">#AFAFAF</span>;
+<span class="key">--color-accent</span>:      <span class="val">#007CC2</span>; <span class="comment">/* Schülke blue — restrained accent only */</span>
+<span class="key">--color-accent-bg</span>:   <span class="val">#E8F4FB</span>;
+
+<span class="key">--font-header</span>:  <span class="val">'Manrope', sans-serif</span>;
+<span class="key">--font-body</span>:    <span class="val">'Open Sans', sans-serif</span>;
+
+<span class="key">--radius-sm</span>:    <span class="val">6px</span>;
+<span class="key">--radius-md</span>:    <span class="val">10px</span>;
+<span class="key">--radius-lg</span>:    <span class="val">16px</span>;
+<span class="key">--radius-card</span>:  <span class="val">10px</span>; <span class="comment">/* subtle, not pill */</span>
+
+<span class="key">--shadow-card</span>:  <span class="val">0 2px 12px rgba(0,0,0,0.06)</span>;
+<span class="key">--max-width</span>:    <span class="val">1200px</span>;
+<span class="key">--section-py</span>:   <span class="val">96px</span>;
+  </div>
+
+  <!-- SECTION SPECS -->
+  <div class="sec-label">Homepage — Section Specs</div>
+  <div class="sections">
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 00</div>
+        <div class="s-name">Navigation</div>
+        <div class="s-tag">Sticky · white</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> white bg, 1px bottom border #E0E0E0, max-width 1200px centered, 20px vertical padding.<br>
+        <strong>Left:</strong> APSIC/AEHEA logo (placeholder SVG atau text "AEHEA").<br>
+        <strong>Center:</strong> links — Panel &amp; Partner | FAQ | Contact — Open Sans 14px, color #636362.<br>
+        <strong>Right:</strong> "Register your interest" — outline button, border #007CC2, text #007CC2, 10px 20px padding, radius 6px. On hover: bg #007CC2, text white.
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 01</div>
+        <div class="s-name">Hero</div>
+        <div class="s-tag">Split layout · #F7F7F7</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> bg #F7F7F7, 2-column split. Left 55% text, right 45% image.<br>
+        <strong>Eyebrow:</strong> "APSIC Environmental Hygiene Excellence Award" — Open Sans 12px, letter-spacing .15em, uppercase, #007CC2.<br>
+        <strong>H1:</strong> "Be recognised.<br>Save lives." — Manrope 800, 68px desktop / 42px mobile, #1A1A1A.<br>
+        <strong>Sub:</strong> "Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety." — Open Sans 17px, #636362, max-width 480px.<br>
+        <strong>CTA:</strong> "Apply Now" — solid #007CC2, white text, 14px 32px, radius 6px. Secondary: "Learn more →" text link, #636362.<br>
+        <strong>Image:</strong> Clinical hospital environment. Rounded 10px. Subtle shadow.<br>
+        <div class="s-img">https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80</div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 02</div>
+        <div class="s-name">About AEHEA</div>
+        <div class="s-tag">3 pillars · white</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> white bg, centered, max-width 1000px.<br>
+        <strong>H2:</strong> "About APSIC Environmental Hygiene Excellence Award (AEHEA)" — Manrope 700, 36px, #1A1A1A, centered.<br>
+        <strong>Body:</strong> 2–3 lines intro text, Open Sans, #636362, centered, max-width 680px.<br>
+        <strong>3 Cards:</strong> flex row, border 1px #E0E0E0, radius 10px, padding 32px, bg white. Each card:
+        <ul>
+          <li>Icon (thin line icon): #007CC2</li>
+          <li>Title: Manrope 600, 18px</li>
+          <li>Body: Open Sans, 14px, #636362</li>
+        </ul>
+        Card 1: "Commitment to IPC" · Card 2: "Innovative practices" · Card 3: "Quality of care"
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 03</div>
+        <div class="s-name">Leadership Message</div>
+        <div class="s-tag">2-col · #F7F7F7</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> bg #F7F7F7, 2-column grid, gap 40px.<br>
+        <strong>H2:</strong> "Message from Award Program Chair and APSIC President" — Manrope 700, 32px, centered, mb 48px.<br>
+        <strong>Each column:</strong> circular avatar image (80px), name Manrope 600, title Open Sans 13px #AFAFAF, quote paragraph Open Sans 15px #636362 italic, role + affiliation Open Sans 12px #AFAFAF.<br>
+        Person 1: A/Prof. Moi Lin Ling — Program Chair, AEHEA · Person 2: Prof. Anucha Apisarnthanarak — President, APSIC<br>
+        <div class="s-img">Avatars: https://i.pravatar.cc/80?u=moilin · https://i.pravatar.cc/80?u=anucha</div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 04</div>
+        <div class="s-name">Why Join</div>
+        <div class="s-tag">Feature blocks · white</div>
+      </div>
+      <div class="section-spec">
+        <strong>H2:</strong> "Why Join the APSIC Environmental Hygiene Excellence Award?" — Manrope 700, 34px.<br>
+        <strong>2 large feature blocks,</strong> horizontal layout. Each: large number "01"/"02" Manrope 800, 80px #EFEFEF (decorative), heading Manrope 700, body Open Sans #636362.<br>
+        Block 1: <strong>Be Recognised</strong> — regional recognition, peer credibility, network.<br>
+        Block 2: <strong>Save Lives</strong> — drive higher standards, improve patient safety outcomes.<br>
+        Below: 2 sub-points — "Celebrated on the regional stage" + "Prestigious recognition, not a monetary prize."
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 05</div>
+        <div class="s-name">FAQ</div>
+        <div class="s-tag">Accordion · #F7F7F7</div>
+      </div>
+      <div class="section-spec">
+        <strong>H2:</strong> "Frequently Asked Questions" — centered.<br>
+        <strong>Accordion items:</strong> max-width 760px, centered. Each item: border-bottom #E0E0E0, question Manrope 600 15px, "+" toggle icon in #007CC2. Expanded: answer Open Sans 14px #636362.<br>
+        5–6 sample questions: "Who can apply?", "Is there a fee?", "How are hospitals evaluated?", "What is the prize?", "When is the next award cycle?", "Is the process confidential?"
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 06</div>
+        <div class="s-name">CTA / Newsletter</div>
+        <div class="s-tag">Full-width · #007CC2</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> full-width bg #007CC2. White text.<br>
+        <strong>H2:</strong> "Want to stay informed?" — Manrope 800, white, centered.<br>
+        <strong>Sub:</strong> "Get updates on the AEHEA award programme." — Open Sans, white/80%.<br>
+        <strong>Input + button:</strong> white input field, "Subscribe" button bg #005A8F (darker blue). max-width 440px, centered.
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 07</div>
+        <div class="s-name">Footer</div>
+        <div class="s-tag">Dark · #1A1A1A</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> bg #1A1A1A, white text. 3 columns.<br>
+        Col 1: Logo "AEHEA" Manrope 700, white. Tagline Open Sans 13px #AFAFAF.<br>
+        Col 2: Nav links — Panel &amp; Partner | How to Participate | Register your Interest — Open Sans 13px #AFAFAF.<br>
+        Col 3: "Panel &amp; Partner | FAQ | Contact" links.<br>
+        Bottom bar: 1px border #2E2E2E, "© 2026 APSIC Environmental Hygiene Excellence Award" left, "Privacy Policy · Terms of Service · Cookies Settings" right — Open Sans 11px #AFAFAF.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIBE-CODING PROMPT -->
+  <div class="sec-label">Vibe-Coding Prompt — copy &amp; paste ke AI mu</div>
+  <div class="prompt-wrap">
+    <button class="copy-btn" onclick="copyPrompt('prompt-d1')">Copy</button>
+    <textarea class="prompt-box" id="prompt-d1" readonly>Build a single-page homepage (HTML + CSS + vanilla JS) for AEHEA — the APSIC Environmental Hygiene Excellence Award website.
+
+DIRECTION: Clinical Minimal (Direction 1). Clean, scientific, premium healthcare aesthetic.
+
+━━━ DESIGN SYSTEM ━━━
+Colors:
+  Background:   #FFFFFF
+  Surface:      #F7F7F7
+  Subtle bg:    #EFEFEF
+  Border:       #E0E0E0
+  Headline:     #1A1A1A
+  Body text:    #636362
+  Muted text:   #AFAFAF
+  Accent:       #007CC2 (restrained — buttons, icons, links only)
+  Accent bg:    #E8F4FB
+
+Fonts (load via Google Fonts):
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
+  Headers: Manrope (700 / 800)
+  Body: Open Sans (400 / 500 / 600)
+
+Spacing: 8px grid. Section padding: 96px top/bottom. Max-width: 1200px centered.
+Border-radius: cards 10px, buttons 6px. Box-shadow: 0 2px 12px rgba(0,0,0,0.06).
+NO Schülke arrow device. NO halftone gradients. Subtle rounded corners only.
+
+━━━ SECTIONS ━━━
+
+[NAV] Sticky white nav, 1px border-bottom #E0E0E0.
+  Left: Text logo "AEHEA" Manrope 700.
+  Center: Panel & Partner · FAQ · Contact (Open Sans 14px #636362).
+  Right: "Register your interest" — outline button, border #007CC2, text #007CC2. Hover: fill #007CC2 white text.
+
+[HERO] bg #F7F7F7. 2-col split (55/45). Padding 120px 0.
+  Left col:
+    Eyebrow: "APSIC ENVIRONMENTAL HYGIENE EXCELLENCE AWARD" — 11px uppercase letter-spacing .15em #007CC2
+    H1: "Be recognised.\nSave lives." — Manrope 800, 68px, #1A1A1A, line-height 1.05
+    Sub: "Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety." — Open Sans 17px #636362, max-width 480px, margin-top 20px
+    CTA row: "Apply Now" solid #007CC2 btn (14px 32px radius 6px) + "Learn more →" text link #636362
+  Right col:
+    Image 900×600 clinical hospital — https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80
+    border-radius 10px, box-shadow 0 8px 40px rgba(0,0,0,0.1)
+
+[ABOUT] bg #FFFFFF. Centered. Padding 96px.
+  H2: "About APSIC Environmental Hygiene Excellence Award (AEHEA)" — Manrope 700 36px centered
+  Sub paragraph: centered, #636362, max-width 680px
+  3 cards in a row (flex, gap 24px), equal width, border 1px #E0E0E0, radius 10px, padding 32px:
+    Card 1 — icon ✓, title "Commitment to IPC", body Open Sans 14px #636362
+    Card 2 — icon ⚡, title "Innovative practices", body Open Sans 14px #636362
+    Card 3 — icon ★, title "Quality of care", body Open Sans 14px #636362
+    Icons in #007CC2
+
+[MESSAGE] bg #F7F7F7. Padding 96px.
+  H2: "Message from Award Program Chair and APSIC President" — Manrope 700 32px centered mb 48px
+  2-col grid gap 40px:
+    Each col: circular avatar 80px, name Manrope 600 18px, title Open Sans 13px #AFAFAF, quote italic Open Sans 15px #636362
+    Col 1: A/Prof. Moi Lin Ling · Program Chair, AEHEA · avatar: https://i.pravatar.cc/80?u=moilin
+    Col 2: Prof. Anucha Apisarnthanarak · President, APSIC · avatar: https://i.pravatar.cc/80?u=anucha
+
+[WHY JOIN] bg #FFFFFF. Padding 96px.
+  H2: "Why Join the APSIC Environmental Hygiene Excellence Award?" — Manrope 700 34px
+  2 feature blocks horizontal:
+    Block 1: large "01" Manrope 800 80px #EFEFEF decorative, H3 "Be Recognised" Manrope 700 22px, body Open Sans #636362
+    Block 2: large "02", H3 "Save Lives", body #636362
+  Below: 2 sub-points side by side:
+    "Celebrated on the regional stage" — with brief description
+    "Prestigious recognition, not a monetary prize" — with brief description
+
+[FAQ] bg #F7F7F7. Padding 96px. Centered.
+  H2: "Frequently Asked Questions" — Manrope 700 32px centered
+  Accordion, max-width 760px centered. JS toggle show/hide. 6 items:
+    "Who can apply?" · "Is there a fee to enter?" · "How are hospitals evaluated?"
+    "What does the winner receive?" · "When is the next award cycle?" · "Is the process confidential?"
+  Each item: border-bottom #E0E0E0, question Manrope 600 15px, icon "+" in #007CC2, answer Open Sans 14px #636362
+
+[CTA SECTION] bg #007CC2. Padding 80px. Centered. White text.
+  H2: "Want to stay informed?" — Manrope 800 36px white
+  Sub: "Get updates on the AEHEA award programme." — Open Sans 16px rgba(255,255,255,0.85)
+  Email input (white, rounded 6px) + "Subscribe" btn (bg #005A8F white text) side by side, max-width 440px
+
+[FOOTER] bg #1A1A1A. Padding 64px 0 32px. White text.
+  Top: 3-col grid:
+    Col 1: "AEHEA" Manrope 700 20px white + tagline #AFAFAF Open Sans 13px
+    Col 2: Panel & Partner · How to Participate · Register your Interest — Open Sans 13px #AFAFAF
+    Col 3: FAQ · Contact — Open Sans 13px #AFAFAF
+  Bottom bar: 1px border-top #2E2E2E, mt 32px pt 24px
+    Left: "© 2026 APSIC Environmental Hygiene Excellence Award" Open Sans 11px #AFAFAF
+    Right: Privacy Policy · Terms of Service · Cookies Settings — #AFAFAF links
+
+━━━ NOTES ━━━
+- Fully responsive. Mobile: stack all 2-col layouts to single col.
+- "Apply Now" / "Register your interest" appear in nav and as CTA — both link to #apply section.
+- No frameworks. Vanilla HTML/CSS/JS only.
+- Use CSS custom properties for all colors/fonts.</textarea>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     DIRECTION 2 — SCHÜLKE BLUE
+════════════════════════════════════════════ -->
+<div class="panel" id="panel-d2">
+
+  <div class="sec-label">Direction 2 · Overview</div>
+  <h2 class="d2-accent">Schülke Blue — Institutional Editorial</h2>
+  <p style="color:#aaa; max-width:700px;">Schülke blue (#007CC2) mendominasi sebagai warna utama. Didukung halftone gradations 40/20/10%. Pakai Schülke 'plus' arrow device sebagai elemen dekoratif. Confident, editorial, authoritative. Referensi: Johns Hopkins + Icecubes blue palette.</p>
+
+  <!-- PALETTE -->
+  <div class="sec-label" style="margin-top:36px;">Color Palette</div>
+  <div class="palette">
+    <div class="swatch"><div class="swatch-box" style="background:#007CC2;"></div><span>#007CC2</span><span style="font-size:9px;color:#555;">Primary</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#007CC266;"></div><span>#007CC266</span><span style="font-size:9px;color:#555;">Primary 40%</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#007CC233;"></div><span>#007CC233</span><span style="font-size:9px;color:#555;">Primary 20%</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#007CC21A;"></div><span>#007CC21A</span><span style="font-size:9px;color:#555;">Primary 10%</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#0A1E36;"></div><span>#0A1E36</span><span style="font-size:9px;color:#555;">Dark navy</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#FFFFFF; border:1px solid #ddd;"></div><span>#FFFFFF</span><span style="font-size:9px;color:#555;">White</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#F2F8FD;"></div><span>#F2F8FD</span><span style="font-size:9px;color:#555;">Blue surface</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#636362;"></div><span>#636362</span><span style="font-size:9px;color:#555;">Body text</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#AFAFAF;"></div><span>#AFAFAF</span><span style="font-size:9px;color:#555;">Muted</span></div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="sec-label">Typography</div>
+  <div class="grid-2">
+    <div class="font-preview">
+      <div class="fp-label">Header Font — Plus Jakarta Sans</div>
+      <div class="fp-heading" style="font-family:'Plus Jakarta Sans',sans-serif; font-size:36px; font-weight:800; color:#ffffff; background:#007CC2; padding:20px; border-radius:6px;">Be Recognised.<br>Save Lives.</div>
+      <div class="fp-meta" style="margin-top:12px;">Google Font: <strong>Plus Jakarta Sans</strong> · weights 400/600/700/800<br>import: <code style="font-size:10px;">family=Plus+Jakarta+Sans:wght@400;600;700;800</code></div>
+    </div>
+    <div class="font-preview" style="background:#0A1E36; border-color:#1a3a5c;">
+      <div class="fp-label" style="color:#5b9bd5;">Arrow Device — Schülke Plus (+)</div>
+      <div style="font-size:72px; color:#007CC2; font-weight:300; line-height:1; margin-bottom:8px;">+</div>
+      <div style="font-size:13px; color:#5b9bd5;">Schülke's signature '+' arrow device. Gunakan sebagai dekoratif elemen di hero dan transisi section. SVG atau unicode '＋' raksasa, rotated 45° jadi panah diagonal. Warna #007CC2 atau putih.</div>
+    </div>
+  </div>
+
+  <!-- TOKENS -->
+  <div class="sec-label">Design Tokens — CSS Variables</div>
+  <div class="tokens-block">
+<span class="comment">/* Direction 2 — Schülke Blue Institutional */</span>
+<span class="key">--color-primary</span>:      <span class="val">#007CC2</span>;
+<span class="key">--color-primary-40</span>:    <span class="val">rgba(0, 124, 194, 0.4)</span>;
+<span class="key">--color-primary-20</span>:    <span class="val">rgba(0, 124, 194, 0.2)</span>;
+<span class="key">--color-primary-10</span>:    <span class="val">rgba(0, 124, 194, 0.1)</span>;
+<span class="key">--color-dark</span>:           <span class="val">#0A1E36</span>; <span class="comment">/* deep navy for hero/dark sections */</span>
+<span class="key">--color-bg</span>:             <span class="val">#FFFFFF</span>;
+<span class="key">--color-surface</span>:        <span class="val">#F2F8FD</span>; <span class="comment">/* blue-tinted surface */</span>
+<span class="key">--color-text</span>:           <span class="val">#0A1E36</span>;
+<span class="key">--color-text-body</span>:      <span class="val">#636362</span>;
+<span class="key">--color-text-muted</span>:     <span class="val">#AFAFAF</span>;
+<span class="key">--color-border</span>:         <span class="val">#D0E8F5</span>;
+
+<span class="key">--font-header</span>:  <span class="val">'Plus Jakarta Sans', sans-serif</span>;
+<span class="key">--font-body</span>:    <span class="val">'Open Sans', sans-serif</span>;
+
+<span class="key">--radius-btn</span>:   <span class="val">4px</span>; <span class="comment">/* sharp — institutional feel */</span>
+<span class="key">--radius-card</span>:  <span class="val">8px</span>;
+<span class="key">--max-width</span>:    <span class="val">1200px</span>;
+<span class="key">--section-py</span>:   <span class="val">100px</span>;
+
+<span class="comment">/* Halftone helper — gunakan sebagai CSS background pattern */</span>
+<span class="comment">/* background-image: radial-gradient(circle, #007CC266 1px, transparent 1px); */</span>
+<span class="comment">/* background-size: 20px 20px; */</span>
+  </div>
+
+  <!-- SECTION SPECS -->
+  <div class="sec-label">Homepage — Section Specs</div>
+  <div class="sections">
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 00</div>
+        <div class="s-name">Navigation</div>
+        <div class="s-tag">White → dark on scroll</div>
+      </div>
+      <div class="section-spec">
+        <strong>Default:</strong> transparent over hero, white text.<br>
+        <strong>On scroll:</strong> bg #0A1E36 atau #FFFFFF dengan shadow.<br>
+        <strong>Left:</strong> Logo AEHEA — Plus Jakarta Sans 700.<br>
+        <strong>Center:</strong> Panel &amp; Partner | FAQ | Contact — Open Sans 14px.<br>
+        <strong>Right:</strong> "Register your interest" — solid #007CC2 btn, white text, radius 4px (sharp institutional).
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 01</div>
+        <div class="s-name">Hero</div>
+        <div class="s-tag">Full-bleed dark · halftone</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> full-width bg #0A1E36 (dark navy). Min-height 85vh.<br>
+        <strong>Halftone:</strong> radial-gradient dot pattern overlay rgba(0,124,194,0.15), background-size 24px 24px — creates the Schülke halftone texture.<br>
+        <strong>Schülke arrow (+):</strong> large SVG '+' rotated 45°, color rgba(0,124,194,0.3), positioned top-right decoratively, 240px.<br>
+        <strong>H1:</strong> "Be recognised.\nSave lives." — Plus Jakarta Sans 800, 72px, white, centered or left-aligned.<br>
+        <strong>Sub:</strong> Open Sans 18px rgba(255,255,255,0.75), max-width 580px.<br>
+        <strong>CTA:</strong> "Apply Now" solid #007CC2 btn + "Learn more" ghost btn white border.<br>
+        <strong>Image:</strong> Overlapping or side panel. Clinical/editorial feel.<br>
+        <div class="s-img">https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=900&q=80</div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 02</div>
+        <div class="s-name">About AEHEA</div>
+        <div class="s-tag">Blue surface · 3 pillars</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> bg #F2F8FD (blue tinted surface). Border-top 3px solid #007CC2.<br>
+        <strong>H2:</strong> "About APSIC Environmental Hygiene Excellence Award" — Plus Jakarta Sans 800, 38px, #0A1E36.<br>
+        <strong>3 cards:</strong> white bg, border 1px #D0E8F5, radius 8px. Left accent bar 3px #007CC2.
+        <ul>
+          <li>Icon #007CC2, title Plus Jakarta Sans 700, body Open Sans #636362</li>
+          <li>Card 1: Commitment to IPC · Card 2: Innovative practices · Card 3: Quality of care</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 03</div>
+        <div class="s-name">Leadership Message</div>
+        <div class="s-tag">Editorial · white</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> white bg. Editorial 2-col. Large opening quote mark #007CC2 (decorative).<br>
+        <strong>H2:</strong> Plus Jakarta Sans 700, 32px, #0A1E36.<br>
+        <strong>Each quote block:</strong> horizontal rule top (1px #007CC2), quote Open Sans 16px italic #636362, avatar circular, name Plus Jakarta Sans 600, title Open Sans 12px #AFAFAF.<br>
+        A/Prof. Moi Lin Ling · Prof. Anucha Apisarnthanarak
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 04</div>
+        <div class="s-name">Why Join</div>
+        <div class="s-tag">Blue bg block</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> full-width #007CC2 bg section. White text. Halftone dot pattern overlay (10% opacity).<br>
+        <strong>Schülke arrow (+)</strong> decorative element, large, white 10% opacity, right side.<br>
+        <strong>H2:</strong> "Why Join?" — Plus Jakarta Sans 800, white, 40px.<br>
+        <strong>2 large feature items:</strong> numbered "01" "02" Plus Jakarta Sans 800 white, H3 white, body rgba(255,255,255,0.8).<br>
+        "Be Recognised" + "Save Lives" — with brief descriptions.<br>
+        Below: 2 tiles on lighter blue bg (#005A8F): "Celebrated on the regional stage" + "Prestigious recognition"
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 05</div>
+        <div class="s-name">FAQ</div>
+        <div class="s-tag">Accordion · #F2F8FD</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg #F2F8FD.</strong> H2 Plus Jakarta Sans 700, #0A1E36.<br>
+        Accordion max-width 760px centered. Each item: border-bottom 1px #D0E8F5. Question Plus Jakarta Sans 600, icon "+" rotated to "×" #007CC2. Answer Open Sans 14px #636362.
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 06</div>
+        <div class="s-name">CTA / Newsletter</div>
+        <div class="s-tag">Dark navy · bold</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg #0A1E36.</strong> Halftone overlay. White text.<br>
+        H2: "Want to stay informed?" Plus Jakarta Sans 800, white.<br>
+        Email input white bg + "Subscribe" btn #007CC2. Plus arrow device decorative.
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 07</div>
+        <div class="s-name">Footer</div>
+        <div class="s-tag">Dark navy · #0A1E36</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg #0A1E36.</strong> Logo AEHEA Plus Jakarta Sans 700 white. 3 link columns #AFAFAF Open Sans.<br>
+        Bottom bar: © 2026 APSIC Environmental Hygiene Excellence Award · Privacy Policy · Terms · Cookies.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIBE-CODING PROMPT -->
+  <div class="sec-label">Vibe-Coding Prompt</div>
+  <div class="prompt-wrap">
+    <button class="copy-btn" onclick="copyPrompt('prompt-d2')">Copy</button>
+    <textarea class="prompt-box" id="prompt-d2" readonly>Build a single-page homepage (HTML + CSS + vanilla JS) for AEHEA — the APSIC Environmental Hygiene Excellence Award website.
+
+DIRECTION: Schülke Blue Institutional (Direction 2). Confident, editorial, authoritative medical-institution feel.
+
+━━━ DESIGN SYSTEM ━━━
+Colors:
+  Primary:       #007CC2 (Schülke blue — dominant)
+  Primary 40%:   rgba(0, 124, 194, 0.4)
+  Primary 20%:   rgba(0, 124, 194, 0.2)
+  Primary 10%:   rgba(0, 124, 194, 0.1)
+  Dark navy:     #0A1E36
+  White:         #FFFFFF
+  Blue surface:  #F2F8FD
+  Body text:     #636362
+  Muted:         #AFAFAF
+  Border:        #D0E8F5
+
+Fonts (Google Fonts):
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
+  Headers: Plus Jakarta Sans (700 / 800)
+  Body: Open Sans (400 / 500 / 600)
+
+Border-radius: buttons 4px (sharp institutional), cards 8px.
+Schülke halftone: radial-gradient(circle, rgba(0,124,194,0.12) 1px, transparent 1px) / 22px 22px
+Schülke arrow device: large '+' character or SVG, rotated slightly, used decoratively in dark sections.
+
+━━━ SECTIONS ━━━
+
+[NAV] Transparent initially over dark hero, transitions to #0A1E36 on scroll. White text.
+  Left: "AEHEA" Plus Jakarta Sans 700 white.
+  Center: Panel & Partner · FAQ · Contact — Open Sans 14px white/70%.
+  Right: "Register your interest" — solid #007CC2 btn, white text, radius 4px.
+
+[HERO] bg #0A1E36 full-width. Min-height 85vh. Position relative.
+  - Halftone dot pattern overlay: radial-gradient(circle, rgba(0,124,194,0.15) 1px, transparent 1px), background-size 22px 22px
+  - Schülke '+' arrow: large SVG/div, 280px, rgba(0,124,194,0.25), top-right quadrant, rotate(45deg)
+  - Content centered or left with 60/40 split:
+    Eyebrow: "APSIC ENVIRONMENTAL HYGIENE EXCELLENCE AWARD" — 11px uppercase letter-spacing .15em #007CC2
+    H1: "Be recognised.\nSave lives." — Plus Jakarta Sans 800, 72px, white, line-height 1.05
+    Sub: Open Sans 18px rgba(255,255,255,0.75), max-width 560px, margin-top 20px
+    CTA row: "Apply Now" solid #007CC2 btn (radius 4px) + "Learn more" ghost btn (border white/30%, text white)
+  - Right side: Hero image with overlay — https://images.unsplash.com/photo-1551190822-a9333d879b1f?auto=format&fit=crop&w=900&q=80
+
+[ABOUT] bg #F2F8FD. Border-top 3px solid #007CC2. Padding 100px.
+  H2: "About APSIC Environmental Hygiene Excellence Award (AEHEA)" — Plus Jakarta Sans 800 38px #0A1E36
+  Sub paragraph Open Sans #636362 max-width 680px
+  3 cards: bg white, border 1px #D0E8F5, radius 8px, border-left 3px solid #007CC2, padding 28px
+    Card 1 — "Commitment to IPC"
+    Card 2 — "Innovative practices"
+    Card 3 — "Quality of care"
+    Each: icon in #007CC2, title Plus Jakarta Sans 700 17px #0A1E36, body Open Sans 14px #636362
+
+[MESSAGE] bg #FFFFFF. Padding 100px.
+  Large decorative '"' in #007CC2 opacity 20%, font-size 200px, positioned top-left
+  H2: "Message from Award Program Chair and APSIC President" Plus Jakarta Sans 700 32px #0A1E36, centered
+  2-col grid:
+    Each: 3px top border #007CC2, quote italic Open Sans 15px #636362, avatar circular 72px, name Plus Jakarta Sans 600 #0A1E36, title Open Sans 12px #AFAFAF
+    Col 1: A/Prof. Moi Lin Ling, Program Chair AEHEA — https://i.pravatar.cc/80?u=moilin
+    Col 2: Prof. Anucha Apisarnthanarak, President APSIC — https://i.pravatar.cc/80?u=anucha
+
+[WHY JOIN] bg #007CC2. Padding 100px. White text.
+  Halftone overlay (10% opacity). '+' arrow device decorative white 8% opacity right side.
+  H2: "Why Join the APSIC Environmental Hygiene Excellence Award?" Plus Jakarta Sans 800 40px white
+  2 large blocks side by side:
+    Block 1: "01" Plus Jakarta Sans 800 80px rgba(255,255,255,0.15), H3 "Be Recognised" Plus Jakarta Sans 700 24px white, body rgba(255,255,255,0.8) Open Sans
+    Block 2: "02", H3 "Save Lives", body rgba(255,255,255,0.8)
+  Below (bg #005A8F): 2 info tiles — "Celebrated on the regional stage" + "Prestigious recognition, not a monetary prize"
+
+[FAQ] bg #F2F8FD. Padding 100px.
+  H2: "Frequently Asked Questions" Plus Jakarta Sans 700 32px #0A1E36, centered
+  Accordion max-width 760px centered. 6 items, border-bottom 1px #D0E8F5.
+  Question: Plus Jakarta Sans 600 15px #0A1E36. Toggle '+' → '×' in #007CC2.
+  Answer: Open Sans 14px #636362.
+
+[CTA] bg #0A1E36. Padding 80px. Halftone + '+' device.
+  H2: "Want to stay informed?" Plus Jakarta Sans 800 36px white, centered
+  Sub: Open Sans 16px rgba(255,255,255,0.75), centered
+  Input white + "Subscribe" btn #007CC2, max-width 440px centered
+
+[FOOTER] bg #0A1E36. 3-col: logo + tagline | nav links | secondary links. All white/AFAFAF.
+  Bottom: © 2026 APSIC Environmental Hygiene Excellence Award · Privacy · Terms · Cookies
+
+━━━ NOTES ━━━
+- Fully responsive. Mobile: all columns stack.
+- Smooth scroll. Nav JS: add class 'scrolled' after 60px scroll → bg #0A1E36.
+- FAQ accordion: JS toggle aria-expanded + max-height transition.
+- Use CSS custom properties for all values.
+- No frameworks. Vanilla only.</textarea>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     DIRECTION 3 — BLUE–PURPLE
+════════════════════════════════════════════ -->
+<div class="panel" id="panel-d3">
+
+  <div class="sec-label">Direction 3 · Overview</div>
+  <h2 class="d3-accent">Blue–Purple — AEHEA Own Identity</h2>
+  <p style="color:#aaa; max-width:700px;">Identitas baru sepenuhnya untuk AEHEA. Bebas dari Schülke blue. Blue–purple palette, gradient backgrounds, white cards. Premium, modern, sedikit futuristik — refined genomics/AI aesthetic. Font: Fraunces (serif display) untuk headers memberikan karakter yang distinctive. Referensi: MYDNA genetics + healthcare automation editorial.</p>
+
+  <!-- PALETTE -->
+  <div class="sec-label" style="margin-top:36px;">Color Palette</div>
+  <div class="palette">
+    <div class="swatch"><div class="swatch-box" style="background:#5B4FBE;"></div><span>#5B4FBE</span><span style="font-size:9px;color:#555;">Primary</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#7B6DD0;"></div><span>#7B6DD0</span><span style="font-size:9px;color:#555;">Primary light</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#A78BFA;"></div><span>#A78BFA</span><span style="font-size:9px;color:#555;">Accent</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#2D1B69;"></div><span>#2D1B69</span><span style="font-size:9px;color:#555;">Deep</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#EDE9FF;"></div><span>#EDE9FF</span><span style="font-size:9px;color:#555;">Lavender bg</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#F5F3FF;"></div><span>#F5F3FF</span><span style="font-size:9px;color:#555;">Surface</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#FFFFFF; border:1px solid #ddd;"></div><span>#FFFFFF</span><span style="font-size:9px;color:#555;">Card bg</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#4B5563;"></div><span>#4B5563</span><span style="font-size:9px;color:#555;">Body text</span></div>
+    <div class="swatch"><div class="swatch-box" style="background:#9CA3AF;"></div><span>#9CA3AF</span><span style="font-size:9px;color:#555;">Muted</span></div>
+  </div>
+  <div style="margin-top:12px; padding:20px; border-radius:10px; background:linear-gradient(135deg, #EDE9FF 0%, #DBEAFE 100%); font-size:12px; color:#5B4FBE;">
+    ✦ Signature gradient: <code>linear-gradient(135deg, #EDE9FF 0%, #DBEAFE 50%, #F0F9FF 100%)</code> — background for hero and major sections. Soft, premium, slightly luminous.
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="sec-label">Typography</div>
+  <div class="grid-2">
+    <div class="font-preview" style="background:linear-gradient(135deg,#EDE9FF,#DBEAFE); border-color:#c4b5fd;">
+      <div class="fp-label" style="color:#7B6DD0;">Header Font — Fraunces (Variable Serif)</div>
+      <div class="fp-heading" style="font-family:'Fraunces',serif; font-size:38px; font-weight:600; color:#2D1B69; line-height:1.05;">Be Recognised.<br><em style="font-weight:300;">Save Lives.</em></div>
+      <div class="fp-meta" style="color:#7B6DD0; margin-top:16px;">Google Font: <strong>Fraunces</strong> · variable — opsz, wght 300/400/600<br>Italic weight 300 untuk subtitle creates premium contrast.<br>import: <code style="font-size:10px;">family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300</code></div>
+    </div>
+    <div class="font-preview">
+      <div class="fp-label">Gradient Examples</div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="height:36px; border-radius:6px; background:linear-gradient(135deg,#EDE9FF,#DBEAFE); display:flex;align-items:center;padding:0 12px;font-size:11px;color:#5B4FBE;">Hero bg gradient</div>
+        <div style="height:36px; border-radius:6px; background:linear-gradient(135deg,#5B4FBE,#7B6DD0); display:flex;align-items:center;padding:0 12px;font-size:11px;color:white;">CTA section gradient</div>
+        <div style="height:36px; border-radius:6px; background:linear-gradient(135deg,#2D1B69,#5B4FBE); display:flex;align-items:center;padding:0 12px;font-size:11px;color:white;">Dark hero variant</div>
+        <div style="height:36px; border-radius:6px; border:1px solid #c4b5fd; background:#F5F3FF; display:flex;align-items:center;padding:0 12px;font-size:11px;color:#5B4FBE;">Card / surface bg</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOKENS -->
+  <div class="sec-label">Design Tokens — CSS Variables</div>
+  <div class="tokens-block">
+<span class="comment">/* Direction 3 — Blue–Purple, AEHEA Own Identity */</span>
+<span class="key">--color-primary</span>:      <span class="val">#5B4FBE</span>;
+<span class="key">--color-primary-light</span>: <span class="val">#7B6DD0</span>;
+<span class="key">--color-accent</span>:        <span class="val">#A78BFA</span>;
+<span class="key">--color-deep</span>:          <span class="val">#2D1B69</span>;
+<span class="key">--color-lavender-bg</span>:   <span class="val">#EDE9FF</span>;
+<span class="key">--color-surface</span>:       <span class="val">#F5F3FF</span>;
+<span class="key">--color-card</span>:          <span class="val">#FFFFFF</span>;
+<span class="key">--color-text</span>:          <span class="val">#1A1A2E</span>;
+<span class="key">--color-text-body</span>:     <span class="val">#4B5563</span>;
+<span class="key">--color-text-muted</span>:    <span class="val">#9CA3AF</span>;
+<span class="key">--color-border</span>:        <span class="val">#DDD6FE</span>;
+
+<span class="key">--gradient-hero</span>:    <span class="val">linear-gradient(135deg, #EDE9FF 0%, #DBEAFE 50%, #F0F9FF 100%)</span>;
+<span class="key">--gradient-cta</span>:     <span class="val">linear-gradient(135deg, #5B4FBE 0%, #7B6DD0 100%)</span>;
+<span class="key">--gradient-dark</span>:    <span class="val">linear-gradient(135deg, #2D1B69 0%, #5B4FBE 100%)</span>;
+
+<span class="key">--font-header</span>:  <span class="val">'Fraunces', serif</span>;
+<span class="key">--font-body</span>:    <span class="val">'Open Sans', sans-serif</span>;
+
+<span class="key">--radius-btn</span>:   <span class="val">8px</span>;
+<span class="key">--radius-card</span>:  <span class="val">16px</span>; <span class="comment">/* more rounded — modern, premium */</span>
+<span class="key">--radius-pill</span>:  <span class="val">100px</span>; <span class="comment">/* for tags, badges */</span>
+<span class="key">--shadow-card</span>:  <span class="val">0 4px 24px rgba(91, 79, 190, 0.12)</span>;
+<span class="key">--max-width</span>:    <span class="val">1200px</span>;
+<span class="key">--section-py</span>:   <span class="val">100px</span>;
+  </div>
+
+  <!-- SECTION SPECS -->
+  <div class="sec-label">Homepage — Section Specs</div>
+  <div class="sections">
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 00</div>
+        <div class="s-name">Navigation</div>
+        <div class="s-tag">White · purple accent</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg #FFFFFF,</strong> border-bottom 1px #DDD6FE. Sticky.<br>
+        <strong>Left:</strong> Logo "AEHEA" — Fraunces 600, #2D1B69. Subtle tag badge "Awards 2026" in #A78BFA pill.<br>
+        <strong>Center:</strong> Panel &amp; Partner | FAQ | Contact — Open Sans 14px #4B5563.<br>
+        <strong>Right:</strong> "Register your interest" — bg gradient (#5B4FBE→#7B6DD0), white text, radius 8px. Subtle shadow rgba(91,79,190,0.3).
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 01</div>
+        <div class="s-name">Hero</div>
+        <div class="s-tag">Gradient bg · centered</div>
+      </div>
+      <div class="section-spec">
+        <strong>Layout:</strong> bg gradient(135deg, #EDE9FF → #DBEAFE → #F0F9FF). Centered content. Min-height 90vh.<br>
+        <strong>Badge:</strong> pill tag "#5B4FBE bg light" text "Excellence in Environmental Hygiene" — Fraunces italic 13px #5B4FBE, bg #EDE9FF.<br>
+        <strong>H1:</strong> "Be recognised.<br><em>Save lives.</em>" — Fraunces 600 + italic 300, 72px, #2D1B69. Mix weights for visual interest.<br>
+        <strong>Sub:</strong> Open Sans 17px #4B5563, max-width 520px, centered, margin-top 20px.<br>
+        <strong>CTA:</strong> "Apply Now" — gradient btn (#5B4FBE→#7B6DD0), white, radius 8px, shadow. + "Learn more" text link #5B4FBE.<br>
+        <strong>Hero visual:</strong> floating white card with image, rotated 2deg, shadow rgba(91,79,190,0.2).<br>
+        <div class="s-img">https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80</div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 02</div>
+        <div class="s-name">About AEHEA</div>
+        <div class="s-tag">White · 3 cards rounded</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg #FFFFFF.</strong> H2 Fraunces 600, 36px, #2D1B69, centered.<br>
+        <strong>3 cards:</strong> bg #F5F3FF, border 1px #DDD6FE, border-radius 16px, padding 32px. Box-shadow rgba(91,79,190,0.08).<br>
+        Top of each card: gradient icon container (circle, gradient #EDE9FF→#DBEAFE), icon inside.<br>
+        Card 1: Commitment to IPC · Card 2: Innovative practices · Card 3: Quality of care<br>
+        Title: Fraunces 600 18px #2D1B69. Body: Open Sans 14px #4B5563. "→" link in #5B4FBE.
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 03</div>
+        <div class="s-name">Leadership Message</div>
+        <div class="s-tag">Lavender bg · premium</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg #EDE9FF.</strong> H2 Fraunces 600, 32px, #2D1B69, centered.<br>
+        <strong>2 white cards</strong> (radius 16px, shadow). Each:
+        <ul>
+          <li>Avatar: circular 72px with gradient ring border (#5B4FBE)</li>
+          <li>Name: Fraunces 600 18px #2D1B69</li>
+          <li>Title: Open Sans 12px uppercase letter-spacing #9CA3AF</li>
+          <li>Quote: Open Sans italic 15px #4B5563</li>
+        </ul>
+        A/Prof. Moi Lin Ling · Prof. Anucha Apisarnthanarak
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 04</div>
+        <div class="s-name">Why Join</div>
+        <div class="s-tag">Gradient purple · white text</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg linear-gradient(135deg, #5B4FBE, #7B6DD0).</strong> White text.<br>
+        <strong>H2:</strong> Fraunces 600, 40px, white. "Why join?"<br>
+        <strong>2 large feature blocks:</strong> "01" Fraunces 300 italic 80px rgba(255,255,255,0.15), H3 Fraunces 600 24px white, body Open Sans rgba(255,255,255,0.8).<br>
+        <strong>Below:</strong> 2 tiles on slightly darker (#4B40A8) — "Celebrated on the regional stage" + "Prestigious recognition, not a monetary prize". White cards with purple tint, radius 12px.
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 05</div>
+        <div class="s-name">FAQ</div>
+        <div class="s-tag">Accordion · #F5F3FF</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg #F5F3FF.</strong> H2 Fraunces 600 32px #2D1B69, centered.<br>
+        Accordion max-width 760px centered. Items: border-bottom 1px #DDD6FE. Question: Fraunces 600 15px #2D1B69. Toggle: "+" in #5B4FBE. Answer: Open Sans 14px #4B5563. When open: bg white, radius 12px, shadow.
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 06</div>
+        <div class="s-name">CTA / Newsletter</div>
+        <div class="s-tag">Deep gradient · premium</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg linear-gradient(135deg, #2D1B69, #5B4FBE).</strong> White text.<br>
+        H2: "Want to stay informed?" Fraunces 600 38px white, centered.<br>
+        Sub: Open Sans 16px rgba(255,255,255,0.75).<br>
+        Input: white bg, #5B4FBE focus ring + "Subscribe" btn gradient (#5B4FBE→#A78BFA), radius 8px.
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-meta">
+        <div class="s-num">Section 07</div>
+        <div class="s-name">Footer</div>
+        <div class="s-tag">Deep purple · #2D1B69</div>
+      </div>
+      <div class="section-spec">
+        <strong>bg #2D1B69.</strong> Logo Fraunces 600 white. 3 columns Open Sans #9CA3AF links.<br>
+        Bottom bar: © 2026 APSIC Environmental Hygiene Excellence Award · Privacy · Terms · Cookies. All #9CA3AF.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIBE-CODING PROMPT -->
+  <div class="sec-label">Vibe-Coding Prompt</div>
+  <div class="prompt-wrap">
+    <button class="copy-btn" onclick="copyPrompt('prompt-d3')">Copy</button>
+    <textarea class="prompt-box" id="prompt-d3" readonly>Build a single-page homepage (HTML + CSS + vanilla JS) for AEHEA — the APSIC Environmental Hygiene Excellence Award website.
+
+DIRECTION: Blue–Purple, AEHEA Own Identity (Direction 3). Premium, modern, slightly futuristic — refined genomics/clinical aesthetic. No Schülke blue. This is AEHEA's own visual identity.
+
+━━━ DESIGN SYSTEM ━━━
+Colors:
+  Primary:       #5B4FBE
+  Primary light: #7B6DD0
+  Accent:        #A78BFA
+  Deep:          #2D1B69
+  Lavender bg:   #EDE9FF
+  Surface:       #F5F3FF
+  Card:          #FFFFFF
+  Text dark:     #1A1A2E
+  Body text:     #4B5563
+  Muted:         #9CA3AF
+  Border:        #DDD6FE
+
+Gradients:
+  Hero bg:    linear-gradient(135deg, #EDE9FF 0%, #DBEAFE 50%, #F0F9FF 100%)
+  CTA:        linear-gradient(135deg, #5B4FBE 0%, #7B6DD0 100%)
+  Dark hero:  linear-gradient(135deg, #2D1B69 0%, #5B4FBE 100%)
+
+Fonts (Google Fonts):
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300;1,9..144,400&family=Open+Sans:wght@400;500;600&display=swap');
+  Headers: Fraunces (variable serif) — mix weight 600 + italic 300 for visual contrast
+  Body: Open Sans (400 / 500 / 600)
+
+Border-radius: cards 16px, buttons 8px, badges 100px (pill).
+Card shadow: 0 4px 24px rgba(91, 79, 190, 0.12)
+No Schülke assets, no arrow device, no halftone. Subtle rounded corners are the signature cue.
+
+━━━ SECTIONS ━━━
+
+[NAV] Sticky. bg #FFFFFF. Border-bottom 1px #DDD6FE.
+  Left: "AEHEA" Fraunces 600 20px #2D1B69. Small badge pill next to it: "Awards 2026" bg #EDE9FF text #5B4FBE.
+  Center: Panel & Partner · FAQ · Contact — Open Sans 14px #4B5563.
+  Right: "Register your interest" — bg gradient(135deg,#5B4FBE,#7B6DD0), white, radius 8px, box-shadow 0 4px 14px rgba(91,79,190,0.3).
+
+[HERO] bg linear-gradient(135deg,#EDE9FF 0%,#DBEAFE 50%,#F0F9FF 100%). Centered. Min-height 90vh.
+  Eyebrow badge: pill, bg rgba(91,79,190,0.1), text #5B4FBE Fraunces italic 13px — "Excellence in Environmental Hygiene · Asia Pacific"
+  H1: "Be recognised." on first line, "<em>Save lives.</em>" second line italic weight 300 — Fraunces, 72px desktop, #2D1B69, text-align center
+  Sub: "Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety." — Open Sans 17px #4B5563, max-width 540px, centered
+  CTA row: "Apply Now" gradient btn (#5B4FBE→#7B6DD0, shadow rgba(91,79,190,0.4)) + "Learn more →" text link #5B4FBE
+  Hero visual: white card div (radius 16px, rotate(2deg), shadow 0 20px 60px rgba(91,79,190,0.2)) containing image.
+    Image: https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80
+  Position card centered below CTAs or side-by-side depending on layout choice.
+
+[ABOUT] bg #FFFFFF. Padding 100px.
+  H2: "About APSIC Environmental Hygiene Excellence Award (AEHEA)" Fraunces 600 36px #2D1B69 centered
+  Sub Open Sans #4B5563 max-width 660px centered
+  3 cards flex row (gap 24px): bg #F5F3FF, border 1px #DDD6FE, radius 16px, padding 32px, shadow rgba(91,79,190,0.08)
+    Icon container: circle 48px bg gradient(135deg,#EDE9FF,#DBEAFE), icon centered
+    Title: Fraunces 600 18px #2D1B69
+    Body: Open Sans 14px #4B5563
+    Link: "Learn more →" #5B4FBE Open Sans 13px font-weight 600, mt auto
+    Card 1: "Commitment to IPC" · Card 2: "Innovative practices" · Card 3: "Quality of care"
+
+[MESSAGE] bg #EDE9FF. Padding 100px.
+  H2: "Message from Award Program Chair and APSIC President" Fraunces 600 32px #2D1B69 centered mb 48px
+  2 white cards (radius 16px, shadow 0 4px 24px rgba(91,79,190,0.12)) in grid gap 24px:
+    Each card padding 36px: avatar circular 72px with 2px gradient border (#5B4FBE→#A78BFA), name Fraunces 600 18px #2D1B69, title Open Sans 11px uppercase letter-spacing .1em #9CA3AF, quote Open Sans italic 15px #4B5563
+    Card 1: A/Prof. Moi Lin Ling, Program Chair, AEHEA — avatar: https://i.pravatar.cc/80?u=moilin
+    Card 2: Prof. Anucha Apisarnthanarak, President, APSIC — avatar: https://i.pravatar.cc/80?u=anucha
+
+[WHY JOIN] bg linear-gradient(135deg,#5B4FBE,#7B6DD0). White text. Padding 100px.
+  H2: "Why join the APSIC Environmental Hygiene Excellence Award?" Fraunces 600 40px white centered
+  2 feature blocks side by side:
+    "01" Fraunces 300 italic 80px rgba(255,255,255,0.12) decorative, H3 Fraunces 600 24px white, body rgba(255,255,255,0.8) Open Sans
+    Block 1 — H3: "Be Recognised", body: description of regional credibility and peer recognition
+    Block 2 — H3: "Save Lives", body: description of driving higher hygiene standards
+  Below: 2 info boxes bg rgba(255,255,255,0.1) border rgba(255,255,255,0.15) radius 12px padding 24px:
+    "Celebrated on the regional stage" · "Prestigious recognition, not a monetary prize"
+    Both: title Fraunces 600 16px white, body Open Sans 13px rgba(255,255,255,0.75)
+
+[FAQ] bg #F5F3FF. Padding 100px.
+  H2: "Frequently Asked Questions" Fraunces 600 32px #2D1B69 centered
+  Accordion max-width 760px centered. Items: border-bottom 1px #DDD6FE. JS toggle.
+  Question: Fraunces 600 15px #2D1B69. Toggle "+" → "×" in #5B4FBE.
+  When open: answer Open Sans 14px #4B5563, plus subtle bg change to white, radius 12px, shadow.
+  6 questions: same set as other directions.
+
+[CTA] bg linear-gradient(135deg,#2D1B69,#5B4FBE). Padding 80px. White. Centered.
+  H2: "Want to stay informed?" Fraunces 600 38px white
+  Sub Open Sans 16px rgba(255,255,255,0.75)
+  Email input (bg rgba(255,255,255,0.1) border rgba(255,255,255,0.2) text white placeholder rgba(255,255,255,0.5)) + "Subscribe" btn (bg gradient(#5B4FBE,#A78BFA) white text radius 8px). Side by side, max-width 460px.
+
+[FOOTER] bg #2D1B69. Padding 64px 0 32px. White/muted text.
+  3-col grid: col 1 "AEHEA" Fraunces 600 20px white + tagline Open Sans 13px #9CA3AF | col 2 nav links | col 3 secondary links — all Open Sans 13px #9CA3AF.
+  Bottom bar 1px border rgba(255,255,255,0.1): © 2026 APSIC Environmental Hygiene Excellence Award | Privacy Policy · Terms of Service · Cookies — Open Sans 11px #9CA3AF.
+
+━━━ NOTES ━━━
+- Fully responsive. Mobile breakpoint 768px: all 2+ columns stack to 1.
+- FAQ: JS accordion with smooth max-height transition (300ms ease).
+- Nav: sticky, z-index 100. Subtle backdrop-filter: blur(10px) on scroll.
+- No Schülke blue (#007CC2) anywhere in this direction.
+- Rounded corners (16px cards) are the signature cue, not arrows or halftone.
+- No frameworks. Pure HTML/CSS/JS.
+- Use CSS custom properties for all values.</textarea>
+  </div>
+
+</div>
+
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('.tab-btn.' + id).classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function copyPrompt(id) {
+  const ta = document.getElementById(id);
+  ta.select();
+  document.execCommand('copy');
+  const btn = ta.parentNode.querySelector('.copy-btn');
+  const orig = btn.textContent;
+  btn.textContent = 'Copied ✓';
+  setTimeout(() => btn.textContent = orig, 2000);
+}
+</script>
+</body>
+</html>

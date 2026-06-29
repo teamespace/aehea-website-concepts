@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AEHEA - Asia Pacific Environmental Hygiene Excellence Award. Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety.">
+  <title>AEHEA — Asia Pacific Environmental Hygiene Excellence Award</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Colors */
+      --color-primary: #5B4FBE;
+      --color-primary-light: #7B6DD0;
+      --color-accent: #A78BFA;
+      --color-deep: #2D1B69;
+      --color-lavender-bg: #EDE9FF;
+      --color-surface: #F5F3FF;
+      --color-card: #FFFFFF;
+      --color-text-dark: #1A1A2E;
+      --color-body-text: #4B5563;
+      --color-muted: #9CA3AF;
+      --color-border: #DDD6FE;
+      --color-white: #FFFFFF;
+      --color-black: #000000;
+
+      /* Gradients */
+      --gradient-hero: linear-gradient(135deg, #EDE9FF 0%, #DBEAFE 50%, #F0F9FF 100%);
+      --gradient-cta: linear-gradient(135deg, #5B4FBE 0%, #7B6DD0 100%);
+      --gradient-dark-hero: linear-gradient(135deg, #2D1B69 0%, #5B4FBE 100%);
+      --gradient-avatar-border: linear-gradient(135deg, #5B4FBE, #A78BFA);
+      --gradient-icon-bg: linear-gradient(135deg, #EDE9FF, #DBEAFE);
+      --gradient-subscribe: linear-gradient(135deg, #5B4FBE, #A78BFA);
+
+      /* Fonts */
+      --font-heading: 'Fraunces', Georgia, serif;
+      --font-body: 'Open Sans', system-ui, sans-serif;
+
+      /* Spacing */
+      --section-padding: 100px;
+      --section-padding-mobile: 64px;
+      --container-max-width: 1200px;
+      --container-padding: 24px;
+
+      /* Radius */
+      --radius-card: 16px;
+      --radius-button: 8px;
+      --radius-pill: 100px;
+      --radius-small: 12px;
+
+      /* Shadows */
+      --shadow-card: 0 4px 24px rgba(91, 79, 190, 0.12);
+      --shadow-button: 0 4px 14px rgba(91, 79, 190, 0.3);
+      --shadow-button-strong: 0 4px 14px rgba(91, 79, 190, 0.4);
+      --shadow-hero-card: 0 20px 60px rgba(91, 79, 190, 0.2);
+
+      /* Transitions */
+      --transition-fast: 200ms ease;
+      --transition-base: 300ms ease;
+      --transition-accordion: 300ms ease;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--color-body-text);
+      background-color: var(--color-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6, p {
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+      padding: 0 var(--container-padding);
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--color-card);
+      border-bottom: 1px solid var(--color-border);
+      transition: background-color var(--transition-fast), backdrop-filter var(--transition-fast);
+    }
+
+    .nav--scrolled {
+      background-color: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav__logo {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--color-deep);
+    }
+
+    .nav__badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      background-color: var(--color-lavender-bg);
+      color: var(--color-primary);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav__link {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-body-text);
+      transition: color var(--transition-fast);
+    }
+
+    .nav__link:hover,
+    .nav__link:focus {
+      color: var(--color-primary);
+      outline: none;
+    }
+
+    .nav__cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      background: var(--gradient-cta);
+      color: var(--color-white);
+      border-radius: var(--radius-button);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: var(--shadow-button);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .nav__cta:hover,
+    .nav__cta:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(91, 79, 190, 0.35);
+      outline: none;
+    }
+
+    .nav__toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      gap: 5px;
+    }
+
+    .nav__toggle-bar {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-deep);
+      transition: transform var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav__toggle[aria-expanded="true"] .nav__toggle-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 90vh;
+      padding: 80px 0 100px;
+      background: var(--gradient-hero);
+      text-align: center;
+    }
+
+    .hero__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 18px;
+      background-color: rgba(91, 79, 190, 0.1);
+      color: var(--color-primary);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 13px;
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+
+    .hero__title {
+      font-family: var(--font-heading);
+      font-size: 72px;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--color-deep);
+      margin-bottom: 24px;
+    }
+
+    .hero__title em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .hero__subtitle {
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--color-body-text);
+      max-width: 540px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero__cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 56px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: var(--radius-button);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn:hover,
+    .btn:focus {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .btn--gradient {
+      background: var(--gradient-cta);
+      color: var(--color-white);
+      box-shadow: var(--shadow-button-strong);
+    }
+
+    .btn--gradient:hover,
+    .btn--gradient:focus {
+      box-shadow: 0 8px 24px rgba(91, 79, 190, 0.45);
+    }
+
+    .hero__link {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap var(--transition-fast);
+    }
+
+    .hero__link:hover,
+    .hero__link:focus {
+      gap: 10px;
+      outline: none;
+    }
+
+    .hero__visual {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      padding: 0 var(--container-padding);
+    }
+
+    .hero__card {
+      background-color: var(--color-card);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-hero-card);
+      padding: 16px;
+      transform: rotate(2deg);
+      transition: transform var(--transition-base);
+    }
+
+    .hero__card:hover {
+      transform: rotate(0deg);
+    }
+
+    .hero__image {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    /* About */
+    .about {
+      padding: var(--section-padding) 0;
+      background-color: var(--color-white);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header__title {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--color-deep);
+      margin-bottom: 16px;
+    }
+
+    .section-header__title--large {
+      font-size: 36px;
+    }
+
+    .section-header__subtitle {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--color-body-text);
+      max-width: 660px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .cards {
+      display: flex;
+      gap: 24px;
+    }
+
+    .card {
+      flex: 1;
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      box-shadow: 0 4px 24px rgba(91, 79, 190, 0.08);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gradient-icon-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .card__icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--color-primary);
+    }
+
+    .card__title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-deep);
+      margin-bottom: 10px;
+    }
+
+    .card__body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-body-text);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .card__link {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap var(--transition-fast);
+    }
+
+    .card__link:hover,
+    .card__link:focus {
+      gap: 8px;
+      outline: none;
+    }
+
+    /* Message */
+    .message {
+      padding: var(--section-padding) 0;
+      background-color: var(--color-lavender-bg);
+    }
+
+    .message__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .message__card {
+      background-color: var(--color-card);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      padding: 36px;
+    }
+
+    .message__avatar-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      padding: 2px;
+      background: var(--gradient-avatar-border);
+      margin-bottom: 20px;
+    }
+
+    .message__avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--color-white);
+      background-color: var(--color-surface);
+    }
+
+    .message__name {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-deep);
+      margin-bottom: 4px;
+    }
+
+    .message__title {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-muted);
+      margin-bottom: 18px;
+    }
+
+    .message__quote {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--color-body-text);
+      line-height: 1.7;
+    }
+
+    /* Why Join */
+    .why-join {
+      padding: var(--section-padding) 0;
+      background: var(--gradient-cta);
+      color: var(--color-white);
+    }
+
+    .why-join__title {
+      font-family: var(--font-heading);
+      font-size: 40px;
+      font-weight: 600;
+      color: var(--color-white);
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .why-join__features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .why-join__feature {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .why-join__number {
+      position: absolute;
+      left: 0;
+      top: -18px;
+      font-family: var(--font-heading);
+      font-size: 80px;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.12);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .why-join__feature-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .why-join__feature-body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.7;
+    }
+
+    .why-join__info-boxes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .why-join__info-box {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-small);
+      padding: 24px;
+    }
+
+    .why-join__info-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 8px;
+    }
+
+    .why-join__info-body {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+    }
+
+    /* FAQ */
+    .faq {
+      padding: var(--section-padding) 0;
+      background-color: var(--color-surface);
+    }
+
+    .faq__list {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .faq__item {
+      border-bottom: 1px solid var(--color-border);
+      transition: background-color var(--transition-base), border-radius var(--transition-base);
+    }
+
+    .faq__item--open {
+      background-color: var(--color-card);
+      border-radius: var(--radius-small);
+      border-bottom: none;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 12px;
+    }
+
+    .faq__question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px;
+      text-align: left;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-deep);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .faq__question:hover,
+    .faq__question:focus {
+      color: var(--color-primary);
+      outline: none;
+    }
+
+    .faq__toggle {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      font-size: 22px;
+      line-height: 1;
+      transition: transform var(--transition-accordion);
+      margin-left: 16px;
+    }
+
+    .faq__item--open .faq__toggle {
+      transform: rotate(45deg);
+    }
+
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-accordion), padding var(--transition-accordion);
+    }
+
+    .faq__answer-inner {
+      padding: 0 24px 24px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-body-text);
+      line-height: 1.7;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 80px 0;
+      background: var(--gradient-dark-hero);
+      color: var(--color-white);
+      text-align: center;
+    }
+
+    .cta__title {
+      font-family: var(--font-heading);
+      font-size: 38px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 12px;
+    }
+
+    .cta__subtitle {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 32px;
+    }
+
+    .cta__form {
+      display: flex;
+      gap: 12px;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    .cta__input {
+      flex: 1;
+      padding: 14px 18px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-button);
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-size: 15px;
+      outline: none;
+      transition: border-color var(--transition-fast), background-color var(--transition-fast);
+    }
+
+    .cta__input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .cta__input:focus {
+      border-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn--subscribe {
+      background: var(--gradient-subscribe);
+      color: var(--color-white);
+      padding: 14px 24px;
+      box-shadow: var(--shadow-button);
+    }
+
+    .btn--subscribe:hover,
+    .btn--subscribe:focus {
+      box-shadow: 0 6px 20px rgba(91, 79, 190, 0.4);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 64px 0 32px;
+      background-color: var(--color-deep);
+      color: var(--color-white);
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer__brand {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 10px;
+    }
+
+    .footer__tagline {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-muted);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    .footer__heading {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-white);
+      margin-bottom: 16px;
+    }
+
+    .footer__links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__link {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-muted);
+      transition: color var(--transition-fast);
+    }
+
+    .footer__link:hover,
+    .footer__link:focus {
+      color: var(--color-white);
+      outline: none;
+    }
+
+    .footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer__copyright {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--color-muted);
+    }
+
+    .footer__legal {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer__legal-link {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--color-muted);
+      transition: color var(--transition-fast);
+    }
+
+    .footer__legal-link:hover,
+    .footer__legal-link:focus {
+      color: var(--color-white);
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav__links {
+        display: none;
+      }
+
+      .nav__links--open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background-color: var(--color-card);
+        border-bottom: 1px solid var(--color-border);
+        padding: 24px;
+        gap: 16px;
+      }
+
+      .nav__toggle {
+        display: flex;
+      }
+
+      .hero {
+        padding: 64px 0 80px;
+        min-height: auto;
+      }
+
+      .hero__title {
+        font-size: 46px;
+      }
+
+      .hero__subtitle {
+        font-size: 16px;
+      }
+
+      .hero__cta-row {
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .hero__card {
+        transform: rotate(0deg);
+      }
+
+      .section-header__title--large {
+        font-size: 28px;
+      }
+
+      .cards,
+      .message__grid,
+      .why-join__features,
+      .why-join__info-boxes,
+      .footer__grid {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+      }
+
+      .why-join__title {
+        font-size: 30px;
+      }
+
+      .why-join__number {
+        font-size: 64px;
+      }
+
+      .cta__title {
+        font-size: 30px;
+      }
+
+      .cta__form {
+        flex-direction: column;
+      }
+
+      .footer__bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .about,
+      .message,
+      .why-join,
+      .faq {
+        padding: var(--section-padding-mobile) 0;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .nav__links {
+        display: flex !important;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Focus visible */
+    :focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    .nav__cta:focus-visible,
+    .btn:focus-visible,
+    .cta__input:focus-visible,
+    .faq__question:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" class="nav__brand" aria-label="AEHEA home">
+          <span class="nav__logo">AEHEA</span>
+          <span class="nav__badge">Awards 2026</span>
+        </a>
+
+        <button class="nav__toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+          <span class="nav__toggle-bar"></span>
+        </button>
+
+        <div class="nav__links" id="nav-menu">
+          <a href="#about" class="nav__link">Panel &amp; Partner</a>
+          <a href="#faq" class="nav__link">FAQ</a>
+          <a href="#contact" class="nav__link">Contact</a>
+          <a href="#register" class="nav__cta">Register your interest</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="hero__content">
+        <span class="hero__eyebrow">Excellence in Environmental Hygiene · Asia Pacific</span>
+        <h1 class="hero__title">
+          Be recognised.<br>
+          <em>Save lives.</em>
+        </h1>
+        <p class="hero__subtitle">
+          Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety.
+        </p>
+        <div class="hero__cta-row">
+          <a href="#register" class="btn btn--gradient">Apply Now</a>
+          <a href="#about" class="hero__link">Learn more <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="hero__visual">
+          <div class="hero__card">
+            <img
+              src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80"
+              alt="Modern hospital environment with clinical hygiene standards"
+              class="hero__image"
+              width="800"
+              height="500"
+              loading="eager"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-header__title section-header__title--large" id="about-title">About APSIC Environmental Hygiene Excellence Award (AEHEA)</h2>
+        <p class="section-header__subtitle">
+          The AEHEA honours hospitals that embed outstanding environmental hygiene practices into everyday care — protecting patients, staff, and communities across the Asia Pacific region.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 class="card__title">Commitment to IPC</h3>
+          <p class="card__body">Demonstrate leadership in infection prevention and control through rigorous protocols, staff engagement, and continuous improvement in environmental hygiene.</p>
+          <a href="#" class="card__link">Learn more <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="card">
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+          <h3 class="card__title">Innovative practices</h3>
+          <p class="card__body">Showcase evidence-based innovations, new technologies, and creative strategies that advance cleanliness, safety, and operational efficiency.</p>
+          <a href="#" class="card__link">Learn more <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="card">
+          <div class="card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </div>
+          <h3 class="card__title">Quality of care</h3>
+          <p class="card__body">Highlight how environmental hygiene directly improves patient outcomes, reduces infections, and strengthens trust in healthcare delivery.</p>
+          <a href="#" class="card__link">Learn more <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Message -->
+  <section class="message" id="message" aria-labelledby="message-title">
+    <div class="container">
+      <h2 class="section-header__title section-header__title--large" id="message-title" style="text-align: center; margin-bottom: 48px;">Message from Award Program Chair and APSIC President</h2>
+
+      <div class="message__grid">
+        <article class="message__card">
+          <div class="message__avatar-wrap">
+            <img
+              src="https://i.pravatar.cc/80?u=moilin"
+              alt="Portrait of A/Prof. Moi Lin Ling"
+              class="message__avatar"
+              width="80"
+              height="80"
+              loading="lazy"
+            >
+          </div>
+          <h3 class="message__name">A/Prof. Moi Lin Ling</h3>
+          <p class="message__title">Program Chair, AEHEA</p>
+          <p class="message__quote">"Environmental hygiene is the silent guardian of patient safety. This award recognises the teams and institutions that make it visible, measurable, and exemplary."</p>
+        </article>
+
+        <article class="message__card">
+          <div class="message__avatar-wrap">
+            <img
+              src="https://i.pravatar.cc/80?u=anucha"
+              alt="Portrait of Prof. Anucha Apisarnthanarak"
+              class="message__avatar"
+              width="80"
+              height="80"
+              loading="lazy"
+            >
+          </div>
+          <h3 class="message__name">Prof. Anucha Apisarnthanarak</h3>
+          <p class="message__title">President, APSIC</p>
+          <p class="message__quote">"APSIC is proud to champion excellence in environmental hygiene across Asia Pacific. Together, we raise standards and save lives."</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Join -->
+  <section class="why-join" id="why-join" aria-labelledby="why-join-title">
+    <div class="container">
+      <h2 class="why-join__title" id="why-join-title">Why join the APSIC Environmental Hygiene Excellence Award?</h2>
+
+      <div class="why-join__features">
+        <div class="why-join__feature">
+          <span class="why-join__number" aria-hidden="true">01</span>
+          <h3 class="why-join__feature-title">Be Recognised</h3>
+          <p class="why-join__feature-body">Earn regional credibility and peer recognition for your hospital's commitment to world-class environmental hygiene. Stand out as a benchmark institution across Asia Pacific.</p>
+        </div>
+
+        <div class="why-join__feature">
+          <span class="why-join__number" aria-hidden="true">02</span>
+          <h3 class="why-join__feature-title">Save Lives</h3>
+          <p class="why-join__feature-body">Drive higher hygiene standards that directly reduce healthcare-associated infections and protect the patients and communities you serve every day.</p>
+        </div>
+      </div>
+
+      <div class="why-join__info-boxes">
+        <div class="why-join__info-box">
+          <h4 class="why-join__info-title">Celebrated on the regional stage</h4>
+          <p class="why-join__info-body">Winners are announced at the APSIC Congress and promoted across regional healthcare networks, media, and partner channels.</p>
+        </div>
+        <div class="why-join__info-box">
+          <h4 class="why-join__info-title">Prestigious recognition, not a monetary prize</h4>
+          <p class="why-join__info-body">AEHEA is a non-monetary award focused on honouring excellence, sharing best practices, and inspiring continuous improvement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-header__title section-header__title--large" id="faq-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq__list" role="region" aria-label="Frequently asked questions">
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-1" id="faq-question-1">
+            Who can apply for the AEHEA?
+            <span class="faq__toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1">
+            <div class="faq__answer-inner">
+              Hospitals and healthcare institutions across the Asia Pacific region that demonstrate excellence in environmental hygiene and infection prevention are eligible to apply.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-2" id="faq-question-2">
+            Is there an application fee?
+            <span class="faq__toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2">
+            <div class="faq__answer-inner">
+              No. Submitting an application for the APSIC Environmental Hygiene Excellence Award is free of charge for all eligible institutions.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-3" id="faq-question-3">
+            What criteria are used to evaluate applications?
+            <span class="faq__toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3">
+            <div class="faq__answer-inner">
+              Applications are assessed on commitment to IPC, innovative environmental hygiene practices, measurable quality outcomes, and overall impact on patient safety.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-4" id="faq-question-4">
+            When is the application deadline?
+            <span class="faq__toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4">
+            <div class="faq__answer-inner">
+              The 2026 application timeline will be published soon. Register your interest to receive updates on key dates, submission guidelines, and announcements.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-5" id="faq-question-5">
+            Is the award a monetary prize?
+            <span class="faq__toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5">
+            <div class="faq__answer-inner">
+              No. AEHEA is a prestigious non-monetary recognition that celebrates excellence, promotes best practices, and inspires institutions across the region.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false" aria-controls="faq-answer-6" id="faq-question-6">
+            How are winners announced?
+            <span class="faq__toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer" id="faq-answer-6" role="region" aria-labelledby="faq-question-6">
+            <div class="faq__answer-inner">
+              Winners are announced at the APSIC Congress and promoted through APSIC's regional communication channels, partner networks, and the AEHEA website.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact" aria-labelledby="cta-title">
+    <div class="container">
+      <h2 class="cta__title" id="cta-title">Want to stay informed?</h2>
+      <p class="cta__subtitle">Get the latest updates on AEHEA 2026 — timelines, submission tips, and award announcements.</p>
+
+      <form class="cta__form" id="newsletter-form" action="#" method="post" novalidate>
+        <label for="email" class="visually-hidden">Email address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="cta__input"
+          placeholder="Enter your email"
+          required
+          aria-required="true"
+        >
+        <button type="submit" class="btn btn--subscribe">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="register" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand">AEHEA</div>
+          <p class="footer__tagline">Asia Pacific Environmental Hygiene Excellence Award — recognising hospitals that protect patients through exceptional environmental hygiene.</p>
+        </div>
+
+        <div>
+          <h4 class="footer__heading">Navigate</h4>
+          <ul class="footer__links">
+            <li><a href="#about" class="footer__link">About</a></li>
+            <li><a href="#why-join" class="footer__link">Why Join</a></li>
+            <li><a href="#faq" class="footer__link">FAQ</a></li>
+            <li><a href="#contact" class="footer__link">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer__heading">Resources</h4>
+          <ul class="footer__links">
+            <li><a href="#" class="footer__link">Panel &amp; Partner</a></li>
+            <li><a href="#" class="footer__link">Past Winners</a></li>
+            <li><a href="#" class="footer__link">Guidelines</a></li>
+            <li><a href="#" class="footer__link">Register Interest</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2026 APSIC Environmental Hygiene Excellence Award</p>
+        <div class="footer__legal">
+          <a href="#" class="footer__legal-link">Privacy Policy</a>
+          <a href="#" class="footer__legal-link">Terms of Service</a>
+          <a href="#" class="footer__legal-link">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // Sticky nav backdrop blur on scroll
+      const nav = document.querySelector('.nav');
+      const navToggle = document.querySelector('.nav__toggle');
+      const navLinks = document.getElementById('nav-menu');
+
+      function updateNavScroll() {
+        if (window.scrollY > 20) {
+          nav.classList.add('nav--scrolled');
+        } else {
+          nav.classList.remove('nav--scrolled');
+        }
+      }
+
+      window.addEventListener('scroll', updateNavScroll, { passive: true });
+      updateNavScroll();
+
+      // Mobile nav toggle
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function () {
+          const expanded = this.getAttribute('aria-expanded') === 'true';
+          this.setAttribute('aria-expanded', String(!expanded));
+          navLinks.classList.toggle('nav__links--open');
+        });
+
+        // Close mobile menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            navToggle.setAttribute('aria-expanded', 'false');
+            navLinks.classList.remove('nav__links--open');
+          });
+        });
+      }
+
+      // FAQ accordion
+      const faqItems = document.querySelectorAll('.faq__item');
+
+      faqItems.forEach(function (item) {
+        const question = item.querySelector('.faq__question');
+        const answer = item.querySelector('.faq__answer');
+
+        if (!question || !answer) return;
+
+        question.addEventListener('click', function () {
+          const isOpen = item.classList.contains('faq__item--open');
+
+          // Close all other items
+          faqItems.forEach(function (otherItem) {
+            if (otherItem !== item) {
+              otherItem.classList.remove('faq__item--open');
+              const otherQuestion = otherItem.querySelector('.faq__question');
+              const otherAnswer = otherItem.querySelector('.faq__answer');
+              if (otherQuestion) otherQuestion.setAttribute('aria-expanded', 'false');
+              if (otherAnswer) otherAnswer.style.maxHeight = null;
+            }
+          });
+
+          // Toggle current item
+          if (isOpen) {
+            item.classList.remove('faq__item--open');
+            question.setAttribute('aria-expanded', 'false');
+            answer.style.maxHeight = null;
+          } else {
+            item.classList.add('faq__item--open');
+            question.setAttribute('aria-expanded', 'true');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+          }
+        });
+      });
+
+      // Newsletter form
+      const newsletterForm = document.getElementById('newsletter-form');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+          const emailInput = this.querySelector('#email');
+          const email = emailInput.value.trim();
+
+          if (email && emailInput.checkValidity()) {
+            alert('Thank you for subscribing! We will keep you updated on AEHEA 2026.');
+            emailInput.value = '';
+          } else {
+            alert('Please enter a valid email address.');
+            emailInput.focus();
+          }
+        });
+      }
+
+      // Smooth scroll for anchor links (fallback for older browsers)
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (event) {
+          const href = this.getAttribute('href');
+          if (href === '#') return;
+
+          const target = document.querySelector(href);
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

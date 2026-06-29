@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AEHEA — APSIC Environmental Hygiene Excellence Award</title>
+  <meta name="description" content="Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Colors */
+      --color-background: #FFFFFF;
+      --color-surface: #F7F7F7;
+      --color-subtle-bg: #EFEFEF;
+      --color-border: #E0E0E0;
+      --color-headline: #1A1A1A;
+      --color-body: #636362;
+      --color-muted: #AFAFAF;
+      --color-accent: #007CC2;
+      --color-accent-bg: #E8F4FB;
+      --color-accent-dark: #005A8F;
+      --color-footer-bg: #1A1A1A;
+      --color-footer-border: #2E2E2E;
+
+      /* Fonts */
+      --font-heading: 'Manrope', sans-serif;
+      --font-body: 'Open Sans', sans-serif;
+
+      /* Spacing */
+      --section-padding: 96px;
+      --max-width: 1200px;
+      --container-padding: 24px;
+
+      /* Radius */
+      --radius-card: 10px;
+      --radius-button: 6px;
+
+      /* Shadows */
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+      --shadow-hero-image: 0 8px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--color-body);
+      background-color: var(--color-background);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, h3, h4, h5, h6, p {
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--container-padding);
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--color-background);
+      border-bottom: 1px solid var(--color-border);
+      transition: box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .nav.scrolled {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav__logo {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--color-headline);
+      letter-spacing: -0.02em;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav__link {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-body);
+      transition: color 0.2s ease;
+    }
+
+    .nav__link:hover {
+      color: var(--color-accent);
+    }
+
+    .nav__cta {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius-button);
+      padding: 10px 20px;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .nav__cta:hover {
+      background-color: var(--color-accent);
+      color: #FFFFFF;
+    }
+
+    .nav__toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+    }
+
+    .nav__toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background-color: var(--color-headline);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    /* Hero */
+    .hero {
+      background-color: var(--color-surface);
+      padding: 120px 0;
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero__eyebrow {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-bottom: 18px;
+    }
+
+    .hero__title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 68px;
+      line-height: 1.05;
+      color: var(--color-headline);
+      white-space: pre-line;
+    }
+
+    .hero__sub {
+      font-family: var(--font-body);
+      font-size: 17px;
+      color: var(--color-body);
+      max-width: 480px;
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+
+    .hero__cta-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-button);
+      padding: 14px 32px;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn--primary {
+      background-color: var(--color-accent);
+      color: #FFFFFF;
+    }
+
+    .btn--primary:hover {
+      background-color: var(--color-accent-dark);
+    }
+
+    .hero__link {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-body);
+      transition: color 0.2s ease;
+    }
+
+    .hero__link:hover {
+      color: var(--color-accent);
+    }
+
+    .hero__image-wrap {
+      position: relative;
+    }
+
+    .hero__image {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-hero-image);
+      object-fit: cover;
+    }
+
+    /* About */
+    .about {
+      background-color: var(--color-background);
+      padding: var(--section-padding) 0;
+      text-align: center;
+    }
+
+    .section__title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--color-headline);
+    }
+
+    .about__title {
+      font-size: 36px;
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.25;
+    }
+
+    .about__sub {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--color-body);
+      max-width: 680px;
+      margin: 20px auto 0;
+      line-height: 1.7;
+    }
+
+    .about__cards {
+      display: flex;
+      gap: 24px;
+      margin-top: 56px;
+      text-align: left;
+    }
+
+    .card {
+      flex: 1;
+      background-color: var(--color-background);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .card__icon {
+      font-size: 24px;
+      color: var(--color-accent);
+      margin-bottom: 16px;
+    }
+
+    .card__title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--color-headline);
+      margin-bottom: 10px;
+    }
+
+    .card__body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-body);
+      line-height: 1.65;
+    }
+
+    /* Message */
+    .message {
+      background-color: var(--color-surface);
+      padding: var(--section-padding) 0;
+    }
+
+    .message__title {
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .message__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .message__col {
+      text-align: center;
+    }
+
+    .message__avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 16px;
+      border: 3px solid var(--color-background);
+      box-shadow: var(--shadow-card);
+    }
+
+    .message__name {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--color-headline);
+    }
+
+    .message__role {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    .message__quote {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--color-body);
+      line-height: 1.7;
+      margin-top: 18px;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Why Join */
+    .why-join {
+      background-color: var(--color-background);
+      padding: var(--section-padding) 0;
+    }
+
+    .why-join__title {
+      font-size: 34px;
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .why-join__features {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .feature-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+    }
+
+    .feature-block__number {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--color-subtle-bg);
+      flex-shrink: 0;
+      min-width: 110px;
+    }
+
+    .feature-block__content {
+      padding-top: 12px;
+    }
+
+    .feature-block__title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--color-headline);
+      margin-bottom: 10px;
+    }
+
+    .feature-block__body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--color-body);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .why-join__sub-points {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+      padding-top: 48px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .sub-point__title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--color-headline);
+      margin-bottom: 8px;
+    }
+
+    .sub-point__body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-body);
+      line-height: 1.65;
+    }
+
+    /* FAQ */
+    .faq {
+      background-color: var(--color-surface);
+      padding: var(--section-padding) 0;
+    }
+
+    .faq__title {
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .faq__list {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .faq__item {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .faq__question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .faq__question-text {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--color-headline);
+      padding-right: 16px;
+    }
+
+    .faq__icon {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--color-accent);
+      line-height: 1;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq__item.is-open .faq__icon {
+      transform: rotate(45deg);
+    }
+
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+
+    .faq__answer-inner {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-body);
+      line-height: 1.7;
+      padding-bottom: 22px;
+      max-width: 680px;
+    }
+
+    .faq__item.is-open .faq__answer {
+      max-height: 300px;
+    }
+
+    /* CTA Section */
+    .cta {
+      background-color: var(--color-accent);
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .cta__title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 36px;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+
+    .cta__sub {
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 32px;
+    }
+
+    .cta__form {
+      display: flex;
+      gap: 12px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .cta__input {
+      flex: 1;
+      height: 48px;
+      padding: 0 16px;
+      border: none;
+      border-radius: var(--radius-button);
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-headline);
+      background-color: #FFFFFF;
+    }
+
+    .cta__input::placeholder {
+      color: var(--color-muted);
+    }
+
+    .cta__input:focus {
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+      outline-offset: 2px;
+    }
+
+    .cta__button {
+      height: 48px;
+      padding: 0 24px;
+      background-color: var(--color-accent-dark);
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-button);
+      transition: background-color 0.2s ease;
+    }
+
+    .cta__button:hover {
+      background-color: #004a75;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--color-footer-bg);
+      padding: 64px 0 32px;
+      color: #FFFFFF;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer__logo {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .footer__tagline {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-muted);
+      max-width: 280px;
+      line-height: 1.6;
+    }
+
+    .footer__links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer__links li {
+      margin-bottom: 10px;
+    }
+
+    .footer__link {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--color-muted);
+      transition: color 0.2s ease;
+    }
+
+    .footer__link:hover {
+      color: #FFFFFF;
+    }
+
+    .footer__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--color-footer-border);
+      margin-top: 32px;
+      padding-top: 24px;
+    }
+
+    .footer__copyright {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--color-muted);
+    }
+
+    .footer__legal {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      :root {
+        --section-padding: 64px;
+        --container-padding: 20px;
+      }
+
+      .nav__links,
+      .nav__cta {
+        display: none;
+      }
+
+      .nav__toggle {
+        display: flex;
+      }
+
+      .hero {
+        padding: 64px 0;
+      }
+
+      .hero__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero__title {
+        font-size: 42px;
+      }
+
+      .hero__sub {
+        font-size: 16px;
+      }
+
+      .hero__cta-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .about__title {
+        font-size: 28px;
+      }
+
+      .about__cards {
+        flex-direction: column;
+      }
+
+      .message__grid,
+      .why-join__sub-points,
+      .footer__grid,
+      .footer__bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .why-join__title {
+        font-size: 28px;
+      }
+
+      .feature-block {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .feature-block__number {
+        font-size: 56px;
+        min-width: auto;
+      }
+
+      .why-join__sub-points {
+        gap: 24px;
+      }
+
+      .cta__title {
+        font-size: 28px;
+      }
+
+      .cta__form {
+        flex-direction: column;
+      }
+
+      .footer__bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .footer__grid {
+        text-align: center;
+        gap: 32px;
+      }
+
+      .footer__tagline {
+        margin: 0 auto;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo" aria-label="AEHEA Home">AEHEA</a>
+      <div class="nav__links">
+        <a href="#about" class="nav__link">Panel & Partner</a>
+        <a href="#faq" class="nav__link">FAQ</a>
+        <a href="#cta" class="nav__link">Contact</a>
+      </div>
+      <a href="#cta" class="nav__cta">Register your interest</a>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container hero__grid">
+      <div class="hero__content">
+        <p class="hero__eyebrow">APSIC Environmental Hygiene Excellence Award</p>
+        <h1 class="hero__title">Be recognised.
+Save lives.</h1>
+        <p class="hero__sub">Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety.</p>
+        <div class="hero__cta-row">
+          <a href="#cta" class="btn btn--primary">Apply Now</a>
+          <a href="#about" class="hero__link">Learn more →</a>
+        </div>
+      </div>
+      <div class="hero__image-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80"
+          alt="Healthcare professional in a clinical hospital environment"
+          class="hero__image"
+          width="900"
+          height="600"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="section__title about__title">About APSIC Environmental Hygiene Excellence Award (AEHEA)</h2>
+      <p class="about__sub">The AEHEA honours healthcare institutions across the Asia Pacific region that demonstrate outstanding commitment, innovation and measurable impact in environmental hygiene and infection prevention & control.</p>
+      <div class="about__cards">
+        <article class="card">
+          <div class="card__icon" aria-hidden="true">✓</div>
+          <h3 class="card__title">Commitment to IPC</h3>
+          <p class="card__body">Recognising hospitals that embed infection prevention and control into everyday practice, governance and culture.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon" aria-hidden="true">⚡</div>
+          <h3 class="card__title">Innovative practices</h3>
+          <p class="card__body">Celebrating teams that introduce novel approaches, technologies and protocols to raise environmental hygiene standards.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon" aria-hidden="true">★</div>
+          <h3 class="card__title">Quality of care</h3>
+          <p class="card__body">Linking cleaner, safer environments to better patient outcomes and reduced healthcare-associated infections.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Message from Chairs -->
+  <section class="message">
+    <div class="container">
+      <h2 class="section__title message__title">Message from Award Program Chair and APSIC President</h2>
+      <div class="message__grid">
+        <article class="message__col">
+          <img
+            src="https://i.pravatar.cc/80?u=moilin"
+            alt="Portrait of A/Prof. Moi Lin Ling"
+            class="message__avatar"
+            width="80"
+            height="80"
+            loading="lazy"
+          />
+          <h3 class="message__name">A/Prof. Moi Lin Ling</h3>
+          <p class="message__role">Program Chair, AEHEA</p>
+          <blockquote class="message__quote">"Environmental hygiene is the silent guardian of patient safety. This award shines a light on the teams and institutions that make it a daily priority."</blockquote>
+        </article>
+        <article class="message__col">
+          <img
+            src="https://i.pravatar.cc/80?u=anucha"
+            alt="Portrait of Prof. Anucha Apisarnthanarak"
+            class="message__avatar"
+            width="80"
+            height="80"
+            loading="lazy"
+          />
+          <h3 class="message__name">Prof. Anucha Apisarnthanarak</h3>
+          <p class="message__role">President, APSIC</p>
+          <blockquote class="message__quote">"APSIC is proud to lead a regional platform that recognises excellence, shares best practice and ultimately protects the lives of patients across Asia Pacific."</blockquote>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Join -->
+  <section class="why-join" id="why-join">
+    <div class="container">
+      <h2 class="section__title why-join__title">Why Join the APSIC Environmental Hygiene Excellence Award?</h2>
+      <div class="why-join__features">
+        <div class="feature-block">
+          <span class="feature-block__number" aria-hidden="true">01</span>
+          <div class="feature-block__content">
+            <h3 class="feature-block__title">Be Recognised</h3>
+            <p class="feature-block__body">Gain regional visibility for your hospital's dedication to environmental hygiene. Stand alongside the leading institutions shaping infection prevention standards in Asia Pacific.</p>
+          </div>
+        </div>
+        <div class="feature-block">
+          <span class="feature-block__number" aria-hidden="true">02</span>
+          <div class="feature-block__content">
+            <h3 class="feature-block__title">Save Lives</h3>
+            <p class="feature-block__body">Demonstrate how rigorous environmental hygiene protocols translate into fewer infections, shorter stays and safer outcomes for every patient under your care.</p>
+          </div>
+        </div>
+      </div>
+      <div class="why-join__sub-points">
+        <div class="sub-point">
+          <h3 class="sub-point__title">Celebrated on the regional stage</h3>
+          <p class="sub-point__body">Winners are announced and honoured at major APSIC events, with promotion across regional channels and partner networks.</p>
+        </div>
+        <div class="sub-point">
+          <h3 class="sub-point__title">Prestigious recognition, not a monetary prize</h3>
+          <p class="sub-point__body">The award is a mark of excellence and credibility—an independent endorsement of your hospital's hygiene and patient-safety leadership.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section__title faq__title">Frequently Asked Questions</h2>
+      <div class="faq__list">
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span class="faq__question-text">Who can apply?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer">
+            <p class="faq__answer-inner">Hospitals and healthcare institutions across the Asia Pacific region that can demonstrate excellence in environmental hygiene and infection prevention & control are welcome to apply.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span class="faq__question-text">Is there a fee to enter?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer">
+            <p class="faq__answer-inner">There is no entry fee for the AEHEA. The award is designed to encourage broad participation and recognises achievements regardless of institution size or budget.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span class="faq__question-text">How are hospitals evaluated?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer">
+            <p class="faq__answer-inner">Applications are reviewed by an independent panel of infection prevention and environmental hygiene experts against published criteria covering commitment, innovation, outcomes and sustainability.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span class="faq__question-text">What does the winner receive?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer">
+            <p class="faq__answer-inner">Winners receive prestigious regional recognition, a formal award and the opportunity to share their success story with peers across the Asia Pacific healthcare community.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span class="faq__question-text">When is the next award cycle?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer">
+            <p class="faq__answer-inner">Dates for the upcoming cycle will be published on this website and communicated to registered stakeholders. Subscribe below to receive updates as soon as they are available.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" aria-expanded="false">
+            <span class="faq__question-text">Is the process confidential?</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq__answer">
+            <p class="faq__answer-inner">Yes. All application materials are handled confidentially by the review panel and APSIC administration team, in line with our privacy and data-protection practices.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta" id="cta">
+    <div class="container">
+      <h2 class="cta__title">Want to stay informed?</h2>
+      <p class="cta__sub">Get updates on the AEHEA award programme.</p>
+      <form class="cta__form" id="newsletter-form" novalidate>
+        <input
+          type="email"
+          class="cta__input"
+          placeholder="Enter your email"
+          aria-label="Email address"
+          required
+        />
+        <button type="submit" class="cta__button">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">AEHEA</div>
+          <p class="footer__tagline">Recognising excellence in environmental hygiene and patient safety across Asia Pacific.</p>
+        </div>
+        <ul class="footer__links">
+          <li><a href="#about" class="footer__link">Panel & Partner</a></li>
+          <li><a href="#why-join" class="footer__link">How to Participate</a></li>
+          <li><a href="#cta" class="footer__link">Register your Interest</a></li>
+        </ul>
+        <ul class="footer__links">
+          <li><a href="#faq" class="footer__link">FAQ</a></li>
+          <li><a href="#cta" class="footer__link">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 APSIC Environmental Hygiene Excellence Award</p>
+        <div class="footer__legal">
+          <a href="#" class="footer__link">Privacy Policy</a>
+          <a href="#" class="footer__link">Terms of Service</a>
+          <a href="#" class="footer__link">Cookies Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // Sticky nav scrolled state
+      var nav = document.getElementById('nav');
+      function onScroll() {
+        if (window.scrollY > 60) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // FAQ accordion
+      var faqItems = document.querySelectorAll('.faq__item');
+      faqItems.forEach(function (item) {
+        var question = item.querySelector('.faq__question');
+        question.addEventListener('click', function () {
+          var isOpen = item.classList.contains('is-open');
+
+          // Optional: close others (accordion behavior)
+          faqItems.forEach(function (otherItem) {
+            if (otherItem !== item) {
+              otherItem.classList.remove('is-open');
+              otherItem.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          if (isOpen) {
+            item.classList.remove('is-open');
+            question.setAttribute('aria-expanded', 'false');
+          } else {
+            item.classList.add('is-open');
+            question.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // Newsletter form
+      var form = document.getElementById('newsletter-form');
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var input = form.querySelector('input[type="email"]');
+        var email = input.value.trim();
+        if (email && input.checkValidity()) {
+          alert('Thank you! You have been subscribed to AEHEA updates.');
+          input.value = '';
+        } else {
+          alert('Please enter a valid email address.');
+          input.focus();
+        }
+      });
+
+      // Smooth scroll for anchor links (polyfill-free, modern browsers handle CSS scroll-behavior)
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (event) {
+          var href = anchor.getAttribute('href');
+          if (href === '#') return;
+          var target = document.querySelector(href);
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
