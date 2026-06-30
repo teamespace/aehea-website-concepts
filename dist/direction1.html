@@ -446,78 +446,117 @@
       color: var(--body);
     }
 
-    .why-join__sub-blocks {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px;
+    .celebrated,
+    .prestigious,
+    .share {
+      padding: 80px 0;
     }
 
-    .why-join__sub {
+    .celebrated {
+      background: var(--surface);
+    }
+
+    .prestigious {
+      background: var(--bg);
+    }
+
+    .share {
+      background: var(--surface);
+    }
+
+    .feature-block {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      align-items: start;
+      gap: 60px;
+      align-items: center;
     }
 
-    .why-join__sub-content h3 {
-      font-size: 22px;
+    .feature-block--reverse .feature-block__content {
+      order: 2;
+    }
+
+    .feature-block--reverse .feature-block__image {
+      order: 1;
+    }
+
+    .feature-block__title {
+      font-size: clamp(26px, 3vw, 36px);
       font-weight: 700;
-      margin-bottom: 16px;
-      max-width: 280px;
+      margin-bottom: 20px;
+      max-width: 400px;
     }
 
-    .why-join__sub-content p {
-      font-size: 14px;
+    .feature-block__text {
+      font-size: 15px;
       line-height: 1.7;
+      color: var(--body);
+      margin-bottom: 20px;
+    }
+
+    .feature-block__list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+      line-height: 1.8;
       color: var(--body);
     }
 
-    .why-join__sub-image {
+    .feature-block__list li {
+      margin-bottom: 10px;
+    }
+
+    .feature-block__list strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .feature-block__image {
       background: var(--surface-2);
       border-radius: var(--radius-md);
       aspect-ratio: 4/3;
       overflow: hidden;
     }
 
-    .why-join__sub-image img {
+    .feature-block__image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .why-join__features {
+    .share__grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 64px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 80px;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .why-join__feature {
+    .share__item {
       text-align: center;
     }
 
-    .why-join__feature-icon {
-      width: 48px;
-      height: 48px;
+    .share__icon {
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       background: var(--accent-bg);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 22px;
       color: var(--accent);
-      margin: 0 auto 14px;
+      margin: 0 auto 18px;
     }
 
-    .why-join__feature-title {
-      font-size: 15px;
+    .share__title {
+      font-size: 17px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
-    .why-join__feature-text {
-      font-size: 13px;
-      line-height: 1.6;
+    .share__text {
+      font-size: 14px;
+      line-height: 1.7;
       color: var(--body);
     }
 
@@ -751,13 +790,29 @@
       .about__cards,
       .message__grid,
       .why-join__blocks,
-      .why-join__sub,
-      .why-join__features,
+      .feature-block,
+      .feature-block--reverse .feature-block__content,
+      .feature-block--reverse .feature-block__image,
+      .share__grid,
       .footer__grid {
         grid-template-columns: 1fr;
       }
 
-      .why-join__sub { gap: 24px; }
+      .feature-block__content,
+      .feature-block__image {
+        order: unset !important;
+      }
+
+      .feature-block,
+      .share__grid {
+        gap: 32px;
+      }
+
+      .celebrated,
+      .prestigious,
+      .share {
+        padding: 56px 0;
+      }
 
       .hero { padding: 80px 0; }
 
@@ -891,43 +946,55 @@
           </div>
         </div>
       </div>
-      <div class="why-join__sub-blocks">
-        <div class="why-join__sub">
-          <div class="why-join__sub-content">
-            <h3>Celebrated on the regional stage</h3>
-            <p>Award recipients are formally recognised at an upcoming APSIC Congress, and leave with certificates, feedback and expert insight.</p>
-          </div>
-          <div class="why-join__sub-image">
-            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80" alt="Regional celebration">
-          </div>
+    </div>
+  </section>
+
+  <section class="celebrated">
+    <div class="container">
+      <div class="feature-block">
+        <div class="feature-block__content">
+          <h3 class="feature-block__title">Celebrated on the regional stage</h3>
+          <p class="feature-block__text">Award recipients are formally recognised at an upcoming APSIC Congress, and leave with certificates, feedback and expert insight.</p>
         </div>
-        <div class="why-join__sub">
-          <div class="why-join__sub-content">
-            <h3>Prestigious recognition, rather than a monetary prize</h3>
-            <p>Finalist institutions are honoured with a visit from an independent panel of experts and a certificate of recognition that strengthens their programme long after the award.</p>
-            <ul style="margin: 12px 0 0; padding-left: 16px; font-size: 13px; line-height: 1.7; color: var(--body);">
-              <li>Continuous improvement: Expert guidance to refine and advance your environmental hygiene programme.</li>
-              <li>Sustainability of programmes: Support to embed lasting change, not one-off achievements.</li>
-              <li>Validation & impact: Help to measure and demonstrate your contribution to patient safety.</li>
-            </ul>
-          </div>
-          <div class="why-join__sub-image">
-            <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=600&q=80" alt="Recognition">
-          </div>
+        <div class="feature-block__image">
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Regional celebration">
         </div>
       </div>
-      <div class="why-join__features">
-        <div class="why-join__feature">
-          <div class="why-join__feature-icon">🏆</div>
-          <h4 class="why-join__feature-title">Present your programme</h4>
-          <p class="why-join__feature-text">Selected hospitals are invited to share best practices via a local presentation at the APSIC Congress.</p>
+    </div>
+  </section>
+
+  <section class="prestigious">
+    <div class="container">
+      <div class="feature-block feature-block--reverse">
+        <div class="feature-block__content">
+          <h3 class="feature-block__title">Prestigious recognition, rather than a monetary prize</h3>
+          <p class="feature-block__text">Finalist institutions are honoured with a visit from an independent panel of experts and a certificate of recognition that strengthens their programme long after the award.</p>
+          <ul class="feature-block__list">
+            <li><strong>Continuous improvement:</strong> Expert guidance to refine and advance your environmental hygiene programme.</li>
+            <li><strong>Sustainability of programmes:</strong> Support to embed lasting change, not one-off achievements.</li>
+            <li><strong>Validation & impact:</strong> Help to measure and demonstrate your contribution to patient safety.</li>
+          </ul>
         </div>
-        <div class="why-join__feature">
-          <div class="why-join__feature-icon">🌐</div>
-          <h4 class="why-join__feature-title">Share with the region</h4>
-          <p class="why-join__feature-text">Representatives exchange their experiences, innovations, and activities with the regional infection prevention community.</p>
+        <div class="feature-block__image">
+          <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=800&q=80" alt="Recognition">
         </div>
-        <div class="why-join__feature" style="grid-column: span 1;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="share">
+    <div class="container">
+      <div class="share__grid">
+        <div class="share__item">
+          <div class="share__icon">🏆</div>
+          <h4 class="share__title">Present your programme</h4>
+          <p class="share__text">Selected hospitals are invited to share best practices via a local presentation at the APSIC Congress.</p>
+        </div>
+        <div class="share__item">
+          <div class="share__icon">🌐</div>
+          <h4 class="share__title">Share with the region</h4>
+          <p class="share__text">Representatives exchange their experiences, innovations, and activities with the regional infection prevention community.</p>
+        </div>
       </div>
     </div>
   </section>
