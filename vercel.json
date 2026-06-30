@@ -1,0 +1,6 @@
+{
+  "name": "APSICv3",
+  "rewrites": [
+    { "source": "/", "destination": "/direction-3-blue-purple.html" }
+  ]
+}
