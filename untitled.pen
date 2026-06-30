@@ -1,0 +1,250 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "Frame",
+      "width": 1440,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "YXRlr",
+          "x": 0,
+          "y": 0,
+          "clip": true,
+          "width": "fit_content(0)",
+          "height": "fit_content(0)",
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "meMLq",
+              "x": 24,
+              "y": 20,
+              "gap": 10,
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 8,
+                  "id": "bXUmm",
+                  "fill": "$primary",
+                  "width": 32,
+                  "height": 32
+                },
+                {
+                  "type": "text",
+                  "id": "YcP3w",
+                  "fill": "$white",
+                  "content": "AEHEA",
+                  "fontFamily": "$font-heading",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "iOZTO",
+              "x": 64,
+              "y": 68,
+              "gap": 8,
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 3,
+                  "id": "YUbtv",
+                  "fill": "$white",
+                  "width": 6,
+                  "height": 6
+                },
+                {
+                  "type": "text",
+                  "id": "p3c2K",
+                  "fill": "$white",
+                  "content": "ASIAN PACIFIC SOCIETY FOR INFECTION CONTROL",
+                  "fontFamily": "$font-body",
+                  "fontSize": 8,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.5
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N8IqQl",
+              "x": 24,
+              "y": 140,
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "aUuhC",
+                  "fill": "$white",
+                  "content": "Environmental Hygiene Excellence Award",
+                  "lineHeight": 1.15,
+                  "fontFamily": "$font-heading",
+                  "fontSize": 48,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "Fhmmt",
+                  "opacity": 0.8,
+                  "fill": "$white",
+                  "content": "Recognising outstanding environmental hygiene and infection prevention practice across Asia Pacific.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "$font-body",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "T5pWy",
+                  "fill": "$accent",
+                  "content": "Asia Pacific 2025",
+                  "fontFamily": "$font-body",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "rBQRR",
+              "x": 24,
+              "y": 310,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "aDOaz",
+                  "fill": "$primary",
+                  "cornerRadius": 100,
+                  "gap": 8,
+                  "padding": [
+                    14,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WUx3M",
+                      "fill": "$white",
+                      "content": "Register Your Interest",
+                      "fontFamily": "$font-body",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 14,
+                      "id": "r12mv7",
+                      "fill": "$white",
+                      "width": 28,
+                      "height": 28
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "DCgC9",
+          "x": 40,
+          "y": 100,
+          "layout": "vertical",
+          "gap": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "XbP3T",
+              "fill": "$deep",
+              "content": "Environmental Hygiene Excellence Award",
+              "lineHeight": 1.15,
+              "fontFamily": "$font-heading",
+              "fontSize": 48,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "HePrc",
+              "fill": "$body",
+              "content": "The regional standard for environmental hygiene excellence in healthcare — Asia Pacific 2025.",
+              "lineHeight": 1.7,
+              "fontFamily": "$font-body",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "zZBjJ",
+              "fill": "$white",
+              "content": "Register Your Interest",
+              "fontFamily": "$font-body",
+              "fontSize": 13,
+              "fontWeight": "600"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "accent": {
+      "type": "color",
+      "value": "#A78BFA"
+    },
+    "body": {
+      "type": "color",
+      "value": "#4B5563"
+    },
+    "border": {
+      "type": "color",
+      "value": "#EDEDDE"
+    },
+    "deep": {
+      "type": "color",
+      "value": "#2D1B69"
+    },
+    "font-body": {
+      "type": "string",
+      "value": "Open Sans"
+    },
+    "font-heading": {
+      "type": "string",
+      "value": "Bitter"
+    },
+    "muted": {
+      "type": "color",
+      "value": "#9CA3AF"
+    },
+    "primary": {
+      "type": "color",
+      "value": "#5B4FBE"
+    },
+    "primary-light": {
+      "type": "color",
+      "value": "#7B6DD0"
+    },
+    "surface": {
+      "type": "color",
+      "value": "#F7F5FF"
+    },
+    "text": {
+      "type": "color",
+      "value": "#1A1A2E"
+    },
+    "white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    }
+  }
+}
