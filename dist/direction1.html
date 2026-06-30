@@ -7,54 +7,73 @@
   <meta name="description" content="Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FFFFFF;
-      --surface: #F7F7F7;
-      --surface-2: #EFEFEF;
-      --border: #E0E0E0;
-      --text: #1A1A1A;
-      --body: #636362;
-      --muted: #AFAFAF;
-      --accent: #007CC2;
-      --accent-dark: #005A8F;
-      --accent-bg: #E8F4FB;
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 16px;
-      --shadow: 0 2px 12px rgba(0,0,0,0.06);
-      --shadow-lg: 0 8px 40px rgba(0,0,0,0.1);
-      --max-width: 1200px;
-      --section-py: 96px;
-      --font-heading: 'Manrope', sans-serif;
-      --font-body: 'Open Sans', sans-serif;
+      --outer-bg: #9ca3af;
+      --page-card: #ffffff;
+      --surface-alt: #f8f9fb;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-muted: #6b7280;
+      --text-inverse: #ffffff;
+      --cta-bg: #111827;
+      --cta-hover: #374151;
+      --accent-teal: #0d9488;
+      --radius-sm: 16px;
+      --radius-md: 24px;
+      --radius-lg: 32px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 1px 3px rgba(17, 24, 39, 0.05);
+      --shadow-md: 0 4px 20px rgba(17, 24, 39, 0.07);
+      --shadow-lg: 0 12px 40px rgba(17, 24, 39, 0.1);
+      --page-max: 1280px;
+      --container-max: 1200px;
+      --section-py: 80px;
+      --font: Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;
       --transition: cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 
     body {
       margin: 0;
-      font-family: var(--font-body);
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--body);
-      background: var(--bg);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      background: var(--outer-bg);
       -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, h4 { margin: 0; font-family: var(--font-heading); color: var(--text); line-height: 1.1; }
+    h1, h2, h3, h4 { margin: 0; font-family: var(--font); color: var(--text-primary); line-height: 1.2; }
 
     a { color: inherit; text-decoration: none; }
 
     img { max-width: 100%; display: block; }
 
+    ul, p { margin: 0; }
+
+    .page-wrapper {
+      padding: 32px;
+      min-height: 100vh;
+    }
+
+    .page-card {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      background: var(--page-card);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
     .container {
       width: 100%;
-      max-width: var(--max-width);
+      max-width: var(--container-max);
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -64,57 +83,88 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      margin: -48px -48px 0;
+      padding: 0 48px;
+      border-bottom: 1px solid rgba(17, 24, 39, 0.06);
     }
 
     .nav__inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
+      height: 80px;
       gap: 24px;
     }
 
     .nav__logo {
-      font-family: var(--font-heading);
+      font-family: var(--font);
       font-size: 22px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.02em;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
     }
 
     .nav__links {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 36px;
     }
 
     .nav__link {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
-      color: var(--body);
+      color: var(--text-secondary);
       transition: color 0.2s ease;
     }
 
-    .nav__link:hover { color: var(--accent); }
+    .nav__link:hover { color: var(--accent-teal); }
 
     .nav__cta {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      border-radius: var(--radius-sm);
-      padding: 10px 20px;
-      transition: color 0.3s ease, background-color 0.3s ease, transform 0.4s var(--transition);
+      color: var(--text-inverse);
+      background: var(--cta-bg);
+      border-radius: var(--radius-pill);
+      padding: 12px 24px;
+      transition: background-color 0.3s ease, transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
     }
 
     .nav__cta:hover {
-      background: var(--accent);
-      color: #fff;
+      background: var(--cta-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     .nav__toggle { display: none; }
+
+    /* Mobile nav panel */
+    .nav__panel {
+      display: none;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: var(--page-card);
+      border-bottom: 1px solid rgba(17, 24, 39, 0.06);
+      padding: 24px 48px;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav__panel.is-open { display: flex; }
+
+    .nav__panel .nav__link {
+      font-size: 18px;
+      padding: 8px 0;
+    }
+
+    .nav__panel .nav__cta {
+      align-self: flex-start;
+      margin-top: 8px;
+    }
 
     /* Buttons */
     .btn {
@@ -122,10 +172,10 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-family: var(--font-body);
-      font-size: 14px;
+      font-family: var(--font);
+      font-size: 15px;
       font-weight: 600;
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-pill);
       padding: 14px 28px;
       transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition), background-color 0.3s ease, color 0.3s ease;
       cursor: pointer;
@@ -133,28 +183,37 @@
     }
 
     .btn--primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(0,124,194,0.2);
+      background: var(--cta-bg);
+      color: var(--text-inverse);
+      box-shadow: var(--shadow-sm);
     }
 
-    .btn--primary:hover { box-shadow: 0 6px 24px rgba(0,124,194,0.3); }
+    .btn--primary:hover {
+      background: var(--cta-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
 
     .btn--outline {
       background: transparent;
-      color: var(--body);
-      border: 1px solid var(--border);
+      color: var(--text-primary);
+      border: 1.5px solid rgba(17, 24, 39, 0.12);
     }
 
-    .btn--outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn--outline:hover {
+      border-color: var(--accent-teal);
+      color: var(--accent-teal);
+      transform: translateY(-2px);
+    }
 
     .btn--text {
       background: transparent;
-      color: var(--body);
+      color: var(--text-inverse);
       padding: 10px 0;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
-    .btn--text:hover { color: var(--accent); }
+    .btn--text:hover { color: rgba(255, 255, 255, 0.85); }
 
     /* Magnetic button */
     .btn-magnetic {
@@ -167,7 +226,7 @@
       position: absolute;
       inset: 0;
       background: currentColor;
-      opacity: 0.1;
+      opacity: 0.08;
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.5s var(--transition);
@@ -180,40 +239,74 @@
 
     /* Hero */
     .hero {
-      background: var(--surface);
-      padding: 120px 0;
+      padding: 48px 0 0;
     }
 
-    .hero__inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
+    .hero__media {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero__image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(17, 24, 39, 0.55) 0%, rgba(17, 24, 39, 0.2) 50%, rgba(17, 24, 39, 0.65) 100%);
+      z-index: 1;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      padding: 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 620px;
     }
 
     .hero__eyebrow {
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      margin-bottom: 18px;
+      letter-spacing: 0.16em;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 20px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .hero__title {
-      font-size: clamp(48px, 6vw, 72px);
+      font-size: 64px;
       font-weight: 800;
-      color: var(--text);
-      line-height: 1.05;
-      margin-bottom: 24px;
+      color: var(--text-inverse);
+      line-height: 1.0;
+      max-width: 560px;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero__bottom {
+      max-width: 520px;
     }
 
     .hero__sub {
       font-size: 17px;
       line-height: 1.7;
-      color: var(--body);
-      max-width: 480px;
-      margin-bottom: 32px;
+      color: rgba(255, 255, 255, 0.92);
+      margin: 0 0 32px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
     }
 
     .hero__cta-row {
@@ -223,44 +316,29 @@
       flex-wrap: wrap;
     }
 
-    .hero__image-wrap {
-      background: var(--surface-2);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero__image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
     /* About */
     .about {
       padding: var(--section-py) 0;
-      background: var(--bg);
+      background: var(--page-card);
     }
 
     .about__header {
       text-align: center;
-      max-width: 800px;
-      margin: 0 auto 64px;
+      max-width: 840px;
+      margin: 0 auto 56px;
     }
 
     .about__title {
-      font-size: clamp(28px, 3.5vw, 38px);
+      font-size: 40px;
       font-weight: 700;
       margin-bottom: 20px;
+      color: var(--text-primary);
     }
 
     .about__intro {
       font-size: 16px;
       line-height: 1.7;
-      color: var(--body);
+      color: var(--text-secondary);
     }
 
     .about__cards {
@@ -271,11 +349,12 @@
     }
 
     .about__card {
-      background: var(--bg);
-      border: 1px solid var(--border);
+      background: var(--page-card);
       border-radius: var(--radius-md);
-      padding: 36px 28px;
+      padding: 40px 32px;
       text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(17, 24, 39, 0.04);
       transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
     }
 
@@ -288,25 +367,26 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: var(--accent-bg);
+      background: rgba(13, 148, 136, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
-      color: var(--accent);
+      color: var(--accent-teal);
       margin: 0 auto 20px;
     }
 
     .about__card-title {
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 600;
       margin-bottom: 12px;
+      color: var(--text-primary);
     }
 
     .about__card-text {
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.7;
-      color: var(--body);
+      color: var(--text-secondary);
     }
 
     .about__actions {
@@ -314,159 +394,190 @@
       align-items: center;
       justify-content: center;
       gap: 16px;
+      flex-wrap: wrap;
     }
 
     /* Message */
     .message {
       padding: var(--section-py) 0;
-      background: var(--surface);
+      background: var(--surface-alt);
+      margin: 0 -48px;
+      padding-left: 48px;
+      padding-right: 48px;
     }
 
     .message__header {
       text-align: center;
-      max-width: 800px;
-      margin: 0 auto 64px;
+      max-width: 840px;
+      margin: 0 auto 56px;
     }
 
     .message__title {
-      font-size: clamp(28px, 3.5vw, 38px);
+      font-size: 40px;
       font-weight: 700;
       margin-bottom: 20px;
+      color: var(--text-primary);
     }
 
     .message__intro {
       font-size: 16px;
       line-height: 1.7;
-      color: var(--body);
+      color: var(--text-secondary);
     }
 
     .message__grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 40px;
-      max-width: 900px;
+      gap: 24px;
+      max-width: 960px;
       margin: 0 auto;
     }
 
     .message__person {
+      background: var(--page-card);
+      border-radius: var(--radius-md);
+      padding: 40px;
       text-align: center;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(17, 24, 39, 0.04);
+      transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
+    }
+
+    .message__person:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
     }
 
     .message__avatar {
-      width: 80px;
-      height: 80px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
       object-fit: cover;
-      margin: 0 auto 16px;
-      background: var(--surface-2);
+      margin: 0 auto 18px;
+      border: 3px solid rgba(13, 148, 136, 0.15);
     }
 
     .message__name {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
       margin-bottom: 4px;
+      color: var(--text-primary);
     }
 
     .message__role {
-      font-size: 13px;
-      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-teal);
       margin-bottom: 4px;
     }
 
     .message__affiliation {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      min-height: 18px;
     }
 
     .message__social {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: var(--surface-2);
-      color: var(--body);
-      font-size: 13px;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      background: var(--surface-alt);
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 700;
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
 
     .message__social:hover {
-      background: var(--accent);
-      color: #fff;
+      background: var(--accent-teal);
+      color: var(--text-inverse);
+      transform: translateY(-2px);
     }
 
     /* Why Join */
     .why-join {
       padding: var(--section-py) 0;
-      background: var(--bg);
+      background: var(--page-card);
     }
 
     .why-join__title {
-      font-size: clamp(28px, 3.5vw, 38px);
+      font-size: 40px;
       font-weight: 700;
       margin-bottom: 48px;
+      text-align: center;
+      color: var(--text-primary);
     }
 
     .why-join__blocks {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 40px;
-      margin-bottom: 64px;
+      gap: 24px;
     }
 
     .why-join__block {
       display: flex;
-      gap: 20px;
+      gap: 24px;
+      background: var(--surface-alt);
+      border-radius: var(--radius-md);
+      padding: 40px;
+      border: 1px solid rgba(17, 24, 39, 0.04);
+      transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
+    }
+
+    .why-join__block:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
     }
 
     .why-join__icon {
       width: 56px;
       height: 56px;
       border-radius: var(--radius-md);
-      background: var(--accent-bg);
+      background: rgba(13, 148, 136, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      color: var(--accent);
+      font-size: 24px;
+      color: var(--accent-teal);
       flex-shrink: 0;
     }
 
     .why-join__block-title {
-      font-size: 20px;
-      font-weight: 700;
+      font-size: 24px;
+      font-weight: 600;
       margin-bottom: 10px;
+      color: var(--text-primary);
     }
 
     .why-join__block-text {
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.7;
-      color: var(--body);
+      color: var(--text-secondary);
     }
 
+    /* Feature sections */
     .celebrated,
     .prestigious {
-      padding: 80px 0;
+      padding: var(--section-py) 0;
+      background: var(--page-card);
     }
 
-    .celebrated {
-      background: var(--surface);
-    }
-
-    .prestigious {
-      background: var(--bg);
-    }
-
-    .celebrated .share__grid {
-      margin-top: 64px;
+    .celebrated__card,
+    .prestigious__card {
+      background: var(--surface-alt);
+      border-radius: var(--radius-md);
+      padding: 48px;
+      border: 1px solid rgba(17, 24, 39, 0.04);
     }
 
     .feature-block {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      gap: 48px;
       align-items: center;
     }
 
@@ -479,25 +590,25 @@
     }
 
     .feature-block__title {
-      font-size: clamp(26px, 3vw, 36px);
-      font-weight: 700;
-      margin-bottom: 20px;
-      max-width: 400px;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-primary);
     }
 
     .feature-block__text {
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.7;
-      color: var(--body);
+      color: var(--text-secondary);
       margin-bottom: 20px;
     }
 
     .feature-block__list {
       margin: 0;
-      padding-left: 18px;
-      font-size: 14px;
+      padding-left: 20px;
+      font-size: 15px;
       line-height: 1.8;
-      color: var(--body);
+      color: var(--text-secondary);
     }
 
     .feature-block__list li {
@@ -505,15 +616,16 @@
     }
 
     .feature-block__list strong {
-      color: var(--text);
+      color: var(--text-primary);
       font-weight: 600;
     }
 
     .feature-block__image {
-      background: var(--surface-2);
+      background: var(--page-card);
       border-radius: var(--radius-md);
       aspect-ratio: 4/3;
       overflow: hidden;
+      box-shadow: var(--shadow-md);
     }
 
     .feature-block__image img {
@@ -525,9 +637,11 @@
     .share__grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 80px;
+      gap: 32px;
       max-width: 900px;
-      margin: 0 auto;
+      margin: 48px auto 0;
+      padding-top: 48px;
+      border-top: 1px solid rgba(17, 24, 39, 0.06);
     }
 
     .share__item {
@@ -538,31 +652,35 @@
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: var(--accent-bg);
+      background: rgba(13, 148, 136, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
-      color: var(--accent);
+      color: var(--accent-teal);
       margin: 0 auto 18px;
     }
 
     .share__title {
-      font-size: 17px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 600;
       margin-bottom: 10px;
+      color: var(--text-primary);
     }
 
     .share__text {
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.7;
-      color: var(--body);
+      color: var(--text-secondary);
     }
 
     /* FAQ */
     .faq {
       padding: var(--section-py) 0;
-      background: var(--surface);
+      background: var(--surface-alt);
+      margin: 0 -48px;
+      padding-left: 48px;
+      padding-right: 48px;
     }
 
     .faq__header {
@@ -571,26 +689,35 @@
     }
 
     .faq__title {
-      font-size: clamp(28px, 3.5vw, 38px);
+      font-size: 40px;
       font-weight: 700;
       margin-bottom: 12px;
+      color: var(--text-primary);
     }
 
     .faq__sub {
-      font-size: 15px;
-      color: var(--body);
+      font-size: 16px;
+      color: var(--text-secondary);
     }
 
     .faq__list {
-      max-width: 800px;
+      max-width: 840px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .faq__item {
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
-      border-radius: 0;
-      margin-bottom: 0;
+      background: var(--page-card);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(17, 24, 39, 0.06);
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .faq__item:hover {
+      box-shadow: var(--shadow-sm);
     }
 
     .faq__question {
@@ -599,32 +726,34 @@
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      padding: 24px 0;
+      padding: 24px;
       background: none;
       border: none;
       text-align: left;
-      font-family: var(--font-heading);
+      font-family: var(--font);
       font-size: 16px;
       font-weight: 600;
-      color: var(--text);
+      color: var(--text-primary);
       cursor: pointer;
       transition: color 0.2s ease;
     }
 
-    .faq__question:hover { color: var(--accent); }
+    .faq__question:hover { color: var(--accent-teal); }
 
     .faq__icon {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       position: relative;
       flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--surface-alt);
     }
 
     .faq__icon::before,
     .faq__icon::after {
       content: '';
       position: absolute;
-      background: var(--accent);
+      background: var(--accent-teal);
       transition: transform 0.3s var(--transition);
     }
 
@@ -653,48 +782,58 @@
     }
 
     .faq__answer-inner {
-      padding-bottom: 24px;
-      font-size: 14px;
+      padding: 0 24px 24px;
+      font-size: 15px;
       line-height: 1.7;
-      color: var(--body);
-      max-width: 720px;
+      color: var(--text-secondary);
+      max-width: 760px;
     }
 
     /* CTA */
     .cta {
-      padding: 100px 0;
-      background: var(--accent);
+      padding: var(--section-py) 0;
+      background: var(--page-card);
+    }
+
+    .cta__card {
+      background: var(--cta-bg);
+      border-radius: var(--radius-md);
+      padding: 80px 48px;
       text-align: center;
     }
 
     .cta__title {
-      font-size: clamp(30px, 3.5vw, 40px);
-      font-weight: 800;
-      color: #fff;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--text-inverse);
       margin-bottom: 12px;
     }
 
     .cta__sub {
-      font-size: 15px;
-      color: rgba(255,255,255,0.8);
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.75);
       margin-bottom: 32px;
     }
 
     .cta__btn {
-      background: #fff;
-      color: var(--accent);
-      border-radius: var(--radius-sm);
-      padding: 14px 32px;
+      background: var(--text-inverse);
+      color: var(--cta-bg);
+      border-radius: var(--radius-pill);
+      padding: 16px 36px;
       font-weight: 600;
     }
 
-    .cta__btn:hover { background: var(--accent-bg); }
+    .cta__btn:hover {
+      background: rgba(255, 255, 255, 0.92);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
 
     /* Footer */
     .footer {
       padding: 64px 0 32px;
-      background: var(--text);
-      color: #fff;
+      background: var(--page-card);
+      border-top: 1px solid rgba(17, 24, 39, 0.06);
     }
 
     .footer__grid {
@@ -705,16 +844,18 @@
     }
 
     .footer__logo {
-      font-family: var(--font-heading);
+      font-family: var(--font);
       font-size: 22px;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 16px;
+      color: var(--text-primary);
+      letter-spacing: -0.03em;
     }
 
     .footer__tagline {
       font-size: 14px;
       line-height: 1.7;
-      color: var(--muted);
+      color: var(--text-muted);
       max-width: 300px;
     }
 
@@ -729,23 +870,23 @@
 
     .footer__links a {
       font-size: 14px;
-      color: rgba(255,255,255,0.72);
+      color: var(--text-secondary);
       transition: color 0.2s ease;
     }
 
-    .footer__links a:hover { color: #fff; }
+    .footer__links a:hover { color: var(--accent-teal); }
 
     .footer__bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding-top: 28px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid rgba(17, 24, 39, 0.06);
     }
 
     .footer__copyright {
       font-size: 13px;
-      color: var(--muted);
+      color: var(--text-muted);
     }
 
     .footer__legal {
@@ -755,15 +896,28 @@
 
     .footer__legal a {
       font-size: 13px;
-      color: var(--muted);
+      color: var(--text-muted);
       transition: color 0.2s ease;
     }
 
-    .footer__legal a:hover { color: #fff; }
+    .footer__legal a:hover { color: var(--accent-teal); }
 
     /* Responsive */
+    @media (max-width: 1024px) {
+      .hero__content { padding: 40px; }
+      .hero__title { font-size: 52px; }
+    }
+
     @media (max-width: 900px) {
-      :root { --section-py: 72px; }
+      :root { --section-py: 64px; }
+
+      .page-wrapper { padding: 16px; }
+      .page-card { padding: 24px; border-radius: var(--radius-md); }
+
+      .nav {
+        margin: -24px -24px 0;
+        padding: 0 24px;
+      }
 
       .nav__links { display: none; }
       .nav__cta { display: none; }
@@ -782,10 +936,28 @@
         display: block;
         width: 24px;
         height: 2px;
-        background: var(--text);
+        background: var(--text-primary);
+        transition: transform 0.3s ease, opacity 0.3s ease;
       }
 
-      .hero__inner,
+      .nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+      .nav__toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .nav__panel { padding: 24px; }
+
+      .message,
+      .faq {
+        margin: 0 -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .hero__media,
+      .hero__content { min-height: 520px; }
+
+      .hero__title { font-size: 44px; }
+
       .about__cards,
       .message__grid,
       .why-join__blocks,
@@ -807,18 +979,11 @@
         gap: 32px;
       }
 
-      .celebrated,
-      .prestigious {
-        padding: 56px 0;
+      .celebrated__card,
+      .prestigious__card,
+      .cta__card {
+        padding: 32px;
       }
-
-      .celebrated .share__grid {
-        margin-top: 40px;
-      }
-
-      .hero { padding: 80px 0; }
-
-      .hero__title { font-size: 42px; }
 
       .footer__bottom {
         flex-direction: column;
@@ -828,8 +993,18 @@
     }
 
     @media (max-width: 600px) {
-      .hero__title { font-size: 36px; }
+      .hero__content { padding: 28px; }
+      .hero__media,
+      .hero__content { min-height: 480px; }
+      .hero__title { font-size: 40px; }
       .hero__cta-row { flex-direction: column; align-items: flex-start; }
+      .about__title,
+      .message__title,
+      .why-join__title,
+      .faq__title,
+      .cta__title { font-size: 32px; }
+      .why-join__block { flex-direction: column; }
+      .share__grid { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -840,276 +1015,299 @@
 </head>
 <body>
 
-  <nav class="nav">
-    <div class="container nav__inner">
-      <a href="#" class="nav__logo">AEHEA</a>
-      <div class="nav__links">
-        <a href="#about" class="nav__link">Panel & Partner</a>
-        <a href="#faq" class="nav__link">FAQ</a>
-        <a href="#contact" class="nav__link">Contact</a>
-      </div>
-      <a href="#cta" class="nav__cta btn-magnetic"><span>Register your interest</span></a>
-      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
+  <div class="page-wrapper">
+    <div class="page-card">
 
-  <header class="hero">
-    <div class="container hero__inner">
-      <div class="hero__content">
-        <p class="hero__eyebrow">APSIC Environmental Hygiene Excellence Award</p>
-        <h1 class="hero__title">Be recognised. Save lives.</h1>
-        <p class="hero__sub">Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety.</p>
-        <div class="hero__cta-row">
-          <a href="#cta" class="btn btn--primary btn-magnetic"><span>Register your interest</span></a>
-          <a href="#about" class="btn btn--text">Learn more <span>→</span></a>
-        </div>
-      </div>
-      <div class="hero__image-wrap">
-        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80" alt="Clinical hospital environment" class="hero__image">
-      </div>
-    </div>
-  </header>
-
-  <section class="about" id="about">
-    <div class="container">
-      <div class="about__header">
-        <h2 class="about__title">About APSIC Environmental Hygiene Excellence Award (AEHEA)</h2>
-        <p class="about__intro">The APSIC Environmental Hygiene Excellence Award (AEHEA) has been established as a regional platform to identify, recognise, honour and celebrate hospitals and healthcare teams that demonstrate excellence in advancing environmental hygiene and patient safety. This award acknowledges institutions that have made meaningful contributions through:</p>
-      </div>
-      <div class="about__cards">
-        <div class="about__card">
-          <div class="about__icon">✓</div>
-          <h3 class="about__card-title">Commitment to IPC</h3>
-          <p class="about__card-text">Hospitals demonstrate unwavering dedication to infection prevention and control practices across all departments and clinical settings.</p>
-        </div>
-        <div class="about__card">
-          <div class="about__icon">⚡</div>
-          <h3 class="about__card-title">Innovative practices</h3>
-          <p class="about__card-text">Leading institutions develop and implement novel evidence-based interventions that advance environmental hygiene standards and improve patient outcomes.</p>
-        </div>
-        <div class="about__card">
-          <div class="about__icon">★</div>
-          <h3 class="about__card-title">Quality of care</h3>
-          <p class="about__card-text">Excellence in environmental hygiene directly translates to measurable improvements in patient safety and clinical outcomes.</p>
-        </div>
-      </div>
-      <div class="about__actions">
-        <a href="#cta" class="btn btn--primary btn-magnetic"><span>Register your interest</span></a>
-        <a href="#contact" class="btn btn--outline">Contact <span>→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="message" id="leadership">
-    <div class="container">
-      <div class="message__header">
-        <h2 class="message__title">Message from Award Program Chair and APSIC President</h2>
-        <p class="message__intro">The APSIC Environmental Hygiene Excellence Award celebrates healthcare institutions that demonstrate exceptional leadership and measurable success in maintaining safe environments. Hygiene is a critical step toward safeguarding patient lives.<br><br>One of the core components in the infection prevention and control programme is appropriate environmental hygiene practices and protocols. These facilitate practices related to the prevention and control of healthcare associated infections. It is the responsibility of healthcare care institutions to ensure a safe physical hygiene environment.<br><br>To pursue these objectives, we would like to invite you to participate in the APSIC Environmental Hygiene Excellence Award.</p>
-      </div>
-      <div class="message__grid">
-        <div class="message__person">
-          <img src="https://i.pravatar.cc/80?u=moilin" alt="A/Prof. Moi Lin Ling" class="message__avatar">
-          <div class="message__name">A/Prof. Moi Lin Ling</div>
-          <div class="message__role">Program Chair, AEHEA</div>
-          <div class="message__affiliation">APSIC Environmental Hygiene Excellence Award</div>
-          <a href="#" class="message__social" aria-label="LinkedIn">in</a>
-        </div>
-        <div class="message__person">
-          <img src="https://i.pravatar.cc/80?u=anucha" alt="Prof. Anucha Apisarnthanarak" class="message__avatar">
-          <div class="message__name">Prof. Anucha Apisarnthanarak</div>
-          <div class="message__role">President, APSIC</div>
-          <div class="message__affiliation">&nbsp;</div>
-          <a href="#" class="message__social" aria-label="LinkedIn">in</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="why-join" id="why-join">
-    <div class="container">
-      <h2 class="why-join__title">Why Join the APSIC Environmental Hygiene Excellence Award?</h2>
-      <div class="why-join__blocks">
-        <div class="why-join__block">
-          <div class="why-join__icon">◎</div>
-          <div>
-            <h3 class="why-join__block-title">Be recognised</h3>
-            <p class="why-join__block-text">Showcase your institution's leadership and excellence in environmental hygiene across the Asia Pacific region.</p>
+      <nav class="nav">
+        <div class="container nav__inner">
+          <a href="#" class="nav__logo">AEHEA</a>
+          <div class="nav__links">
+            <a href="#about" class="nav__link">Panel & Partner</a>
+            <a href="#faq" class="nav__link">FAQ</a>
+            <a href="#contact" class="nav__link">Contact</a>
           </div>
-        </div>
-        <div class="why-join__block">
-          <div class="why-join__icon">✚</div>
-          <div>
-            <h3 class="why-join__block-title">Save lives</h3>
-            <p class="why-join__block-text">Implementing exemplary environmental hygiene strategies significantly reduces patient mortality and morbidity.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="celebrated">
-    <div class="container">
-      <div class="feature-block">
-        <div class="feature-block__content">
-          <h3 class="feature-block__title">Celebrated on the regional stage</h3>
-          <p class="feature-block__text">Award recipients are formally recognised at an upcoming APSIC Congress, and leave with certificates, feedback and expert insight.</p>
-        </div>
-        <div class="feature-block__image">
-          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Regional celebration">
-        </div>
-      </div>
-      <div class="share__grid">
-        <div class="share__item">
-          <div class="share__icon">🏆</div>
-          <h4 class="share__title">Present your programme</h4>
-          <p class="share__text">Selected hospitals are invited to share best practices via a local presentation at the APSIC Congress.</p>
-        </div>
-        <div class="share__item">
-          <div class="share__icon">🌐</div>
-          <h4 class="share__title">Share with the region</h4>
-          <p class="share__text">Representatives exchange their experiences, innovations, and activities with the regional infection prevention community.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="prestigious">
-    <div class="container">
-      <div class="feature-block feature-block--reverse">
-        <div class="feature-block__content">
-          <h3 class="feature-block__title">Prestigious recognition, rather than a monetary prize</h3>
-          <p class="feature-block__text">Finalist institutions are honoured with a visit from an independent panel of experts and a certificate of recognition that strengthens their programme long after the award.</p>
-          <ul class="feature-block__list">
-            <li><strong>Continuous improvement:</strong> Expert guidance to refine and advance your environmental hygiene programme.</li>
-            <li><strong>Sustainability of programmes:</strong> Support to embed lasting change, not one-off achievements.</li>
-            <li><strong>Validation & impact:</strong> Help to measure and demonstrate your contribution to patient safety.</li>
-          </ul>
-        </div>
-        <div class="feature-block__image">
-          <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=800&q=80" alt="Recognition">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="faq" id="faq">
-    <div class="container">
-      <div class="faq__header">
-        <h2 class="faq__title">FAQs</h2>
-        <p class="faq__sub">Find answers to questions about eligibility, process, and benefits</p>
-      </div>
-      <div class="faq__list">
-        <div class="faq__item">
-          <button class="faq__question" aria-expanded="false">
-            Who is eligible to participate?
-            <span class="faq__icon"></span>
+          <a href="#cta" class="nav__cta btn-magnetic"><span>Register your interest</span></a>
+          <button class="nav__toggle" aria-label="Open menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
-          <div class="faq__answer">
-            <div class="faq__answer-inner">Hospitals and healthcare institutions across the Asia Pacific region are eligible to apply. Participation is open to institutions at various stages of environmental hygiene development.</div>
-          </div>
         </div>
-        <div class="faq__item">
-          <button class="faq__question" aria-expanded="false">
-            What is the objective of the Award Programme?
-            <span class="faq__icon"></span>
-          </button>
-          <div class="faq__answer">
-            <div class="faq__answer-inner">The programme aims to: acknowledge excellence in environmental hygiene, encourage participation and evaluation, provide a platform for benchmarking and recognition.</div>
-          </div>
+        <div class="nav__panel" id="navPanel">
+          <a href="#about" class="nav__link">Panel & Partner</a>
+          <a href="#faq" class="nav__link">FAQ</a>
+          <a href="#contact" class="nav__link">Contact</a>
+          <a href="#cta" class="nav__cta btn-magnetic"><span>Register your interest</span></a>
         </div>
-        <div class="faq__item">
-          <button class="faq__question" aria-expanded="false">
-            Is there a participation fee?
-            <span class="faq__icon"></span>
-          </button>
-          <div class="faq__answer">
-            <div class="faq__answer-inner">Participation in the Award Programme is generally not associated with a monetary prize or participation fee. Any specific requirements will be communicated during the registration phase.</div>
-          </div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__question" aria-expanded="false">
-            What are the evaluation criteria?
-            <span class="faq__icon"></span>
-          </button>
-          <div class="faq__answer">
-            <div class="faq__answer-inner">Submissions will be assessed based on: commitment to infection prevention and environmental hygiene practices, innovation and sustainability, impact on patient safety and infection prevention.</div>
-          </div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__question" aria-expanded="false">
-            How are finalists selected?
-            <span class="faq__icon"></span>
-          </button>
-          <div class="faq__answer">
-            <div class="faq__answer-inner">The APSIC Expert Panel reviews all submitted applications using a structured scoring system and shortlists institutions that demonstrate excellence and strong potential.</div>
-          </div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__question" aria-expanded="false">
-            What are the benefits of participating?
-            <span class="faq__icon"></span>
-          </button>
-          <div class="faq__answer">
-            <div class="faq__answer-inner">Participants gain: a structured validation process and framework, insights from regional experts, recognition in the professional community, and motivation to further environmental hygiene.</div>
-          </div>
-        </div>
-        <div class="faq__item">
-          <button class="faq__question" aria-expanded="false">
-            Will submitted information be kept confidential?
-            <span class="faq__icon"></span>
-          </button>
-          <div class="faq__answer">
-            <div class="faq__answer-inner">Yes. All submissions will be handled with strict confidentiality and used solely for evaluation purposes within the programme.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      </nav>
 
-  <section class="cta" id="cta">
-    <div class="container">
-      <h2 class="cta__title">Want to stay informed?</h2>
-      <p class="cta__sub">Let your success in protecting patients be seen and celebrated.</p>
-      <a href="#cta" class="btn cta__btn btn-magnetic" onclick="event.preventDefault(); document.getElementById('cta').scrollIntoView({behavior:'smooth'});"><span>Register your interest</span></a>
-    </div>
-  </section>
+      <header class="hero">
+        <div class="container">
+          <div class="hero__media">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80" alt="Clinical hospital environment" class="hero__image">
+            <div class="hero__overlay"></div>
+            <div class="hero__content">
+              <div>
+                <p class="hero__eyebrow">APSIC Environmental Hygiene Excellence Award</p>
+                <h1 class="hero__title">Be recognised. Save lives.</h1>
+              </div>
+              <div class="hero__bottom">
+                <p class="hero__sub">Identifying, recognising and celebrating hospitals across Asia Pacific that demonstrate excellence in environmental hygiene and patient safety.</p>
+                <div class="hero__cta-row">
+                  <a href="#cta" class="btn btn--primary btn-magnetic"><span>Register your interest</span></a>
+                  <a href="#about" class="btn btn--text">Learn more <span>→</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
-  <footer class="footer" id="contact">
-    <div class="container">
-      <div class="footer__grid">
-        <div>
-          <div class="footer__logo">AEHEA</div>
-          <p class="footer__tagline">Asia Pacific recognition for environmental hygiene excellence, infection prevention and quality patient care.</p>
+      <section class="about" id="about">
+        <div class="container">
+          <div class="about__header">
+            <h2 class="about__title">About APSIC Environmental Hygiene Excellence Award (AEHEA)</h2>
+            <p class="about__intro">The APSIC Environmental Hygiene Excellence Award (AEHEA) has been established as a regional platform to identify, recognise, honour and celebrate hospitals and healthcare teams that demonstrate excellence in advancing environmental hygiene and patient safety. This award acknowledges institutions that have made meaningful contributions through:</p>
+          </div>
+          <div class="about__cards">
+            <div class="about__card">
+              <div class="about__icon">✓</div>
+              <h3 class="about__card-title">Commitment to IPC</h3>
+              <p class="about__card-text">Hospitals demonstrate unwavering dedication to infection prevention and control practices across all departments and clinical settings.</p>
+            </div>
+            <div class="about__card">
+              <div class="about__icon">⚡</div>
+              <h3 class="about__card-title">Innovative practices</h3>
+              <p class="about__card-text">Leading institutions develop and implement novel evidence-based interventions that advance environmental hygiene standards and improve patient outcomes.</p>
+            </div>
+            <div class="about__card">
+              <div class="about__icon">★</div>
+              <h3 class="about__card-title">Quality of care</h3>
+              <p class="about__card-text">Excellence in environmental hygiene directly translates to measurable improvements in patient safety and clinical outcomes.</p>
+            </div>
+          </div>
+          <div class="about__actions">
+            <a href="#cta" class="btn btn--primary btn-magnetic"><span>Register your interest</span></a>
+            <a href="#contact" class="btn btn--outline">Contact <span>→</span></a>
+          </div>
         </div>
-        <div>
-          <ul class="footer__links">
-            <li><a href="#about">Panel & Partner</a></li>
-            <li><a href="#why-join">How to Participate</a></li>
-            <li><a href="#cta">Register your Interest</a></li>
-          </ul>
+      </section>
+
+      <section class="message" id="leadership">
+        <div class="container">
+          <div class="message__header">
+            <h2 class="message__title">Message from Award Program Chair and APSIC President</h2>
+            <p class="message__intro">The APSIC Environmental Hygiene Excellence Award celebrates healthcare institutions that demonstrate exceptional leadership and measurable success in maintaining safe environments. Hygiene is a critical step toward safeguarding patient lives.<br><br>One of the core components in the infection prevention and control programme is appropriate environmental hygiene practices and protocols. These facilitate practices related to the prevention and control of healthcare associated infections. It is the responsibility of healthcare care institutions to ensure a safe physical hygiene environment.<br><br>To pursue these objectives, we would like to invite you to participate in the APSIC Environmental Hygiene Excellence Award.</p>
+          </div>
+          <div class="message__grid">
+            <div class="message__person">
+              <img src="https://i.pravatar.cc/80?u=moilin" alt="A/Prof. Moi Lin Ling" class="message__avatar">
+              <div class="message__name">A/Prof. Moi Lin Ling</div>
+              <div class="message__role">Program Chair, AEHEA</div>
+              <div class="message__affiliation">APSIC Environmental Hygiene Excellence Award</div>
+              <a href="#" class="message__social" aria-label="LinkedIn">in</a>
+            </div>
+            <div class="message__person">
+              <img src="https://i.pravatar.cc/80?u=anucha" alt="Prof. Anucha Apisarnthanarak" class="message__avatar">
+              <div class="message__name">Prof. Anucha Apisarnthanarak</div>
+              <div class="message__role">President, APSIC</div>
+              <div class="message__affiliation">&nbsp;</div>
+              <a href="#" class="message__social" aria-label="LinkedIn">in</a>
+            </div>
+          </div>
         </div>
-        <div>
-          <ul class="footer__links">
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-          </ul>
+      </section>
+
+      <section class="why-join" id="why-join">
+        <div class="container">
+          <h2 class="why-join__title">Why Join the APSIC Environmental Hygiene Excellence Award?</h2>
+          <div class="why-join__blocks">
+            <div class="why-join__block">
+              <div class="why-join__icon">◎</div>
+              <div>
+                <h3 class="why-join__block-title">Be recognised</h3>
+                <p class="why-join__block-text">Showcase your institution's leadership and excellence in environmental hygiene across the Asia Pacific region.</p>
+              </div>
+            </div>
+            <div class="why-join__block">
+              <div class="why-join__icon">✚</div>
+              <div>
+                <h3 class="why-join__block-title">Save lives</h3>
+                <p class="why-join__block-text">Implementing exemplary environmental hygiene strategies significantly reduces patient mortality and morbidity.</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="footer__bottom">
-        <span class="footer__copyright">© 2026 APSIC Environmental Hygiene Excellence Award</span>
-        <div class="footer__legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookies Settings</a>
+      </section>
+
+      <section class="celebrated">
+        <div class="container">
+          <div class="celebrated__card">
+            <div class="feature-block">
+              <div class="feature-block__content">
+                <h3 class="feature-block__title">Celebrated on the regional stage</h3>
+                <p class="feature-block__text">Award recipients are formally recognised at an upcoming APSIC Congress, and leave with certificates, feedback and expert insight.</p>
+              </div>
+              <div class="feature-block__image">
+                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Regional celebration">
+              </div>
+            </div>
+            <div class="share__grid">
+              <div class="share__item">
+                <div class="share__icon">🏆</div>
+                <h4 class="share__title">Present your programme</h4>
+                <p class="share__text">Selected hospitals are invited to share best practices via a local presentation at the APSIC Congress.</p>
+              </div>
+              <div class="share__item">
+                <div class="share__icon">🌐</div>
+                <h4 class="share__title">Share with the region</h4>
+                <p class="share__text">Representatives exchange their experiences, innovations, and activities with the regional infection prevention community.</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <section class="prestigious">
+        <div class="container">
+          <div class="prestigious__card">
+            <div class="feature-block feature-block--reverse">
+              <div class="feature-block__content">
+                <h3 class="feature-block__title">Prestigious recognition, rather than a monetary prize</h3>
+                <p class="feature-block__text">Finalist institutions are honoured with a visit from an independent panel of experts and a certificate of recognition that strengthens their programme long after the award.</p>
+                <ul class="feature-block__list">
+                  <li><strong>Continuous improvement:</strong> Expert guidance to refine and advance your environmental hygiene programme.</li>
+                  <li><strong>Sustainability of programmes:</strong> Support to embed lasting change, not one-off achievements.</li>
+                  <li><strong>Validation & impact:</strong> Help to measure and demonstrate your contribution to patient safety.</li>
+                </ul>
+              </div>
+              <div class="feature-block__image">
+                <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=800&q=80" alt="Recognition">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq" id="faq">
+        <div class="container">
+          <div class="faq__header">
+            <h2 class="faq__title">FAQs</h2>
+            <p class="faq__sub">Find answers to questions about eligibility, process, and benefits</p>
+          </div>
+          <div class="faq__list">
+            <div class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                Who is eligible to participate?
+                <span class="faq__icon"></span>
+              </button>
+              <div class="faq__answer">
+                <div class="faq__answer-inner">Hospitals and healthcare institutions across the Asia Pacific region are eligible to apply. Participation is open to institutions at various stages of environmental hygiene development.</div>
+              </div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                What is the objective of the Award Programme?
+                <span class="faq__icon"></span>
+              </button>
+              <div class="faq__answer">
+                <div class="faq__answer-inner">The programme aims to: acknowledge excellence in environmental hygiene, encourage participation and evaluation, provide a platform for benchmarking and recognition.</div>
+              </div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                Is there a participation fee?
+                <span class="faq__icon"></span>
+              </button>
+              <div class="faq__answer">
+                <div class="faq__answer-inner">Participation in the Award Programme is generally not associated with a monetary prize or participation fee. Any specific requirements will be communicated during the registration phase.</div>
+              </div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                What are the evaluation criteria?
+                <span class="faq__icon"></span>
+              </button>
+              <div class="faq__answer">
+                <div class="faq__answer-inner">Submissions will be assessed based on: commitment to infection prevention and environmental hygiene practices, innovation and sustainability, impact on patient safety and infection prevention.</div>
+              </div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                How are finalists selected?
+                <span class="faq__icon"></span>
+              </button>
+              <div class="faq__answer">
+                <div class="faq__answer-inner">The APSIC Expert Panel reviews all submitted applications using a structured scoring system and shortlists institutions that demonstrate excellence and strong potential.</div>
+              </div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                What are the benefits of participating?
+                <span class="faq__icon"></span>
+              </button>
+              <div class="faq__answer">
+                <div class="faq__answer-inner">Participants gain: a structured validation process and framework, insights from regional experts, recognition in the professional community, and motivation to further environmental hygiene.</div>
+              </div>
+            </div>
+            <div class="faq__item">
+              <button class="faq__question" aria-expanded="false">
+                Will submitted information be kept confidential?
+                <span class="faq__icon"></span>
+              </button>
+              <div class="faq__answer">
+                <div class="faq__answer-inner">Yes. All submissions will be handled with strict confidentiality and used solely for evaluation purposes within the programme.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="cta">
+        <div class="container">
+          <div class="cta__card">
+            <h2 class="cta__title">Want to stay informed?</h2>
+            <p class="cta__sub">Let your success in protecting patients be seen and celebrated.</p>
+            <a href="#cta" class="btn cta__btn btn-magnetic" onclick="event.preventDefault(); document.getElementById('cta').scrollIntoView({behavior:'smooth'});"><span>Register your interest</span></a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer" id="contact">
+        <div class="container">
+          <div class="footer__grid">
+            <div>
+              <div class="footer__logo">AEHEA</div>
+              <p class="footer__tagline">Asia Pacific recognition for environmental hygiene excellence, infection prevention and quality patient care.</p>
+            </div>
+            <div>
+              <ul class="footer__links">
+                <li><a href="#about">Panel & Partner</a></li>
+                <li><a href="#why-join">How to Participate</a></li>
+                <li><a href="#cta">Register your Interest</a></li>
+              </ul>
+            </div>
+            <div>
+              <ul class="footer__links">
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__bottom">
+            <span class="footer__copyright">© 2026 APSIC Environmental Hygiene Excellence Award</span>
+            <div class="footer__legal">
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="#">Cookies Settings</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
     </div>
-  </footer>
+  </div>
 
   <script>
     (function () {
@@ -1165,6 +1363,25 @@
           }
         });
       });
+
+      // Mobile nav toggle
+      var toggle = document.querySelector('.nav__toggle');
+      var panel = document.getElementById('navPanel');
+      if (toggle && panel) {
+        toggle.addEventListener('click', function () {
+          var expanded = toggle.getAttribute('aria-expanded') === 'true';
+          toggle.setAttribute('aria-expanded', String(!expanded));
+          toggle.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
+          panel.classList.toggle('is-open', !expanded);
+        });
+        panel.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', 'Open menu');
+            panel.classList.remove('is-open');
+          });
+        });
+      }
     })();
   </script>
 </body>
