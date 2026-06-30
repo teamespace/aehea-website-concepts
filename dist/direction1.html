@@ -447,8 +447,7 @@
     }
 
     .celebrated,
-    .prestigious,
-    .share {
+    .prestigious {
       padding: 80px 0;
     }
 
@@ -460,8 +459,8 @@
       background: var(--bg);
     }
 
-    .share {
-      background: var(--surface);
+    .celebrated .share__grid {
+      margin-top: 64px;
     }
 
     .feature-block {
@@ -809,9 +808,12 @@
       }
 
       .celebrated,
-      .prestigious,
-      .share {
+      .prestigious {
         padding: 56px 0;
+      }
+
+      .celebrated .share__grid {
+        margin-top: 40px;
       }
 
       .hero { padding: 80px 0; }
@@ -960,6 +962,18 @@
           <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Regional celebration">
         </div>
       </div>
+      <div class="share__grid">
+        <div class="share__item">
+          <div class="share__icon">🏆</div>
+          <h4 class="share__title">Present your programme</h4>
+          <p class="share__text">Selected hospitals are invited to share best practices via a local presentation at the APSIC Congress.</p>
+        </div>
+        <div class="share__item">
+          <div class="share__icon">🌐</div>
+          <h4 class="share__title">Share with the region</h4>
+          <p class="share__text">Representatives exchange their experiences, innovations, and activities with the regional infection prevention community.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -977,23 +991,6 @@
         </div>
         <div class="feature-block__image">
           <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=800&q=80" alt="Recognition">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="share">
-    <div class="container">
-      <div class="share__grid">
-        <div class="share__item">
-          <div class="share__icon">🏆</div>
-          <h4 class="share__title">Present your programme</h4>
-          <p class="share__text">Selected hospitals are invited to share best practices via a local presentation at the APSIC Congress.</p>
-        </div>
-        <div class="share__item">
-          <div class="share__icon">🌐</div>
-          <h4 class="share__title">Share with the region</h4>
-          <p class="share__text">Representatives exchange their experiences, innovations, and activities with the regional infection prevention community.</p>
         </div>
       </div>
     </div>
